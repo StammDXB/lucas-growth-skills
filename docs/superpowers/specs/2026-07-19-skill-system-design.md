@@ -4,6 +4,25 @@ Date: 2026-07-19
 Status: Approved for planning
 Target: Claude Desktop / claude.ai only (not Claude Code)
 
+## Active scope
+
+**Only Phase 1 (`copywriting`) is in scope right now.** Phases 2 to 4 are
+recorded so the architecture holds together, but are not being built. Do not
+research or author for them until Phase 1 is reviewed.
+
+Two lenses are already written and verified: `lenses/semiotics.md` and
+`lenses/persuasion-frameworks.md`. Both feed `copywriting`.
+
+## Research protocol (learned the hard way)
+
+The WebSearch budget is **session-wide**. Parallel research agents starve each
+other: five dispatched at once exhausted 200/200 within minutes and three
+returned degraded or empty.
+
+**Dispatch research sequentially, one discipline at a time, scoped to the skill
+currently being built.** Never fan out research across disciplines that are not
+in active scope.
+
 ## 1. Problem
 
 The repo holds 35 skills salvaged from a private workspace. Two problems:
