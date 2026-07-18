@@ -4,13 +4,16 @@ description: >-
   Improve and edit existing copy. Use for "edit this copy", "improve this headline", or "tighten this paragraph".
 ---
 
-## Step 0: Load Marketing Context (MANDATORY)
+## Step 0: Load Brand Context
 
-Check if `.agents/lucas-marketing-context.md` exists.
-- If it exists: load it now. It contains Lucas's positioning, voice, ICP, and economic context.
-- If it does not exist: invoke the `lucas-marketing-context` skill first, then return to this skill.
+If the project has a marketing or brand context file (for example
+`.agents/marketing-context.md`, a positioning brief, brand guidelines, or a
+tone-of-voice doc), load it now. It governs voice, ICP, and positioning for
+everything below.
 
-This step is non-negotiable. No marketing skill executes without Lucas's context loaded.
+If none exists, establish these before proceeding: who the audience is, what the
+positioning is, and what the primary conversion goal is. Ask the user if it is
+not inferable from the project. Do not fall back on generic B2B SaaS assumptions.
 
 ---
 # Copy Editing
@@ -418,12 +421,6 @@ When editing collaboratively:
 5. **Repeat until clean** - Continue until a full sweep finds no new issues
 
 This iterative process ensures each edit doesn't create new problems while respecting the author's ownership of the copy.
-
----
-
-## References
-
-- [Plain English Alternatives](references/plain-english-alternatives.md): Replace complex words with simpler alternatives
 
 ---
 

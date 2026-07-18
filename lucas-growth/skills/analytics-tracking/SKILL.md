@@ -4,13 +4,16 @@ description: >-
   Set up analytics tracking plans (GA4, Mixpanel, etc.). Use for "set up analytics", "tracking plan", or "GA4 setup".
 ---
 
-## Step 0: Load Marketing Context (MANDATORY)
+## Step 0: Load Brand Context
 
-Check if `.agents/lucas-marketing-context.md` exists.
-- If it exists: load it now. It contains Lucas's positioning, voice, ICP, and economic context.
-- If it does not exist: invoke the `lucas-marketing-context` skill first, then return to this skill.
+If the project has a marketing or brand context file (for example
+`.agents/marketing-context.md`, a positioning brief, brand guidelines, or a
+tone-of-voice doc), load it now. It governs voice, ICP, and positioning for
+everything below.
 
-This step is non-negotiable. No marketing skill executes without Lucas's context loaded.
+If none exists, establish these before proceeding: who the audience is, what the
+positioning is, and what the primary conversion goal is. Ask the user if it is
+not inferable from the project. Do not fall back on generic B2B SaaS assumptions.
 
 ---
 # Analytics Tracking
@@ -72,8 +75,6 @@ Event Name | Category | Properties | Trigger | Notes
 | System Events | Signup completed, purchase, subscription changed |
 | Custom Conversions | Goal completions, funnel stages |
 
-**For comprehensive event lists**: See [references/event-library.md](references/event-library.md)
-
 ---
 
 ## Event Naming Conventions
@@ -117,8 +118,6 @@ checkout_payment_completed
 | purchase_completed | plan, value |
 | subscription_cancelled | reason |
 
-**For full event library by business type**: See [references/event-library.md](references/event-library.md)
-
 ---
 
 ## Event Properties
@@ -159,8 +158,6 @@ gtag('event', 'signup_completed', {
 });
 ```
 
-**For detailed GA4 implementation**: See [references/ga4-implementation.md](references/ga4-implementation.md)
-
 ---
 
 ## Google Tag Manager
@@ -182,8 +179,6 @@ dataLayer.push({
   'form_location': 'footer'
 });
 ```
-
-**For detailed GTM implementation**: See [references/gtm-implementation.md](references/gtm-implementation.md)
 
 ---
 

@@ -4,13 +4,16 @@ description: >-
   Plan website page hierarchy, navigation, and URL structure. Use for "organize my site", "sitemap", or "site structure".
 ---
 
-## Step 0: Load Marketing Context (MANDATORY)
+## Step 0: Load Brand Context
 
-Check if `.agents/lucas-marketing-context.md` exists.
-- If it exists: load it now. It contains Lucas's positioning, voice, ICP, and economic context.
-- If it does not exist: invoke the `lucas-marketing-context` skill first, then return to this skill.
+If the project has a marketing or brand context file (for example
+`.agents/marketing-context.md`, a positioning brief, brand guidelines, or a
+tone-of-voice doc), load it now. It governs voice, ICP, and positioning for
+everything below.
 
-This step is non-negotiable. No marketing skill executes without Lucas's context loaded.
+If none exists, establish these before proceeding: who the audience is, what the
+positioning is, and what the primary conversion goal is. Ask the user if it is
+not inferable from the project. Do not fall back on generic B2B SaaS assumptions.
 
 ---
 # Site Architecture
@@ -59,8 +62,6 @@ Gather this context (ask if not provided):
 | Documentation | 3-4 levels | Home, Guides, API Reference | `/docs/section/page` |
 | Hybrid SaaS+content | 3-4 levels | Home, Product, Blog, Resources, Docs | `/product/feature`, `/blog/slug` |
 | Small business | 1-2 levels | Home, Services, About, Contact | `/services/name` |
-
-**For full page hierarchy templates**: See [references/site-type-templates.md](references/site-type-templates.md)
 
 ---
 
@@ -157,8 +158,6 @@ Home > Blog > SEO Category > Post Title
 ```
 
 Breadcrumbs should mirror the URL hierarchy. Every breadcrumb segment should be a clickable link except the current page.
-
-**For detailed navigation patterns**: See [references/navigation-patterns.md](references/navigation-patterns.md)
 
 ---
 
@@ -259,8 +258,6 @@ graph TD
     FEAT --> F1[Analytics]
     FEAT --> F2[Automation]
 ```
-
-**For more Mermaid templates**: See [references/mermaid-templates.md](references/mermaid-templates.md)
 
 ---
 

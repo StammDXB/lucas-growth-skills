@@ -22,12 +22,13 @@ description: >-
 1. **Determine brand context:**
    - If the audit brief names a client → set `brand_context` = client name
    - If already operating in a client folder → set `brand_context` = that client
-   - If neither → set `brand_context` = `lucas` (default)
+   - If neither → set `brand_context` = the primary brand of the current project
    - If ambiguous → ask using AskUserQuestion: "Whose asset is this?"
 
 2. **Resolve foundation path:**
-   - `lucas` → scan Lucas business-realm foundation directory
-   - `[client]` → scan the client brand directory under the business realm
+   - Locate the project's brand foundation directory (brand guidelines, positioning,
+     audience, tone-of-voice docs). Common locations: `brand/`, `_foundation/`,
+     `docs/brand/`. Ask the user if none is discoverable.
 
 3. **Load foundation files:**
    For each `.md` file in the resolved path:

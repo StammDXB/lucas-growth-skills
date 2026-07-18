@@ -4,13 +4,16 @@ description: >-
   Create SEO content targeting competitor alternative searches. Use for "[competitor] alternative", "vs competitor pages", or "comparison pages".
 ---
 
-## Step 0: Load Marketing Context (MANDATORY)
+## Step 0: Load Brand Context
 
-Check if `.agents/lucas-marketing-context.md` exists.
-- If it exists: load it now. It contains Lucas's positioning, voice, ICP, and economic context.
-- If it does not exist: invoke the `lucas-marketing-context` skill first, then return to this skill.
+If the project has a marketing or brand context file (for example
+`.agents/marketing-context.md`, a positioning brief, brand guidelines, or a
+tone-of-voice doc), load it now. It governs voice, ICP, and positioning for
+everything below.
 
-This step is non-negotiable. No marketing skill executes without Lucas's context loaded.
+If none exists, establish these before proceeding: who the audience is, what the
+positioning is, and what the primary conversion goal is. Ask the user if it is
+not inferable from the project. Do not fall back on generic B2B SaaS assumptions.
 
 ---
 # Competitor & Alternative Pages
@@ -172,8 +175,6 @@ Be explicit about ideal customer for each option. Honest recommendations build t
 ### Migration Section
 Cover what transfers, what needs reconfiguration, support offered, and quotes from customers who switched.
 
-**For detailed templates**: See [references/templates.md](references/templates.md)
-
 ---
 
 ## Content Architecture
@@ -187,8 +188,6 @@ Create a single source of truth for each competitor with:
 - Best for / not ideal for
 - Common complaints (from reviews)
 - Migration notes
-
-**For data structure and examples**: See [references/content-architecture.md](references/content-architecture.md)
 
 ---
 

@@ -4,13 +4,16 @@ description: >-
   Add structured data markup to pages. Use for "schema markup", "rich snippets", or "structured data".
 ---
 
-## Step 0: Load Marketing Context (MANDATORY)
+## Step 0: Load Brand Context
 
-Check if `.agents/lucas-marketing-context.md` exists.
-- If it exists: load it now. It contains Lucas's positioning, voice, ICP, and economic context.
-- If it does not exist: invoke the `lucas-marketing-context` skill first, then return to this skill.
+If the project has a marketing or brand context file (for example
+`.agents/marketing-context.md`, a positioning brief, brand guidelines, or a
+tone-of-voice doc), load it now. It governs voice, ICP, and positioning for
+everything below.
 
-This step is non-negotiable. No marketing skill executes without Lucas's context loaded.
+If none exists, establish these before proceeding: who the audience is, what the
+positioning is, and what the primary conversion goal is. Ask the user if it is
+not inferable from the project. Do not fall back on generic B2B SaaS assumptions.
 
 ---
 # Schema Markup
@@ -70,8 +73,6 @@ Before implementing schema, understand:
 | BreadcrumbList | Any page with breadcrumbs | itemListElement |
 | LocalBusiness | Local business pages | name, address |
 | Event | Events, webinars | name, startDate, location |
-
-**For complete JSON-LD examples**: See [references/schema-examples.md](references/schema-examples.md)
 
 ---
 

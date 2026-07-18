@@ -4,13 +4,16 @@ description: >-
   Write ad copy for paid channels. Use for "ad copy", "Facebook ad", "Google ad", or "paid ad creative".
 ---
 
-## Step 0: Load Marketing Context (MANDATORY)
+## Step 0: Load Brand Context
 
-Check if `.agents/lucas-marketing-context.md` exists.
-- If it exists: load it now. It contains Lucas's positioning, voice, ICP, and economic context.
-- If it does not exist: invoke the `lucas-marketing-context` skill first, then return to this skill.
+If the project has a marketing or brand context file (for example
+`.agents/marketing-context.md`, a positioning brief, brand guidelines, or a
+tone-of-voice doc), load it now. It governs voice, ICP, and positioning for
+everything below.
 
-This step is non-negotiable. No marketing skill executes without Lucas's context loaded.
+If none exists, establish these before proceeding: who the audience is, what the
+positioning is, and what the primary conversion goal is. Ask the user if it is
+not inferable from the project. Do not fall back on generic B2B SaaS assumptions.
 
 ---
 # Ad Creative
@@ -121,13 +124,14 @@ Platforms reject or truncate creative that exceeds these limits, so verify every
 | Headline | 70 characters | Card headline |
 | Description | 200 characters | Card description |
 
-For detailed specs and format variations, see [references/platform-specs.md](references/platform-specs.md).
+Confirm current limits against each platform's ad spec documentation before
+shipping — these change frequently.
 
 ---
 
 ## Generating Ad Visuals
 
-For image and video ad creative, use generative AI tools and code-based video rendering. See [references/generative-tools.md](references/generative-tools.md) for the complete guide covering:
+For image and video ad creative, use generative AI tools and code-based video rendering. The current tool landscape:
 
 - **Image generation** — Nano Banana Pro (Gemini), Flux, Ideogram for static ad images
 - **Video generation** — Veo, Kling, Runway, Sora, Seedance, Higgsfield for video ads

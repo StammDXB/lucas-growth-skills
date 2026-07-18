@@ -13,7 +13,7 @@ description: >-
 
 **One responsibility:** Validate a deliverable through two independent reviewers who must both approve before the deliverable proceeds.
 
-This skill does NOT: fix issues (it reports them), implement changes, or approve on Lucas's behalf.
+This skill does NOT: fix issues (it reports them), implement changes, or approve on the user's behalf.
 
 ---
 
@@ -107,7 +107,7 @@ After 3 rounds without convergent PASS: escalate to user with full issue history
 
 - Client deliverables (proposals, decks, strategy documents)
 - Content before publishing (Substack issues, LinkedIn long-form)
-- Governance change proposals before presenting to Lucas
+- Governance change proposals before presenting to the decision-maker
 - Any output where "good enough" isn't good enough
 
 ## Red Flags — STOP and Reconsider

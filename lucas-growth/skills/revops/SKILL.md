@@ -4,13 +4,16 @@ description: >-
   Set up or improve revenue operations processes. Use for "RevOps", "revenue operations", or "sales process".
 ---
 
-## Step 0: Load Marketing Context (MANDATORY)
+## Step 0: Load Brand Context
 
-Check if `.agents/lucas-marketing-context.md` exists.
-- If it exists: load it now. It contains Lucas's positioning, voice, ICP, and economic context.
-- If it does not exist: invoke the `lucas-marketing-context` skill first, then return to this skill.
+If the project has a marketing or brand context file (for example
+`.agents/marketing-context.md`, a positioning brief, brand guidelines, or a
+tone-of-voice doc), load it now. It governs voice, ICP, and positioning for
+everything below.
 
-This step is non-negotiable. No marketing skill executes without Lucas's context loaded.
+If none exists, establish these before proceeding: who the audience is, what the
+positioning is, and what the primary conversion goal is. Ask the user if it is
+not inferable from the project. Do not fall back on generic B2B SaaS assumptions.
 
 ---
 # RevOps
@@ -82,8 +85,6 @@ Define response times and document them:
 - Rep qualifies or rejects within **48 hours**
 - Rejected MQLs go to recycling nurture with reason code
 
-**For complete lifecycle stage templates and SLA examples**: See [references/lifecycle-definitions.md](references/lifecycle-definitions.md)
-
 ---
 
 ## Lead Scoring
@@ -123,8 +124,6 @@ Define response times and document them:
 - Setting and forgetting (buyer behavior changes; recalibrate quarterly)
 - Scoring all page visits equally (pricing page ≠ blog post)
 
-**For detailed scoring templates and example models**: See [references/scoring-models.md](references/scoring-models.md)
-
 ---
 
 ## Lead Routing
@@ -153,8 +152,6 @@ Response time is the single biggest factor in lead conversion:
 - After **24 hours**, the lead is effectively cold
 
 Build routing rules that prioritize speed. Alert reps immediately. Escalate if SLA is missed.
-
-**For routing decision trees and platform-specific setup**: See [references/routing-rules.md](references/routing-rules.md)
 
 ---
 
@@ -213,8 +210,6 @@ Build routing rules that prioritize speed. Alert reps immediately. Escalate if S
 - **Routing by criteria** — Send enterprise leads to senior AEs, SMB to junior reps
 - **Pre-meeting enrichment** — Auto-populate CRM record before the call
 - **No-show workflows** — Auto-follow-up if prospect misses meeting
-
-**For platform-specific workflow recipes**: See [references/automation-playbooks.md](references/automation-playbooks.md)
 
 ---
 

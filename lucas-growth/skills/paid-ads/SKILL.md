@@ -4,13 +4,16 @@ description: >-
   Plan and optimize paid advertising campaigns. Use for "paid ads strategy", "ad campaign", or "media buying".
 ---
 
-## Step 0: Load Marketing Context (MANDATORY)
+## Step 0: Load Brand Context
 
-Check if `.agents/lucas-marketing-context.md` exists.
-- If it exists: load it now. It contains Lucas's positioning, voice, ICP, and economic context.
-- If it does not exist: invoke the `lucas-marketing-context` skill first, then return to this skill.
+If the project has a marketing or brand context file (for example
+`.agents/marketing-context.md`, a positioning brief, brand guidelines, or a
+tone-of-voice doc), load it now. It governs voice, ICP, and positioning for
+everything below.
 
-This step is non-negotiable. No marketing skill executes without Lucas's context loaded.
+If none exists, establish these before proceeding: who the audience is, what the
+positioning is, and what the primary conversion goal is. Ask the user if it is
+not inferable from the project. Do not fall back on generic B2B SaaS assumptions.
 
 ---
 # Paid Ads
@@ -112,8 +115,6 @@ LI_LeadGen_CMOs-SaaS_Whitepaper_Mar24
 **Social Proof Lead:**
 > [Impressive stat or testimonial] → [What you do] → [CTA]
 
-**For detailed templates and headline formulas**: See [references/ad-copy-templates.md](references/ad-copy-templates.md)
-
 ---
 
 ## Audience Targeting Overview
@@ -131,8 +132,6 @@ LI_LeadGen_CMOs-SaaS_Whitepaper_Mar24
 - **Lookalikes**: Base on best customers (by LTV), not all customers
 - **Retargeting**: Segment by funnel stage (visitors vs. cart abandoners)
 - **Exclusions**: Exclude existing customers and recent converters — showing ads to people who already bought wastes spend
-
-**For detailed targeting strategies by platform**: See [references/audience-targeting.md](references/audience-targeting.md)
 
 ---
 
@@ -250,8 +249,6 @@ LI_LeadGen_CMOs-SaaS_Whitepaper_Mar24
 ## Platform Setup
 
 Before launching campaigns, ensure proper tracking and account setup.
-
-**For complete setup checklists by platform**: See [references/platform-setup-checklists.md](references/platform-setup-checklists.md)
 
 ### Universal Pre-Launch Checklist
 - [ ] Conversion tracking tested with real conversion

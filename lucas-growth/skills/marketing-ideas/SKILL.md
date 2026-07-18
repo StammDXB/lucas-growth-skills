@@ -4,13 +4,16 @@ description: >-
   Generate marketing ideas and campaign concepts. Use for "marketing ideas", "campaign brainstorm", or "growth ideas".
 ---
 
-## Step 0: Load Marketing Context (MANDATORY)
+## Step 0: Load Brand Context
 
-Check if `.agents/lucas-marketing-context.md` exists.
-- If it exists: load it now. It contains Lucas's positioning, voice, ICP, and economic context.
-- If it does not exist: invoke the `lucas-marketing-context` skill first, then return to this skill.
+If the project has a marketing or brand context file (for example
+`.agents/marketing-context.md`, a positioning brief, brand guidelines, or a
+tone-of-voice doc), load it now. It governs voice, ICP, and positioning for
+everything below.
 
-This step is non-negotiable. No marketing skill executes without Lucas's context loaded.
+If none exists, establish these before proceeding: who the audience is, what the
+positioning is, and what the primary conversion goal is. Ask the user if it is
+not inferable from the project. Do not fall back on generic B2B SaaS assumptions.
 
 ---
 # Marketing Ideas for SaaS
@@ -51,8 +54,6 @@ When asked for marketing ideas:
 | International | 131-132 | Expansion, Price localization |
 | Developer | 133-136 | DevRel, Certifications |
 | Audience-Specific | 137-139 | Referrals, Podcast tours, Customer language |
-
-**For the complete list with descriptions**: See [references/ideas-by-category.md](references/ideas-by-category.md)
 
 ---
 

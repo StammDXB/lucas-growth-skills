@@ -4,10 +4,6 @@ description: >-
   Trace every button/link click call-by-call to find async races, stale closures, dead paths, and useEffect interference. Use for "clicks not working", "UI bug", or "button not responding".
 ---
 
-## Step 0: Load Marketing Context
-Check if `.agents/lucas-marketing-context.md` exists. Load if present — CTA analysis benefits from conversion context.
-
----
 # Click Path Audit
 
 Systematically trace UI interaction paths to find bugs that escape normal testing.

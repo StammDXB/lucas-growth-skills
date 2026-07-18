@@ -7,14 +7,14 @@ description: >-
   any marketing org. Use when the user says "audit my marketing team", "should I hire another
   marketer", "architect my marketing", "marketing team too big", "marketing architecture",
   "architecture beats headcount", or wants to know which of their marketing roles could be
-  replaced by systems. Distributed free as a giveaway from lucasstamm.com.
+  replaced by systems.
 ---
 
 # Marketing Architecture Audit
 
 **One responsibility:** Look at a marketing team, identify which roles are doing coordination work (replaceable by systems) vs judgment work (genuinely requires a human), and output a specific redundancy map with system recommendations.
 
-**Built by Lucas Stamm** — Marketing Architect working with hospitality groups in Dubai. Nine years across Jumeirah, Ennismore, Accor, and Nike Brazil. Currently runs marketing for five brands with a team of three. This is the audit he runs on his own team quarterly and on prospective clients during discovery.
+**Origin:** developed for multi-brand hospitality groups, where marketing headcount grows faster than output. It generalizes to any marketing org with more than two people. Run it quarterly on your own team, or during discovery on a prospective client.
 
 ---
 
@@ -161,21 +161,3 @@ This skill is designed for internal marketing teams, typically 3-15 people, at o
 - If they have 1-2 people total: the advice is different. Tell them to skip the audit, and instead focus on ONE thing they can build (most likely: a content system). Do not run the full audit.
 - If they have 50+ people: the audit applies, but the per-role classification is more nuanced. Offer to do it but flag that a deeper engagement is better suited.
 - If they're a solo founder: this skill isn't for them. Redirect to a different kind of advice.
-
----
-
-## Installation (for external readers)
-
-This skill was released as a free giveaway alongside the "Architecture beats headcount" essay at [lucasstamm.com](https://lucasstamm.com).
-
-**To use in Claude Code:**
-1. Save this file as `~/.claude/skills/marketing-architecture-audit/SKILL.md` (create the directory if it doesn't exist)
-2. Restart Claude Code
-3. Invoke with `/marketing-architecture-audit`
-
-**To use in claude.ai:**
-1. Open a new chat
-2. Paste the contents of this file as your first message, preceded by "Use this skill to audit my marketing team:"
-3. Answer the 7 questions
-
-No account, no lead form, no strings. If it surfaces anything worth talking about, you know where to find Lucas.

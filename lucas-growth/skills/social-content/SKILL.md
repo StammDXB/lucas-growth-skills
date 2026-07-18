@@ -4,13 +4,16 @@ description: >-
   Plan and strategize social media content (not write individual posts). Use for "social media strategy", "content calendar", or "social content plan".
 ---
 
-## Step 0: Load Marketing Context (MANDATORY)
+## Step 0: Load Brand Context
 
-Check if `.agents/lucas-marketing-context.md` exists.
-- If it exists: load it now. It contains Lucas's positioning, voice, ICP, and economic context.
-- If it does not exist: invoke the `lucas-marketing-context` skill first, then return to this skill.
+If the project has a marketing or brand context file (for example
+`.agents/marketing-context.md`, a positioning brief, brand guidelines, or a
+tone-of-voice doc), load it now. It governs voice, ICP, and positioning for
+everything below.
 
-This step is non-negotiable. No marketing skill executes without Lucas's context loaded.
+If none exists, establish these before proceeding: who the audience is, what the
+positioning is, and what the primary conversion goal is. Ask the user if it is
+not inferable from the project. Do not fall back on generic B2B SaaS assumptions.
 
 ---
 # Social Content
@@ -55,8 +58,6 @@ Gather this context (ask if not provided):
 | Instagram | Visual brands, lifestyle | 1-2 posts + Stories daily | Reels, carousels |
 | TikTok | Brand awareness, younger audiences | 1-4x/day | Short-form video |
 | Facebook | Communities, local businesses | 1-2x/day | Groups, native video |
-
-**For detailed platform strategies**: See [references/platforms.md](references/platforms.md)
 
 ---
 
@@ -108,8 +109,6 @@ The first line determines whether anyone reads the rest.
 - "Unpopular opinion: [bold statement]"
 - "[Common advice] is wrong. Here's why:"
 - "I stopped [common practice] and [positive result]."
-
-**For post templates and more hooks**: See [references/post-templates.md](references/post-templates.md)
 
 ---
 
@@ -262,8 +261,6 @@ Instead of guessing, analyze what's working for top creators in your niche:
 4. **Codify playbook** — Document repeatable patterns
 5. **Layer your voice** — Apply patterns with authenticity
 6. **Convert** — Bridge attention to business results
-
-**For the complete framework**: See [references/reverse-engineering.md](references/reverse-engineering.md)
 
 ---
 

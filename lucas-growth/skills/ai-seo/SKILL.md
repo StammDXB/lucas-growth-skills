@@ -4,13 +4,16 @@ description: >-
   Optimize content to appear in AI answer engines (ChatGPT, Perplexity). Use for "optimize for AI search", "AI citations", or "appear in Perplexity".
 ---
 
-## Step 0: Load Marketing Context (MANDATORY)
+## Step 0: Load Brand Context
 
-Check if `.agents/lucas-marketing-context.md` exists.
-- If it exists: load it now. It contains Lucas's positioning, voice, ICP, and economic context.
-- If it does not exist: invoke the `lucas-marketing-context` skill first, then return to this skill.
+If the project has a marketing or brand context file (for example
+`.agents/marketing-context.md`, a positioning brief, brand guidelines, or a
+tone-of-voice doc), load it now. It governs voice, ICP, and positioning for
+everything below.
 
-This step is non-negotiable. No marketing skill executes without Lucas's context loaded.
+If none exists, establish these before proceeding: who the audience is, what the
+positioning is, and what the primary conversion goal is. Ask the user if it is
+not inferable from the project. Do not fall back on generic B2B SaaS assumptions.
 
 ---
 # AI SEO
@@ -58,8 +61,6 @@ Gather this context (ask if not provided):
 | **Gemini** | Google's AI assistant | Pulls from Google index + Knowledge Graph |
 | **Copilot** | Bing-powered AI search | Bing index + authoritative sources |
 | **Claude** | Brave Search (when enabled) | Training data + Brave search results |
-
-For a deep dive on how each platform selects sources and what to optimize per platform, see [references/platform-ranking-factors.md](references/platform-ranking-factors.md).
 
 ### Key Difference from Traditional SEO
 
@@ -134,8 +135,6 @@ Verify your robots.txt allows AI crawlers. Each AI platform has its own bot, and
 
 Check your robots.txt for `Disallow` rules targeting any of these. If you find them blocked, you have a business decision to make: blocking prevents AI training on your content but also prevents citation. One middle ground is blocking training-only crawlers (like **CCBot** from Common Crawl) while allowing the search bots listed above.
 
-See [references/platform-ranking-factors.md](references/platform-ranking-factors.md) for the full robots.txt configuration.
-
 ---
 
 ## Optimization Strategy
@@ -159,8 +158,6 @@ AI systems extract passages, not pages. Every key claim should work as a standal
 - **Pros/cons blocks** for evaluation queries
 - **FAQ blocks** for common questions
 - **Statistic blocks** with cited sources
-
-For detailed templates for each block type, see [references/content-patterns.md](references/content-patterns.md).
 
 **Structural rules:**
 - Lead every section with a direct answer (don't bury it)

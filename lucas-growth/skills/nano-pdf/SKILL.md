@@ -50,7 +50,7 @@ uvx nano-pdf add <file.pdf> <insert-after-page> "<description of new slide>"
 
 **Example:**
 ```bash
-uvx nano-pdf add proposal.pdf 0 "Title slide: 'Guest Retention Strategy — Acme Hospitality'"
+uvx nano-pdf add proposal.pdf 0 "Title slide: 'Customer Retention Strategy — Acme Corp'"
 uvx nano-pdf add deck.pdf 5 "Closing slide with call to action: 'Schedule a Discovery Call'"
 ```
 

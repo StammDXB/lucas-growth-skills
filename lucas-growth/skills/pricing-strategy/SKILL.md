@@ -4,13 +4,16 @@ description: >-
   Design pricing tiers and packaging strategy. Use for "pricing strategy", "pricing tiers", or "how to price".
 ---
 
-## Step 0: Load Marketing Context (MANDATORY)
+## Step 0: Load Brand Context
 
-Check if `.agents/lucas-marketing-context.md` exists.
-- If it exists: load it now. It contains Lucas's positioning, voice, ICP, and economic context.
-- If it does not exist: invoke the `lucas-marketing-context` skill first, then return to this skill.
+If the project has a marketing or brand context file (for example
+`.agents/marketing-context.md`, a positioning brief, brand guidelines, or a
+tone-of-voice doc), load it now. It governs voice, ICP, and positioning for
+everything below.
 
-This step is non-negotiable. No marketing skill executes without Lucas's context loaded.
+If none exists, establish these before proceeding: who the audience is, what the
+positioning is, and what the primary conversion goal is. Ask the user if it is
+not inferable from the project. Do not fall back on generic B2B SaaS assumptions.
 
 ---
 # Pricing Strategy
@@ -121,8 +124,6 @@ Ask: "As a customer uses more of [metric], do they get more value?"
 - **Support level** — Email → Priority → Dedicated
 - **Access** — API, SSO, custom branding
 
-**For detailed tier structures and persona-based packaging**: See [references/tier-structure.md](references/tier-structure.md)
-
 ### Consulting Service Tiers (Tool-Stack Model)
 
 For consulting service lines, map tiers to implementation complexity, not feature access:
@@ -159,8 +160,6 @@ Identifies which features customers value most:
 - Show sets of features
 - Ask: Most important? Least important?
 - Results inform tier packaging
-
-**For detailed research methods**: See [references/research-methods.md](references/research-methods.md)
 
 ---
 

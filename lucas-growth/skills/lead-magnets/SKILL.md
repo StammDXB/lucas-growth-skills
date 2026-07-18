@@ -4,13 +4,16 @@ description: >-
   Design and build lead magnets. Use for "lead magnet", "content upgrade", or "free resource".
 ---
 
-## Step 0: Load Marketing Context (MANDATORY)
+## Step 0: Load Brand Context
 
-Check if `.agents/lucas-marketing-context.md` exists.
-- If it exists: load it now. It contains Lucas's positioning, voice, ICP, and economic context.
-- If it does not exist: invoke the `lucas-marketing-context` skill first, then return to this skill.
+If the project has a marketing or brand context file (for example
+`.agents/marketing-context.md`, a positioning brief, brand guidelines, or a
+tone-of-voice doc), load it now. It governs voice, ICP, and positioning for
+everything below.
 
-This step is non-negotiable. No marketing skill executes without Lucas's context loaded.
+If none exists, establish these before proceeding: who the audience is, what the
+positioning is, and what the primary conversion goal is. Ask the user if it is
+not inferable from the project. Do not fall back on generic B2B SaaS assumptions.
 
 ---
 # Lead Magnets
@@ -89,8 +92,6 @@ Gather this context (ask if not provided):
 | Webinar | Authority, live engagement | Medium | 1 week prep |
 | Resource library | Ongoing value, return visits | High | Ongoing |
 | Free trial/community access | Product experience | Varies | Varies |
-
-**For detailed creation guidance per format**: See [references/format-guide.md](references/format-guide.md)
 
 ---
 
@@ -241,8 +242,6 @@ Don't waste the thank you page. After they've converted:
 | **Lead-to-customer rate** | Lead quality | 1-5% (B2B), varies widely |
 | **Email engagement** | Content relevance | 30-50% open, 2-5% click |
 | **Time to conversion** | Nurture effectiveness | Track by lead magnet source |
-
-**For detailed benchmarks by format and industry**: See [references/benchmarks.md](references/benchmarks.md)
 
 ### A/B Testing Ideas
 

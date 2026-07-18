@@ -33,8 +33,15 @@ By [Lucas Stamm](https://lucasstamm.com). 35 skills.
 
 ## Scope
 
-These are portable, self-contained skills. They carry no dependency on a
-private workspace, and no skill here duplicates one shipped by Anthropic.
+These are portable, self-contained skills. They carry no dependency on a private
+workspace, no hard-coded brand or client names, and no absolute paths. Every
+skill runs standalone in any project.
+
+Skills that need brand context open with a `Step 0: Load Brand Context` block.
+It loads a project brand/positioning doc if one exists, and otherwise asks for
+audience, positioning, and conversion goal rather than assuming a default.
+
+No skill here duplicates one shipped by Anthropic.
 
 See `NOTICE` for third-party attribution.
 
