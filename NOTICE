@@ -1,0 +1,15 @@
+Third-party attribution
+=======================
+
+Most skills in this repository are original work by Lucas Stamm.
+
+The following are derived from or informed by third-party sources, with
+attribution retained inline in each SKILL.md:
+
+  skills/ai-output-hygiene   Informed by Leonxlnx (taste-skill, output-skill,
+                             redesign-skill).
+  skills/pricing-strategy    Informed by published work of Rob Howard.
+
+This repository deliberately contains NO skills derived from the
+anthropics/skills repository (Apache License 2.0). Those skills ship with
+Claude natively and are not redistributed here.

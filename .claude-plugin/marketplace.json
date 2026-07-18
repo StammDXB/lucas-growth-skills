@@ -1,0 +1,14 @@
+{
+  "name": "lucas-growth",
+  "owner": { "name": "Lucas Stamm" },
+  "metadata": {
+    "description": "Marketing architecture, growth, CRO, SEO, and brand skills by Lucas Stamm"
+  },
+  "plugins": [
+    {
+      "name": "lucas-growth",
+      "source": "./lucas-growth",
+      "description": "35 skills for marketing architecture, conversion optimization, SEO, paid acquisition, retention, and brand craft"
+    }
+  ]
+}
