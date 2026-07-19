@@ -33,9 +33,24 @@ produce ceremony instead of judgment, which is worse than a plain answer.
 
 ## Step 1: Clarify before writing
 
-Do not draft until you can answer these. If the brief does not supply them and
-you cannot infer them confidently from context, **ask**. Two questions cost less
-than a confident draft aimed at nobody.
+Ask only where the answer would change what you write. Otherwise draft.
+
+- **Can infer them confidently from context?** Draft.
+- **One or two genuinely missing, and they change the copy?** Ask for those
+  and stop. Two questions cost less than a confident draft aimed at nobody.
+- **Three or more missing?** Draft against your stated assumptions anyway.
+  Then ask the single most important question underneath the draft. Both
+  halves are required: a draft with no question hides what you guessed, and a
+  question with no draft is the interrogation this rule exists to prevent.
+
+**You still ship the artifact that was asked for.** Correcting a wrong premise,
+diagnosing the real problem, or explaining what you would need to do it properly
+is never a substitute for the deliverable. Do both, in that order: the
+correction first, then the copy.
+
+Never withhold the deliverable behind an interrogation. A marked-up draft the
+user can react to beats a list of questions they must answer cold, and it
+surfaces a wrong assumption faster than asking about it does.
 
 Required:
 1. **Who is the reader**, specifically. Not "marketers". "Ops leads at 50-200
@@ -135,12 +150,14 @@ Show the copy. Then a short note in plain language.
 [the copy, clean, ready to use]
 
 ---
-Checked against the copywriting rubric. [n] items fixed.
 Assumed: [any input you had to assume]
 Open: [anything unresolved, or anything needing proof you do not have]
 ```
 
-Keep the note to three lines or fewer. Never show the rubric scoring, the
+Keep the note to two lines or fewer, and drop either line when it has nothing
+to say. Never report that you ran the rubric, how many items you fixed, or how
+many rounds it took. A fix count is not information the reader can act on: it
+describes your process, not their copy. Never show the rubric scoring, the
 revision rounds, or your internal reasoning. The user wants copy, not a
 transcript.
 
