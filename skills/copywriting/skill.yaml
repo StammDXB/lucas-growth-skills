@@ -1,0 +1,9 @@
+# Lenses and rubrics compiled into references/ at build time.
+# Skills cannot reference each other at runtime in Claude Desktop, so shared
+# knowledge is bundled per skill.
+lenses:
+  - persuasion-frameworks
+  - semiotics
+  - voice-and-tone
+rubrics:
+  - rubric-copywriting
