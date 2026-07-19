@@ -13,6 +13,7 @@ Usage:
 
 from __future__ import annotations
 
+import json
 import re
 import shutil
 import sys
@@ -41,6 +42,8 @@ NAME_PATTERN = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 
 # Matches markdown links and bare paths pointing into bundled directories.
 REF_PATTERN = re.compile(r"(?:references|assets|scripts)/[A-Za-z0-9._/-]+")
+# Manifest descriptions open with the skill count, e.g. "10 skills: ..."
+LEADING_COUNT = re.compile(r"^\s*(\d+)\b")
 
 
 @dataclass
@@ -120,6 +123,71 @@ def validate_no_orphans(skill_out: Path, body: str, res: Result) -> None:
             res.warnings.append(
                 f"bundled but never referenced in SKILL.md: "
                 f"references/{path.relative_to(refs_dir)}"
+            )
+
+
+def _manifest_description(path: Path, res: Result) -> str | None:
+    """Pull the user-facing description out of either manifest shape."""
+    if not path.exists():
+        res.errors.append(f"missing manifest: {path.relative_to(ROOT)}")
+        return None
+    try:
+        data = json.loads(path.read_text())
+    except json.JSONDecodeError as exc:
+        res.errors.append(f"{path.relative_to(ROOT)} is not valid JSON: {exc}")
+        return None
+    if "plugins" in data:  # marketplace.json
+        entries = data.get("plugins") or []
+        return entries[0].get("description", "") if entries else ""
+    return data.get("description", "")  # plugin.json
+
+
+def validate_distribution(skill_names: list[str], res: Result) -> None:
+    """Check the hand-maintained manifests and the plugin tree against reality.
+
+    Two failures this catches, both of which have already shipped:
+
+    1. Manifest drift. build.py rebuilds plugin/skills/ but never touches
+       marketplace.json or plugin.json, so their descriptions go stale the
+       moment a skill is added. The pack shipped advertising 7 skills while
+       bundling 10, and the marketplace UI showed the stale number.
+    2. A stale plugin tree, which is what running build.py without --plugin
+       leaves behind. The Claude Code marketplace then serves yesterday's
+       skills with no other signal that anything is wrong.
+    """
+    count = len(skill_names)
+
+    for path in (
+        ROOT / ".claude-plugin" / "marketplace.json",
+        PLUGIN_DIR / ".claude-plugin" / "plugin.json",
+    ):
+        desc = _manifest_description(path, res)
+        if desc is None:
+            continue
+        rel = path.relative_to(ROOT)
+        match = LEADING_COUNT.match(desc)
+        if not match:
+            res.warnings.append(
+                f"{rel}: description opens with no skill count, so it cannot be "
+                f"checked against the {count} skills that ship"
+            )
+            continue
+        stated = int(match.group(1))
+        if stated != count:
+            res.errors.append(
+                f"{rel}: description says {stated} skills, but {count} ship"
+            )
+
+    for name in skill_names:
+        src = SKILLS_DIR / name / "SKILL.md"
+        out = PLUGIN_DIR / "skills" / name / "SKILL.md"
+        if not out.exists():
+            res.errors.append(
+                f"plugin/skills/{name}/ is missing; run build.py --plugin"
+            )
+        elif src.read_text() != out.read_text():
+            res.errors.append(
+                f"plugin/skills/{name}/SKILL.md is stale; run build.py --plugin"
             )
 
 
@@ -230,6 +298,14 @@ def main() -> int:
     BUILD_DIR.mkdir(exist_ok=True)
     results = [compile_skill(t, check_only, plugin_mode) for t in targets if t.is_dir()]
     shutil.rmtree(BUILD_DIR, ignore_errors=True)
+
+    # Only meaningful across the full set: a single-skill build would compare
+    # the manifests against a count of 1. Runs after compilation so --plugin
+    # validates the tree it just wrote, while --check validates the committed one.
+    if not args:
+        dist_res = Result(name="distribution")
+        validate_distribution([t.name for t in targets if t.is_dir()], dist_res)
+        results.append(dist_res)
 
     failed = 0
     for r in results:
