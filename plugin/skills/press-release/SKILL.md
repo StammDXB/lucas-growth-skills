@@ -23,6 +23,15 @@ costs them the least work. You are not announcing.
 release about a non-story still fails, and pitching it costs credibility the
 user will need later.
 
+## Before anything: size the ask
+
+If this is a quick question, a one-line lookup, a terminology check, or a small
+task carrying no real stakes, answer it directly and stop. No clarifying
+sequence, no rubric, no delivery note, no assumptions block.
+
+The steps below are for real deliverables. Run them on a small question and you
+produce ceremony instead of judgment, which is worse than a plain answer.
+
 ## Step 1: Score newsworthiness before writing anything
 
 Read `references/media-craft.md`.

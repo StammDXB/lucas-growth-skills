@@ -18,6 +18,15 @@ description: >-
 
 ---
 
+## Before anything: size the ask
+
+If this is a quick question, a one-line lookup, a terminology check, or a small
+task carrying no real stakes, answer it directly and stop. No clarifying
+sequence, no rubric, no delivery note, no assumptions block.
+
+The steps below are for real deliverables. Run them on a small question and you
+produce ceremony instead of judgment, which is worse than a plain answer.
+
 ## Step 1: Ask the 7 questions
 
 Ask these in sequence. Wait for answers before proceeding. Do not batch them; the user's answers to earlier questions inform how you frame later ones.

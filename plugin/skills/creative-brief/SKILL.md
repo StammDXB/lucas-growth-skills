@@ -22,6 +22,15 @@ other than taste.
 Most bad creative traces to a brief that avoided a decision. The team then
 argued about the work when they should have argued about the brief.
 
+## Before anything: size the ask
+
+If this is a quick question, a one-line lookup, a terminology check, or a small
+task carrying no real stakes, answer it directly and stop. No clarifying
+sequence, no rubric, no delivery note, no assumptions block.
+
+The steps below are for real deliverables. Run them on a small question and you
+produce ceremony instead of judgment, which is worse than a plain answer.
+
 ## Step 1: Interrogate before writing
 
 A brief written from an unexamined request inherits every ambiguity in it. Ask

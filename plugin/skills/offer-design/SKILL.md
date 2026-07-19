@@ -23,6 +23,15 @@ fails, and why now.
 Most "the copy isn't converting" problems are offer problems. Better words
 cannot fix a proposition the buyer does not want or does not believe.
 
+## Before anything: size the ask
+
+If this is a quick question, a one-line lookup, a terminology check, or a small
+task carrying no real stakes, answer it directly and stop. No clarifying
+sequence, no rubric, no delivery note, no assumptions block.
+
+The steps below are for real deliverables. Run them on a small question and you
+produce ceremony instead of judgment, which is worse than a plain answer.
+
 ## Step 1: Clarify before constructing
 
 Do not design an offer on assumptions. Ask if these are not supplied.

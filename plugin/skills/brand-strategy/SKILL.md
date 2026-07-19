@@ -19,6 +19,15 @@ metadata:
 Positioning is a decision about what you give up. Everything else follows from
 that, and most brand work fails because that decision was never made.
 
+## Before anything: size the ask
+
+If this is a quick question, a one-line lookup, a terminology check, or a small
+task carrying no real stakes, answer it directly and stop. No clarifying
+sequence, no rubric, no delivery note, no assumptions block.
+
+The steps below are for real deliverables. Run them on a small question and you
+produce ceremony instead of judgment, which is worse than a plain answer.
+
 ## Step 1: Clarify before positioning
 
 Do not produce positioning from a thin brief. Ask if these are missing.

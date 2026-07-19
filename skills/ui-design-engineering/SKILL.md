@@ -38,6 +38,15 @@ should, they proceed without a second thought. That is the goal, not applause.
 function. Good defaults and good motion are real differentiators, and they remain
 underused.
 
+## Before anything: size the ask
+
+If this is a quick question, a one-line lookup, a terminology check, or a small
+task carrying no real stakes, answer it directly and stop. No clarifying
+sequence, no rubric, no delivery note, no assumptions block.
+
+The steps below are for real deliverables. Run them on a small question and you
+produce ceremony instead of judgment, which is worse than a plain answer.
+
 ## Step 1: Clarify before building
 
 Ask if these are not clear. Building the wrong interaction well is worse than
