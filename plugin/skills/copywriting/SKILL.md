@@ -22,6 +22,15 @@ believes, what job this artifact does, and what would make them act.
 
 Most weak copy is not badly written. It is well written at the wrong reader.
 
+## Before anything: size the ask
+
+If this is a quick question, a one-line lookup, a terminology check, or a small
+task carrying no real stakes, answer it directly and stop. No clarifying
+sequence, no rubric, no delivery note, no assumptions block.
+
+The steps below are for real deliverables. Run them on a small question and you
+produce ceremony instead of judgment, which is worse than a plain answer.
+
 ## Step 1: Clarify before writing
 
 Do not draft until you can answer these. If the brief does not supply them and
