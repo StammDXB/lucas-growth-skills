@@ -72,6 +72,51 @@ The components that matter:
 brand is deliberately not for, and not good at. If the answer is nothing, there
 is no position.
 
+## Dunford's positioning components
+
+April Dunford, *Obviously Awesome* (2019). The most operational positioning
+framework in current practice, and it inverts the usual order: it derives the
+category *last* rather than assuming it first.
+
+1. **Competitive alternatives.** What would customers do if you did not exist?
+   Usually a spreadsheet, an agency, or nothing. Not the vendors you benchmark
+   against.
+2. **Unique attributes.** What do you have that the alternatives do not?
+   Features and capabilities, stated plainly.
+3. **Value, and the proof of it.** What those attributes let the customer do that
+   they could not otherwise. Attributes without value are a spec sheet.
+4. **Target market characteristics.** Who cares a lot about that value, and how
+   would you identify them?
+5. **Market category.** The context that makes your value obvious. Chosen last,
+   because it follows from 1 to 4.
+6. **(+1) Relevant trends.** Only if genuinely relevant. This is where most
+   positioning goes wrong, by bolting on whatever is fashionable.
+
+**The move that makes it work:** most teams pick the category first and reason
+backwards, which is why so much positioning sounds like the category rather than
+the company. Dunford's order forces the category to be a conclusion.
+
+Her diagnostic question is worth asking verbatim: *"What would your customers do
+if you did not exist?"* The answer is almost never the competitor set the team
+has been benchmarking against, and that gap is usually where the real position is.
+
+## Jobs to be done
+
+Clayton Christensen and Bob Moesta. People do not buy products, they hire them
+to make progress in a particular circumstance.
+
+The useful discipline is that the **circumstance** is the unit of analysis, not
+the customer. The same person hires different things in different circumstances.
+A demographic cannot be a job.
+
+Two questions that surface a job rather than a preference:
+- What was happening the day they decided to look for a solution?
+- What did they stop doing, or fire, in order to hire this?
+
+Note the relationship to category entry points above: both reject the persona as
+the unit and replace it with the situation. They are compatible, and where they
+disagree, JTBD suits considered purchases and entry points suit habitual ones.
+
 ## Brand architecture
 
 - **Branded house.** One master brand, sub-brands as descriptors. Efficient,

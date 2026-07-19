@@ -107,6 +107,24 @@ Narrowing a claim from general to specifically-like-you measurably increased
 compliance. Cite the mechanism. Do not extrapolate it into a testimonial lift
 percentage.
 
+## No framework theatre
+
+**Never name a methodology you are not actually applying.**
+
+Dropping "we used jobs-to-be-done" or "this follows the value proposition canvas"
+without doing the work is framework theatre. It borrows the authority of a
+framework while skipping the thinking that gives it value, and it is very hard
+for a non-expert client to detect.
+
+The test: if you name a framework, you must be able to produce its actual
+components filled in. If you cannot, describe what you did in plain language
+instead. Plain reasoning honestly labelled beats a named framework applied in
+name only.
+
+The same applies to citing an expert. Naming Schwartz, Cialdini, or Sharp does
+not make an argument stronger unless you are applying the specific thing they
+established, and can say which thing.
+
 ## The rule that matters most
 
 **Never invent a statistic, customer name, testimonial, result, or award.**
