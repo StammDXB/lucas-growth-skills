@@ -1,0 +1,111 @@
+{
+  "skill_name": "creative-brief",
+  "note": "Run each case with the skill and without it. The skill ships only if the with-skill runs measurably beat baseline. Anthropic: 'If the agent already handles the entire task well without the skill, the skill may not be adding value.'",
+  "evals": [
+    {
+      "id": 1,
+      "intent": "The please-everyone ask: does it force one proposition and kill the adjective hedges, or does it write a brief that carries both ideas and copies the hedges straight through?",
+      "prompt": "Need a creative brief for our spring campaign. Coffee subscription, direct to consumer. The founder wants it to be about ethical sourcing, the growth team wants it to be about how it works out cheaper than a daily café habit, and honestly both are true so let's cover both. Tone should be premium but approachable, and playful but trustworthy. Keep everyone happy on this one, I really don't want another round of internal arguments.",
+      "expected_output": "Refuses to carry both ideas. States that a brief with two propositions produces work that does neither and that the internal argument returns at presentation stage with a bigger audience. Strips the 'X but Y' tone hedges as deferred decisions. Asks who actually decides between sourcing and cost.",
+      "assertions": [
+        "The final brief presents exactly one proposition and does not carry the ethical-sourcing idea and the cost-versus-café idea as two co-equal messages, key messages, or pillars",
+        "The brief does not contain 'premium but approachable', 'playful but trustworthy', or any other 'X but Y' or 'X yet Y' adjective pairing in its tone, proposition, or brand sections",
+        "States explicitly that carrying two ideas produces work that does neither, or that the unresolved internal argument will resurface when the work is presented",
+        "Asks who has final sign-off between the two ideas, or names the approver, rather than leaving the choice unattributed"
+      ],
+      "baseline_hypothesis": "Plain Claude writes a polished brief with a 'Key Messages' section bulleting both ideas as complementary, and lifts 'premium but approachable, playful but trustworthy' verbatim into a Tone of Voice section because the user asked for it. Expected to fail assertions 1, 2 and 3."
+    },
+    {
+      "id": 2,
+      "intent": "Clarify-first gate on a deliverable-shaped ask: does it refuse to write a brief it has no inputs for, or does it invent an audience, an insight, and a success metric?",
+      "prompt": "Can you write me a creative brief for a launch video? We're launching our new app next month and I need to brief a production company by Friday.",
+      "expected_output": "Does not proceed. Says plainly that the video is a solution someone already chose and asks what business problem it is for, who specifically, what behaviour must change, and how success will be measured. Offers to help find the answers rather than filling the gaps with plausible assumptions.",
+      "assertions": [
+        "Does not output a completed brief containing an invented audience description, an invented audience insight, or an invented success metric",
+        "Asks what business outcome or problem the video exists to address, rather than treating 'a launch video' as the given starting point",
+        "Asks at least three of the following: who the audience specifically is, what they currently believe or do, what behaviour must change, how success will be measured, what the real constraints are",
+        "Does not state any statistic, market-size figure, download benchmark, or competitor claim about the app's category"
+      ],
+      "baseline_hypothesis": "Plain Claude produces a complete, confident brief inventing an audience ('tech-savvy professionals aged 25-40 frustrated with existing tools'), an insight, and 'increase awareness and drive downloads' as the objective, then appends a short list of questions to refine it. Expected to fail assertions 1 and 3, and usually 2."
+    },
+    {
+      "id": 3,
+      "intent": "Vague brief handed over with the agency blamed: does it diagnose the brief's missing decisions first, or just rewrite the prose into a tidier version of the same brief?",
+      "prompt": "The agency has missed the mark three times now on this. Here's the brief we gave them, can you tighten it up so they finally get it?\n\nBRIEF: Skylark Wellness App — Q3 Campaign\nBackground: Skylark is a meditation and sleep app founded in 2019. We have 400k downloads and a 4.6 star rating.\nObjective: Increase brand awareness and drive app downloads.\nAudience: Millennials and Gen Z, anyone interested in wellness and self-care.\nKey message: Skylark helps you sleep better and manage stress in a way that fits your life.\nTone: Calm but energising, premium but accessible.\nDeliverables: Social assets, 2 x 30s video, display banners.\nTimeline: Assets due end of August.",
+      "expected_output": "Diagnoses before rewriting. Names the missing decision (sleep or stress, not both), the two hedges, the audience that rules nobody out, the objective that cannot be used to reject anything, and the absent approver. Locates the cause in the brief rather than in the agency's execution.",
+      "assertions": [
+        "Gives a diagnosis of what is missing or wrong in the supplied brief before producing any rewritten version",
+        "Quotes or names at least two of the 'X but Y' hedges ('calm but energising', 'premium but accessible') and states that each defers a decision to whoever makes the work",
+        "States that the audience definition excludes nobody, or names 'anyone interested in wellness' as unusable",
+        "States that the brief contains no success measure that could be used to reject work, or that 'increase brand awareness' cannot be used to judge the output",
+        "Identifies that no approver is named, or asks who signs the work off"
+      ],
+      "baseline_hypothesis": "Plain Claude returns a slicker rewrite of the same brief — sharper objective wording, a persona-style audience, softened tone adjectives — without a diagnosis section, keeps both the sleep and stress ideas, and never raises approvers. Expected to fail assertions 1, 2 and 5, and likely 3."
+    },
+    {
+      "id": 4,
+      "intent": "Folklore in the user's own prompt: is 'the APG single-minded proposition framework' corrected as undefined agency vocabulary, or performed as a documented method?",
+      "prompt": "Write the brief properly using the single-minded proposition framework, the APG standard one, I want this done to the actual definition rather than someone's interpretation. Client is Halden & Co, a 90-year-old British shoe repair chain, 40 shops in high streets and stations, trying to get under-35s to repair their shoes rather than replace them. Budget £250k, mainly social and out of home, launching September. Marketing director is Priya Raman, she signs off.",
+      "expected_output": "Uses the concept but corrects the premise: 'single-minded proposition' is standard agency vocabulary with no authoritative published definition, and the Account Planning Group's own explainer does not define it. Does not invent canonical components to satisfy the request. Still writes the brief for Halden & Co with one proposition.",
+      "assertions": [
+        "States that 'single-minded proposition' has no authoritative published definition, or that the Account Planning Group does not actually define it, rather than presenting it as a documented standard",
+        "Does not attribute a numbered, named, or canonical set of framework components to the Account Planning Group or to any published source",
+        "Still delivers the requested brief for Halden & Co, containing exactly one proposition",
+        "The proposition is written as a full sentence for the internal team, and is not labelled or presented as a tagline, strapline, endline, or line to appear in the advertising"
+      ],
+      "baseline_hypothesis": "Plain Claude describes 'the APG single-minded proposition framework' as an established method and lists confident invented components for it, then writes a proposition that reads as a strapline ('Worn in, not worn out'). Expected to fail assertions 1, 2 and 4."
+    },
+    {
+      "id": 5,
+      "intent": "Two contested effectiveness claims asserted as settled: does it report the sampling limitation on 60/40 and correct the inverted awards finding, or brief the campaign on both premises as given?",
+      "prompt": "Our CMO wants the brief to reflect two things she's certain about. First, the 60/40 rule proves you should put 60% into brand and 40% into activation. Second, there's IPA research showing award-winning creative is no more effective than non-award-winning work, so we shouldn't be paying for creative ambition — brief them for efficient, high-volume activation instead. Write the brief. It's for Bramble, a mid-market UK garden furniture retailer, spring range, £400k media budget, sold through their own stores and website.",
+      "expected_output": "Corrects both premises before briefing. The 60/40 figure is IPA-sourced but derives from self-selected award submissions rather than a representative sample, and has been revised. The awards finding is real but the conclusion drawn from it is inverted: awarded work was starved of budget and evaluated on short windows. Still writes the Bramble brief.",
+      "assertions": [
+        "States that the 60/40 figure derives from self-selected IPA award submissions rather than a representative sample, or otherwise names a specific limitation in how the figure was sourced",
+        "Corrects the reading that awarded work being no more effective means creative quality does not drive effectiveness, and gives budget starvation or short-term evaluation windows as the actual explanation",
+        "Does not present 60/40 in the brief as a proven, universal, or settled budget rule",
+        "Still produces the requested brief for Bramble"
+      ],
+      "baseline_hypothesis": "Plain Claude repeats 60/40 approvingly, likely crediting Binet and Field as though attribution settles it, accepts the awards conclusion, and briefs an activation-weighted campaign as instructed. Expected to fail assertions 1, 2 and 3."
+    },
+    {
+      "id": 6,
+      "intent": "Fabrication pressure: user explicitly authorises invented audience research and market stats to make the brief look serious.",
+      "prompt": "Write a creative brief for our B2B launch, we're a payroll platform built for restaurant groups. Chuck in an audience insight and two or three market stats so the agency takes it seriously. Doesn't need to be exact, just make it sound credible and we'll check the numbers later.",
+      "expected_output": "Refuses to invent the insight or the figures. Marks them as gaps to be supplied, states that a brief built on invented inputs produces work nobody can evaluate, and still delivers the brief structure with the real inputs it has.",
+      "assertions": [
+        "Does not output any market statistic, audience research finding, or competitor claim presented as real or sourced",
+        "Any figure or insight it cannot source appears as an obviously marked placeholder or open question rather than a plausible invented number",
+        "Explicitly states that the insight and the figures must be supplied or sourced before the brief is handed to the agency",
+        "Still produces a usable brief rather than only refusing"
+      ],
+      "baseline_hypothesis": "Plain Claude generates fluent invented figures ('restaurant operators spend around 6 hours a week on manual payroll') with a soft '[verify]' or 'industry estimates' hedge, and an invented insight stated as fact. Expected to fail assertions 1 and 2."
+    },
+    {
+      "id": 7,
+      "intent": "Full inputs supplied: does the brief actually exclude things, define success before the work, and close with what is still open and how it could go wrong?",
+      "prompt": "OK here's everything. Northwind Tools, we make cordless power tools sold through independent trade merchants in the UK, not the big sheds. Problem is our merchant sales have been flat for two years while DIY-focused brands take shelf space off us. Our buyers are self-employed tradespeople, mostly 30 to 55, they buy whatever the merchant behind the counter hands them and they currently think of us as mid-tier, fine, replaceable. We need them asking for us by name at the counter instead of accepting the substitute. We've got a 24-month battery warranty nobody else at our price offers. Budget is £600k over 12 months across trade press, merchant point of sale, and a bit of social. Legal need the warranty terms footnoted anywhere we mention it. Sign-off is our sales director Gavin Hale, who will hate anything that makes us look like a consumer brand, and our MD Elaine Foss. We tried a price promotion in 2023, it moved volume and then volume dropped straight back. Write the brief.",
+      "expected_output": "A one-page brief built on the counter-substitution behaviour, with an explicit out-of-scope section, success measured in named-request or specification terms rather than awareness, Gavin Hale's consumer-brand objection carried as a constraint, and two closing lines covering what is still open and the most likely way this brief produces the wrong work.",
+      "assertions": [
+        "Contains an explicit section stating what is out of scope, what the work will not do, or what is deliberately excluded",
+        "States the behaviour change as a shift from one named behaviour to another named behaviour, rather than as an awareness, perception, or affinity objective",
+        "States what was assumed and what still needs to be answered",
+        "Names the most likely way this brief could produce the wrong work",
+        "States a success measure that could be assessed without having seen the creative work"
+      ],
+      "baseline_hypothesis": "Plain Claude fills a conventional template — Background, Objectives, Target Audience, Key Message, Tone of Voice, Deliverables, Mandatories, Timings — with the objective as 'increase brand preference and drive specification at the counter', no exclusions, no open questions, and no risk statement. Expected to fail assertions 1, 3 and 4."
+    },
+    {
+      "id": 8,
+      "intent": "Negative case: does it stay out of the way when the ask is a one-line terminology question?",
+      "prompt": "Quick one — in a creative brief, does 'mandatories' just mean the legal stuff, or does it cover logo and brand guideline requirements too?",
+      "expected_output": "A short direct answer: mandatories covers anything the work must include or comply with, legal, brand, channel and format. No clarifying interrogation about the project, no brief, no pressure tests, no rubric.",
+      "assertions": [
+        "Answers the terminology question directly without asking clarifying questions about the user's project, audience, or objectives",
+        "Does not produce a creative brief or a full brief template",
+        "Does not produce a rubric scorecard, pressure-test checklist, or quality assessment",
+        "Response is proportionate to a one-line terminology question"
+      ]
+    }
+  ]
+}

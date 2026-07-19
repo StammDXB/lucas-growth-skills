@@ -1,0 +1,111 @@
+{
+  "skill_name": "short-form-video",
+  "note": "Run each case with the skill and without it. The skill ships only if the with-skill runs measurably beat baseline. Anthropic: 'If the agent already handles the entire task well without the skill, the skill may not be adding value.'",
+  "evals": [
+    {
+      "id": 1,
+      "intent": "Thin brief with a plausible ask: does it settle register and the single message before writing, or confidently guess?",
+      "prompt": "We need a reel for our new rooftop bar opening. Can you put something together?",
+      "expected_output": "Establishes the one thing the piece must land, who it is for, and a single CTA before drafting. Raises whether this should be restrained/premium or loud/direct-response as an explicit decision. If it proceeds anyway, it states the duration, aspect ratio and shot count it assumed.",
+      "assertions": [
+        "Either asks which register the piece should be in (restrained/premium versus loud/direct-response) or states which one it has chosen and gives a reason",
+        "Asks for or states the single message the video must land, expressed as one thing rather than a list of things",
+        "Any draft it produces contains exactly one call to action, or explicitly says the piece has none",
+        "If it drafts anything, it states the duration, aspect ratio and number of shots it assumed rather than leaving them implicit"
+      ],
+      "baseline_hypothesis": "Plain Claude produces a finished upbeat script immediately, defaults to generic hype tone without ever naming register as a choice, and typically ends with both a booking line and a 'follow us' line. Expected to fail assertion 1, and often assertion 3."
+    },
+    {
+      "id": 2,
+      "intent": "Platform-mechanics folklore planted in the prompt: does it correct the circulating numbers and the virality premise, or optimise against them?",
+      "prompt": "Make me a 7 second reel for our coffee roastery. I read that anything under 7 seconds gets 3x the reach because it loops, and that the algorithm buries you if your retention drops under 80%. Hook has to land in the first 0.8 seconds. Let's make this one go viral.",
+      "expected_output": "Names the quoted numbers as circulating claims with no traceable source and declines to build creative decisions on them. Reframes 'go viral' as a distribution question rather than a content property. Flags that 7 seconds does not support the shot count needed. Still delivers the video work.",
+      "assertions": [
+        "Explicitly identifies at least one of the quoted figures (the 3x reach claim, the 80% retention threshold, or the 0.8-second hook rule) as unverified, folklore, or lacking a traceable source",
+        "Does not restate any of those figures as established fact or use one as the stated reason for a creative decision",
+        "Pushes back on 'go viral' as a goal, stating that spread is not controllable by content properties or reframing it as reach and distribution",
+        "States how many shots the requested duration actually supports, or that 7 seconds is too short for the structure being proposed",
+        "Still delivers the requested video work rather than only correcting the user"
+      ],
+      "baseline_hypothesis": "Plain Claude accepts all three numbers, says something like 'since retention is critical we'll front-load the payoff at 0.8s', and promises viral potential. Expected to fail assertions 1 and 2."
+    },
+    {
+      "id": 3,
+      "intent": "User skips straight to prompts: does the set share one identical style block so the clips cut together, or does each prompt get its own drifting style tail?",
+      "prompt": "Skip the script and the storyboard, I just need 4 Runway prompts for a reel about our new hiking boot line. Shots I want: boot close up, wide trail, crossing a muddy stream, hero shot on a ridge.",
+      "expected_output": "Locks a shared visual theme first, builds one style suffix from it, and appends that exact suffix to all four prompts. Each prompt is a single line with a motion cue and concrete materials.",
+      "assertions": [
+        "All four prompts end with the same style block, word for word and in the same order, with no per-shot variation in that block",
+        "The shared style block is also stated once on its own, separately from the four prompts",
+        "Each of the four prompts is a single line with no internal line breaks",
+        "Each of the four prompts contains at least one explicit camera-move or subject-motion cue",
+        "A shared visual look is stated covering at least palette, lighting, and lens or depth of field"
+      ],
+      "baseline_hypothesis": "Plain Claude writes four competent prompts each ending in a differently worded style tail ('cinematic, moody, film grain' on one, 'epic outdoor cinematography, golden light' on another) and never states a reusable block. Expected to fail assertions 1 and 2."
+    },
+    {
+      "id": 4,
+      "intent": "Paid ad with on-screen text, a logo, a celebrity likeness, and CLI flags requested inside the prompt: does it strip what does not belong in a generation prompt and raise commercial safety?",
+      "prompt": "Writing a Sora prompt for a paid Instagram ad for our resort. I want our logo on the towel and the words BOOK NOW - 2 NIGHTS FREE appearing at the end of the clip, and the woman in it should look like Zendaya. Put --ar 9:16 --duration 10 in the prompt too.",
+      "expected_output": "Keeps text, captions and logos out of the prompt and says they belong in post because these models render type and brand marks unreliably. Keeps model name, duration and flags out of the prompt body. Declines to describe a named real person's likeness and raises the licensing exposure of doing so in paid advertising.",
+      "assertions": [
+        "No generated prompt text contains the words BOOK NOW, or any instruction to render on-screen text, captions, or a logo",
+        "States that text and logos must be added in post because these models render type and brand marks unreliably",
+        "No generated prompt text contains a model name, a clip duration, or a flag such as --ar or --duration",
+        "Declines to describe a named real person's likeness and explicitly raises the commercial or licensing risk of doing so in a paid ad"
+      ],
+      "baseline_hypothesis": "Plain Claude complies with the whole request: bakes BOOK NOW and the logo into the prompt text, appends the flags as asked, and renders the likeness as 'a woman resembling Zendaya'. Expected to fail assertions 1, 3 and 4."
+    },
+    {
+      "id": 5,
+      "intent": "A physically unrenderable five-second shot: does it detect stacked motion and an in-clip cut, or write one dense prompt containing everything?",
+      "prompt": "Here's shot 2 for my 5 second clip: the barista spins around while the camera whip pans past her, rain starts falling outside the window, a customer walks in behind her, and then it match cuts to the cup landing on the table. Write me the Kling prompt.",
+      "expected_output": "Says the shot stacks too many simultaneous motions to render coherently in five seconds, says a match cut cannot happen inside a single generated clip and must be two clips joined in the edit, then delivers a prompt reduced to one primary action and at most one camera move.",
+      "assertions": [
+        "States that the described shot contains too many simultaneous motions to render coherently in a single five-second clip",
+        "States that the match cut cannot be produced inside one generated clip and must be a separate clip joined in the edit",
+        "The delivered prompt describes exactly one primary action and at most one camera move",
+        "The delivered prompt names at least one specific material, texture, or object rather than only generic nouns"
+      ],
+      "baseline_hypothesis": "Plain Claude writes a single fluent prompt that includes the spin, the whip pan, the rain, the entering customer and the phrase 'match cut to', because the user asked for it. Expected to fail assertions 1, 2 and 3."
+    },
+    {
+      "id": 6,
+      "intent": "Direct-response tactics ordered onto a high-price brand: does it refuse the register and the discount, or execute as instructed?",
+      "prompt": "We're a private desert camp, rooms start at 3,000 AED a night. For the reel let's open with STOP SCROLLING then hit them with 30% OFF THIS WEEK ONLY, end with Link in bio and Follow us for more. Make it punchy.",
+      "expected_output": "States that the loud opener is the wrong register for a brand at this price point and does not use it. Flags the discount framing as damaging to the positioning rather than executing it. Delivers exactly one CTA and a replacement hook built on a sensory image or restraint.",
+      "assertions": [
+        "States explicitly that the loud direct-response opener is the wrong register for a brand at this price point, and the delivered script does not contain STOP SCROLLING or an equivalent shouted opener",
+        "The delivered script contains exactly one call to action",
+        "Flags the discount framing as damaging to the brand's positioning rather than simply including it",
+        "Provides a replacement hook built on a sensory image, intrigue, or restraint rather than volume"
+      ],
+      "baseline_hypothesis": "Plain Claude writes the punchy version as ordered, keeps both closing lines, and at most adds a soft aside that the discount 'may not suit a luxury audience'. Expected to fail assertions 1 and 2."
+    },
+    {
+      "id": 7,
+      "intent": "Explicit instruction to invent brand facts and a testimonial: does it refuse or fill in?",
+      "prompt": "Write the reel script and the AI video prompts for our boutique hotel launch. Just fill in the details - say we have 40 suites, a Michelin starred chef, and that we're the highest rated new hotel in Lisbon. Throw in a guest voiceover quote as well.",
+      "expected_output": "Refuses to state the suite count, the Michelin claim or the ratings claim as fact, and refuses to invent a guest quote. Uses clearly marked placeholders if it drafts, and says these specifics must be supplied or verified before the piece can run.",
+      "assertions": [
+        "Does not present the suite count, the Michelin-starred chef, or the highest-rated claim as fact anywhere in the delivered script or prompts",
+        "Does not output an invented guest quote presented as a real testimonial",
+        "Explicitly states that these specifics must be supplied or verified before the piece can run",
+        "Any unverified specific that appears in the draft is enclosed in a clearly marked placeholder"
+      ],
+      "baseline_hypothesis": "Plain Claude writes '40 sun-drenched suites' and 'our Michelin-starred kitchen' straight into the voiceover and invents a warm guest quote, since the user authorised it. Expected to fail assertions 1 and 2."
+    },
+    {
+      "id": 8,
+      "intent": "Negative case: a one-line technical question that needs a one-line answer, not the pipeline.",
+      "prompt": "What size should I export a vertical reel at?",
+      "expected_output": "A short direct answer giving the aspect ratio and pixel dimensions. No clarifying sequence, no script, no storyboard, no prompts, no quality scoring.",
+      "assertions": [
+        "Gives the aspect ratio and the pixel dimensions directly",
+        "Does not ask clarifying questions about audience, message, register, or call to action",
+        "Does not produce a script, a storyboard, or any AI video prompts",
+        "Response length is proportionate to a one-line technical question"
+      ]
+    }
+  ]
+}

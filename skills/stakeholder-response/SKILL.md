@@ -1,6 +1,6 @@
 ---
 name: stakeholder-response
-description: Draft strategic, diplomatic written responses to high-stakes stakeholders, owners, principals, family offices, agencies, C-suite, government bodies, partner brands, and journalists. Use whenever the user needs to push back on a decision, decline without burning a relationship, deliver bad news, request budget or approval, manage agency or vendor underperformance, address cross-department friction, defend strategy under criticism, follow up after silence, or respond to a politically sensitive request. Also triggers for "draft a reply to X", "how should I respond to", "I need to push back on", "say no to without offending", "diplomatic response", "stakeholder email", or any situation where written tone and political nuance will determine the outcome. Diagnoses context, stakes, voice, and underlying need before choosing a tactic. Outputs the email body only.
+description: Draft strategic, diplomatic written responses to high-stakes stakeholders, owners, principals, family offices, agencies, C-suite, government bodies, partner brands, and journalists. Use whenever the user needs to push back on a decision, decline without burning a relationship, deliver bad news, request budget or approval, manage agency or vendor underperformance, address cross-department friction, defend strategy under criticism, follow up after silence, or respond to a politically sensitive request. Also triggers for "draft a reply to X", "how should I respond to", "I need to push back on", "say no to without offending", "diplomatic response", "stakeholder email", or any situation where written tone and political nuance will determine the outcome. Diagnoses context, stakes, voice, and underlying need before choosing a tactic. Outputs a sendable email body, not an essay explaining the tactics.
 ---
 
 # Stakeholder Response
@@ -14,6 +14,15 @@ A diagnostic-first writing engine for high-stakes stakeholder communication. Wri
 **Never start writing before diagnosing.** Every reply is downstream of four reads: stakes, context, voice, underlying need. Getting any of these wrong produces a tone-deaf reply, regardless of how well-written the prose is.
 
 ---
+
+## BEFORE ANYTHING: SIZE THE ASK
+
+If this is a quick question, a one-line lookup, a terminology check, or a small
+task carrying no real stakes, answer it directly and stop. No clarifying
+sequence, no rubric, no delivery note, no assumptions block.
+
+The steps below are for real deliverables. Run them on a small question and you
+produce ceremony instead of judgment, which is worse than a plain answer.
 
 ## STEP 1: DIAGNOSE BEFORE DRAFTING
 
@@ -130,7 +139,19 @@ If asking, ask **one** question, not a list. If you have to ask three, draft a p
 
 ## STEP 5: OUTPUT FORMAT
 
-Default output: **email body only**. No subject, no strategic note, no preamble explaining the choices.
+Default output: **the email body, then the delivery note. Nothing else.**
+
+- No subject line unless the user explicitly asks.
+- No preamble above the draft.
+- No explanation of which tactic you chose, or why, wrapped around the draft.
+
+The delivery note is the bounded three-line block specified under DELIVERY NOTE
+below. It is not a strategic note and it is not the working: three labelled
+lines the user reads in five seconds. If what you are about to append runs
+longer than three lines, it is the working, and it does not ship.
+
+**Proportionality.** On a small ask, per BEFORE ANYTHING above, append no
+delivery note at all.
 
 If the user asks "why did you write it that way" or "explain the tactic," then explain, but never volunteer it upfront.
 
@@ -247,7 +268,8 @@ written is the only unbiased reader available.
 
 ## DELIVERY NOTE
 
-After the draft, three lines maximum:
+After the draft, three lines maximum. Omit it entirely on a small ask, per the
+proportionality rule in STEP 5.
 
 ```
 Read      the stakes level and the underlying need you diagnosed

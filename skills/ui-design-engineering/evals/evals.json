@@ -1,0 +1,111 @@
+{
+  "skill_name": "ui-design-engineering",
+  "note": "Run each case with the skill and without it. The skill ships only if the with-skill runs measurably beat baseline. Anthropic: 'If the agent already handles the entire task well without the skill, the skill may not be adding value.'",
+  "evals": [
+    {
+      "id": 1,
+      "intent": "Hard gate: does it refuse to animate a keyboard-triggered, high-frequency control, or does it build the animation it was asked for?",
+      "prompt": "Can you add a nice open animation to our command palette? It's the Cmd+K one. I'm thinking a 300ms fade and scale-up so it feels less abrupt, plus a backdrop blur that fades in.",
+      "expected_output": "Declines to add the 300ms animation. Names how often this control is opened as the reason — a keyboard-triggered action repeated many times a day feels slow and disconnected once animated. Proposes instant, or something at the very bottom of the duration range. Drops or makes instant the fading backdrop blur.",
+      "assertions": [
+        "Recommends against the requested 300ms open animation rather than implementing it as asked",
+        "Gives frequency of use — that this control is opened many times a day, or that it is keyboard-triggered — as the stated reason",
+        "Any opening animation it still proposes is 100ms or shorter, or it proposes none at all",
+        "Addresses the fading backdrop blur specifically: either drops it, makes it instant, or states why it is being kept"
+      ],
+      "baseline_hypothesis": "Plain Claude implements exactly what was asked — a 300ms fade plus scale(0.95) to scale(1) with a blurred backdrop fading in — and calls it a polished result. Expected to fail assertions 1, 2 and 3."
+    },
+    {
+      "id": 2,
+      "intent": "Layout-triggering property plus two planted folk remedies: does it name the real cause and reject both remedies, or tune around them?",
+      "prompt": "Our mobile drawer slides in by transitioning `left` from -320px to 0 over 600ms ease-in-out. It stutters badly on Android. I've already put `will-change: transform` on the drawer, the overlay and the page wrapper. Do I need to go even longer on the duration to smooth it out?",
+      "expected_output": "Identifies `left` as the cause because it forces layout on every frame, and rewrites the animation as a transform translate. Rejects a longer duration as the fix and brings the duration back inside the drawer range. Tells the user to strip will-change from the elements that are not themselves animating.",
+      "assertions": [
+        "States that animating `left` is the cause because it triggers layout or reflow, and replaces it with a `transform` translate",
+        "Explicitly rejects increasing the duration as the fix, and proposes a duration of 500ms or less",
+        "Says `will-change` should be removed from the elements that are not themselves being animated",
+        "The replacement CSS uses a percentage-based translate such as `translateX(-100%)` rather than a hardcoded -320px value"
+      ],
+      "baseline_hypothesis": "Plain Claude switches `left` to `transform` (the easy half) but keeps the 600ms or extends it, leaves the blanket will-change in place or endorses it as an optimisation, and writes `translateX(-320px)`. Expected to fail assertions 2 and 3, and often 4."
+    },
+    {
+      "id": 3,
+      "intent": "The user asks for the wrong thing by name: does it hand over the global animation kill-switch, or correct what reduced motion actually means?",
+      "prompt": "Adding prefers-reduced-motion to our site. Give me the snippet that disables all animations and transitions globally for users who have it turned on.",
+      "expected_output": "Pushes back on the global kill. Reduced motion means less and gentler motion, not zero — opacity and colour transitions that aid comprehension stay, movement and position change goes. Delivers a targeted block rather than a universal reset, and says which categories of motion are being removed.",
+      "assertions": [
+        "Does not deliver a universal selector rule (such as one targeting `*`) that sets animation and transition to none or a near-zero duration for all elements",
+        "States that reduced motion means less or gentler motion rather than no motion at all",
+        "The snippet it provides keeps at least one opacity, fade, or colour transition active under reduced motion",
+        "Names the specific categories of motion that should be removed — movement, position change, scale, or parallax — rather than treating all animation identically"
+      ],
+      "baseline_hypothesis": "Plain Claude supplies the widely-copied `*, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }` reset because it was asked for it directly and the snippet is well known. Expected to fail assertions 1, 2 and 3."
+    },
+    {
+      "id": 4,
+      "intent": "Deep implementation fact: does it know why a JS-driven transform still drops frames under main-thread load?",
+      "prompt": "Our Framer Motion tab underline uses animate={{ x: activeOffset }} with a spring. It's buttery in isolation but drops frames whenever the page is fetching and rendering data. We're already animating a transform, and the component is already memoized. What else is there?",
+      "expected_output": "Explains that the x/y/scale shorthand is not hardware-accelerated — it drives values on the main thread through requestAnimationFrame — so it competes with the fetch and render work. Recommends either the full transform string form or moving the animation to CSS / the Web Animations API, which run off the main thread.",
+      "assertions": [
+        "States that the `x` shorthand animates on the main thread via requestAnimationFrame and is therefore not hardware-accelerated",
+        "Proposes either the full transform string form (such as transform: translateX(...)) or moving the animation to a CSS animation or the Web Animations API",
+        "Gives main-thread contention during data fetching as the reason the stutter only appears under load, rather than blaming re-renders or spring configuration",
+        "Does not offer adding `will-change` or lowering spring stiffness as the primary fix"
+      ],
+      "baseline_hypothesis": "Plain Claude re-suggests things the user already did — memoize harder, reduce re-renders, add will-change, use layoutId, lower stiffness — because it treats 'animating a transform' as already optimal. Expected to fail assertions 1 and 3."
+    },
+    {
+      "id": 5,
+      "intent": "The hedged brief: does it name the contradiction and commit to one direction, or produce the generic middle it was asked for?",
+      "prompt": "Our pricing page looks cheap next to our competitors. Make it feel premium — modern but warm, minimal but rich. What we have now: white background, Inter, cards with 1px #ddd borders and shadow-md, blue primary buttons.",
+      "expected_output": "Names 'modern but warm, minimal but rich' as two opposed directions and either asks which one or picks one and justifies it. Commits with concrete specifications. Replaces Inter, the generic grey hairline border and the default shadow rather than layering effects on top of them.",
+      "assertions": [
+        "Explicitly states that the brief describes two directions that pull against each other, and either asks which one to take or picks one and says why",
+        "Commits to a single named visual direction and gives concrete specifications for it — named typeface, specific colour values, radius values, or shadow values",
+        "Replaces Inter with a different named typeface rather than keeping it",
+        "Replaces both the 1px solid grey border and the default shadow-md with specified alternatives rather than keeping either",
+        "Does not leave the user with an unranked menu of aesthetic options and no recommendation"
+      ],
+      "baseline_hypothesis": "Plain Claude accepts 'modern but warm, minimal but rich' at face value, keeps Inter, keeps the card border, and adds a gradient, a glass panel and a larger shadow on top — the generic middle. Expected to fail assertions 1, 3 and 4."
+    },
+    {
+      "id": 6,
+      "intent": "Four separate craft rules the user's own spec violates: scale(0), ease-in on an enter, an over-long duration, and a default transform-origin.",
+      "prompt": "Need the CSS for a popover that opens off an avatar button in the top-right of our nav. I want it to scale from 0 up to full size with ease-in over 400ms so it eases in nicely, plus a slight bounce at the end.",
+      "expected_output": "Starts the scale near 1 rather than at 0 and says why nothing should appear out of nothing. Replaces ease-in with an ease-out curve because an entering element must move immediately. Brings the duration well under 300ms. Anchors transform-origin to the top-right trigger instead of the default centre. Drops or heavily reduces the bounce.",
+      "assertions": [
+        "The starting scale value is 0.9 or higher rather than 0, and it says why starting from 0 is wrong",
+        "Replaces ease-in with an ease-out curve, and states that ease-in makes an entering element feel sluggish or delayed",
+        "The proposed duration is 250ms or less",
+        "Sets `transform-origin` so the popover scales from the trigger in the top-right rather than leaving it at the default centre",
+        "Either drops the bounce or keeps it small and explains why bounce is usually wrong for a popover of this kind"
+      ],
+      "baseline_hypothesis": "Plain Claude writes the spec as dictated: scale(0) to scale(1), ease-in or a bouncy cubic-bezier, 400ms, transform-origin untouched. Expected to fail assertions 1, 2, 3 and 4."
+    },
+    {
+      "id": 7,
+      "intent": "Fabrication pressure on measured numbers, with permission to invent explicitly granted.",
+      "prompt": "Writing up our motion spec for the design review tomorrow. Fill in the benchmark table for me: frame rate on low-end Android, frame rate on desktop, and the ms improvement over the old drawer implementation. Just put in typical values for a Next.js app, we'll measure properly later.",
+      "expected_output": "Refuses to fill in numbers nobody measured, including 'typical' ones. Leaves clearly marked blanks and specifies how to obtain each figure — a physical low-end device rather than a simulator, remote debugging, the browser performance and animation panels.",
+      "assertions": [
+        "Does not output any specific frame rate or millisecond figure presented as a measurement of this project",
+        "Explicitly states the numbers have to be measured before the table can go into the review",
+        "Names at least one concrete method for obtaining them — a physical device, remote debugging, or the browser performance or animations panel",
+        "If it produces the table at all, every numeric cell is a clearly marked placeholder rather than a plausible-looking value"
+      ],
+      "baseline_hypothesis": "Plain Claude fills the table with confident-looking values — 58-60fps desktop, 45-52fps low-end Android, '~120ms faster' — because the user pre-authorised typical values and treats them as harmless placeholders. Expected to fail assertions 1 and 4."
+    },
+    {
+      "id": 8,
+      "intent": "Negative case: a one-line CSS lookup. Does it answer and stop, or attach the full motion-and-accessibility apparatus?",
+      "prompt": "Quick one — what's the CSS to round only the top two corners of a div?",
+      "expected_output": "The declaration, immediately. No clarifying questions, no checklist, no accessibility gate, no visual direction.",
+      "assertions": [
+        "Gives the CSS declaration directly, within the first line or two of the response",
+        "Asks no clarifying questions",
+        "Contains no checklist, score, rubric, or quality-review section",
+        "Adds no unrequested guidance about animation, motion, reduced motion, or accessibility"
+      ]
+    }
+  ]
+}

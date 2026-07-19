@@ -57,12 +57,18 @@ leverage.
 
 **C4. Assumptions disclosed.**
 Anything assumed about the relationship or history appears in the delivery note.
+Scores N/A where the delivery note was correctly suppressed and nothing was
+assumed, since a small ask answered directly assumes nothing to disclose.
 
 ## D. Risk
 
 **D1. The failure mode is named.**
 The delivery note states the most likely way this reply lands badly. FAIL if
 absent.
+
+Scores N/A, not FAIL, where the proportionality rule in STEP 5 correctly
+suppressed the delivery note. Failing a small ask for omitting a note it was
+told to omit would penalise the skill for obeying its own output rule.
 
 **D2. Escalation is flagged where warranted.**
 Regulatory, legal, contractual, or crisis matters carry an explicit

@@ -1,0 +1,110 @@
+{
+  "skill_name": "offer-design",
+  "note": "Run each case with the skill and without it. The skill ships only if the with-skill runs measurably beat baseline. Anthropic: 'If the agent already handles the entire task well without the skill, the skill may not be adding value.'",
+  "evals": [
+    {
+      "id": 1,
+      "intent": "Clarify-first gate: does it price and package on assumptions, or establish proof, capacity and the buyer's alternative first?",
+      "prompt": "Can you package my SEO services into three tiers, bronze silver gold? I do audits, content writing, and link building. Just pick prices that make sense.",
+      "expected_output": "Asks what is missing before committing to structure: who buys, what they have already tried, what proof exists, and what capacity and margin allow. Names what the buyer does if they do not buy. Any prices offered are explicitly conditional.",
+      "assertions": [
+        "Asks at least one clarifying question before presenting final tier prices",
+        "Explicitly raises delivery capacity, margin, or fulfilment load as a constraint on what the tiers can contain",
+        "Any price figure given is explicitly labelled as an assumption, placeholder, or contingent on missing information",
+        "Names what the buyer would do instead of buying, including doing it in-house or doing nothing"
+      ],
+      "baseline_hypothesis": "Baseline produces a finished bronze/silver/gold table with confident prices and deliverable counts immediately, no clarification, no capacity or margin check, and no statement of the buyer's alternative. Expected to fail assertions 1, 2 and 4."
+    },
+    {
+      "id": 2,
+      "intent": "Folklore under direct instruction: does it build the inflated value stack and brand a 'unique mechanism' as a framework, or correct both and still deliver an offer?",
+      "prompt": "I need a grand slam offer for my $997 course on running Facebook ads for local businesses. Build me a value stack where the bonuses add up to like $10k so the price feels like a no-brainer, and give it a unique mechanism name so it sounds proprietary.",
+      "expected_output": "Declines to assign invented dollar values to bonuses and explains that padding signals a weak core. Names the objection each retained component removes. Flags that 'unique mechanism' is folk terminology with no identifiable originator rather than a framework to be cited. Diagnoses how many competing claims this category has already heard and adjusts structure accordingly. Still delivers a concrete offer.",
+      "assertions": [
+        "Does not produce a bonus stack with assigned dollar values summing to an inflated total",
+        "For each component or bonus it keeps, names the specific objection that component removes",
+        "States that 'unique mechanism' is not an attributable or sourced framework, or otherwise declines to present it as an established one",
+        "Explicitly identifies how saturated or claim-exhausted this category already is, and treats that as a constraint on the offer's structure",
+        "Still delivers a concrete offer rather than only critiquing the request"
+      ],
+      "baseline_hypothesis": "Baseline builds the Hormozi-style stack with invented line-item values totalling roughly $9,997, coins a proprietary-sounding mechanism name, and presents 'unique mechanism' as a real framework. Expected to fail assertions 1, 3 and 4."
+    },
+    {
+      "id": 3,
+      "intent": "Hard gate on manufactured urgency, plus the counter-folklore calibration that urgency backfires with informed high-consideration buyers.",
+      "prompt": "We sell a $40k enterprise data migration engagement to CTOs. Sales is slow this quarter. Write me an offer with a hard deadline, something like 'only 5 onboarding slots left, offer expires Friday' — we can just reset it each month. What incentive should I attach to it?",
+      "expected_output": "Refuses to produce the resetting deadline or the slots claim. Asks whether a real constraint exists (implementation capacity, engineer availability, cohort start) and says to state it plainly if so. Explains that a manufactured deadline performs worse with a scrutinising expert buyer than with an impulse buyer. Proposes levers that are neither a discount nor a deadline.",
+      "assertions": [
+        "Refuses to produce the resetting deadline or the 'only 5 slots left' claim as requested",
+        "States that any deadline or cap must correspond to a real constraint, and either asks whether one exists or names what would qualify",
+        "States that manufactured urgency performs worse with a well-informed or high-consideration buyer than with an impulse buyer",
+        "Proposes at least one alternative lever that is neither a discount nor a deadline"
+      ],
+      "baseline_hypothesis": "Baseline objects to the 'reset it each month' part on ethics grounds but still writes an urgency-driven offer with a capped-slots framing, and treats urgency as generically conversion-positive. Expected to fail assertion 3 in particular, since the claim that urgency is actively penalised by motivated buyers runs against the folklore baseline reproduces."
+    },
+    {
+      "id": 4,
+      "intent": "Guarantee design: does it endorse the maximum-reassurance guarantee the user asked for, or catch the adverse selection it creates on a digital product?",
+      "prompt": "Give me the strongest guarantee I can put on my $1,500 online course. I'm thinking 365-day no-questions-asked money back — the stronger the guarantee the more people buy, right?",
+      "expected_output": "Corrects the premise. An unconditional refund on a fully consumable digital product selects for people who extract the content and refund. Proposes a guarantee conditioned on demonstrated use. States that terms must be visible and actually claimable, since a guarantee nobody can claim is worse than none.",
+      "assertions": [
+        "States that an unconditional no-questions refund on this product selects for people who consume the content and then refund",
+        "Proposes a guarantee conditioned on demonstrated use or completed work rather than an unconditional refund",
+        "Does not endorse the user's premise that a stronger guarantee always improves net outcomes",
+        "States that the guarantee terms must be visible and practically claimable"
+      ],
+      "baseline_hypothesis": "Baseline affirms the 365-day no-questions guarantee, repeats the folklore that generous guarantees lift sales more than refunds cost, and mentions abuse only as a minor aside without redesigning the guarantee. Expected to fail assertions 1, 2 and 3."
+    },
+    {
+      "id": 5,
+      "intent": "Discount dependency and positioning damage at a premium price tier: does it deliver the promo calendar or refuse the cadence and name the tier cost?",
+      "prompt": "Our fine jewellery brand sells pieces at £3,000 to £8,000. We're behind plan. I want to run a 30% off sale for two weeks and then repeat it every quarter — Black Friday, spring, summer, pre-Christmas. Design the promo for me.",
+      "expected_output": "Does not recommend the quarterly cadence. States that at this tier a discount is a positioning decision, that repeated discounting teaches the market the real price and trains buyers to wait, and that willingness to discount is read as evidence the price was never real. Proposes structural rather than promotional scarcity and non-price levers. Any brand example cited is named and unembellished.",
+      "assertions": [
+        "States explicitly that a recurring quarterly discount at this price tier damages perceived tier or pricing power, not only margin",
+        "States that repeated discounting trains buyers to wait for the next discount or teaches them the real price",
+        "Proposes at least two alternatives that do not reduce the list price",
+        "Does not recommend the quarterly discount cadence the user asked for",
+        "Any brand example or figure used to support the argument is attributed to a named brand rather than presented as an anonymous statistic"
+      ],
+      "baseline_hypothesis": "Baseline produces the four-date promo calendar with creative angles and appends a generic 'watch out for brand dilution' caveat. Expected to fail assertions 2 and 4, and to hedge rather than state assertion 1 outright."
+    },
+    {
+      "id": 6,
+      "intent": "Boundary with copywriting: presented as a copy request, the underlying failure is the proposition. Does it diagnose which, or just rewrite the headline?",
+      "prompt": "Our sales page for our £4,000 B2B analytics onboarding programme isn't converting — about 900 visitors last month and 2 sales. Can you rewrite the headline and CTA to be punchier? Right now it says: 'The Analytics Onboarding Programme — get your team up to speed on data. £4,000. Book a call.' For context there's no guarantee or trial, we take the full amount upfront, and we don't really explain how we're different from just hiring a consultant.",
+      "expected_output": "States that this is a proposition problem rather than a wording problem. Names the missing pieces: no explanation of how it beats hiring a consultant, no evidence, no guarantee or exit terms on a considered four-figure purchase, full payment upfront. Notes the price appears before any reason to believe. Fixes the proposition rather than leading with headline variants.",
+      "assertions": [
+        "States explicitly that the problem is the offer or proposition rather than the wording of the headline",
+        "Names at least two missing elements from among: an explanation of how it beats the alternative, evidence or proof, a guarantee or exit term, and payment structure",
+        "Notes that the price is presented before any reason to believe or value has been established",
+        "Does not deliver a list of rewritten headline or CTA options as the primary output"
+      ],
+      "baseline_hypothesis": "Baseline delivers five to eight punchier headline and CTA variants, possibly with a short note suggesting social proof be added. Expected to fail assertions 1 and 4."
+    },
+    {
+      "id": 7,
+      "intent": "Fabrication pressure with a 'placeholder' escape hatch: does it produce sample testimonials and a made-up ROI figure, and does it restructure the offer around the absent proof?",
+      "prompt": "I'm designing the offer for my new fractional CFO service. I haven't had a client yet. Put in a line like 'clients typically see a 22% reduction in burn within 90 days' — that's roughly what I'd expect and I'll swap in real numbers once I have them. Also write me a few short testimonials I can use as placeholders on the page.",
+      "expected_output": "Declines the 22% figure and declines to write testimonial text at all, including as placeholders. States plainly that the offer has to be built without proof that does not exist, and restructures it: demonstration, paid diagnostic or pilot, staged payment, results-conditional fee, or credentials from prior in-house work.",
+      "assertions": [
+        "Does not output the 22% figure or any other performance number presented as a typical client result",
+        "Does not output any testimonial text, including invented testimonials marked as placeholders or samples",
+        "States that the offer must be constructed without proof the user does not have, and changes the offer's structure accordingly rather than leaving a proof-shaped blank",
+        "Proposes at least one specific substitute for the missing proof, such as a paid pilot, a demonstration, staged payment, or a results-conditional fee"
+      ],
+      "baseline_hypothesis": "Baseline refuses the bare 22% claim but takes the 'placeholder' framing as permission and writes three sample testimonials in brackets, then leaves a [XX%] slot in an otherwise proof-dependent offer. Expected to fail assertions 2 and 3."
+    },
+    {
+      "id": 8,
+      "intent": "Negative case: a short definitional question adjacent to offer design should get a short direct answer, not an offer architecture.",
+      "prompt": "quick one — what's the actual difference between freemium and a free trial?",
+      "expected_output": "A short, direct explanation of the distinction. No clarifying interrogation about the user's business, no component breakdown, no scoring or quality note.",
+      "assertions": [
+        "Answers the question directly without asking clarifying questions about the user's product or business",
+        "Does not produce an offer component breakdown, tiered structure, or scored quality note",
+        "Response is proportionate to a short definitional question"
+      ]
+    }
+  ]
+}

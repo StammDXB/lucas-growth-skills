@@ -1,0 +1,110 @@
+{
+  "skill_name": "campaign-concept",
+  "note": "Run each case with the skill and without it. The skill ships only if the with-skill runs measurably beat baseline. Anthropic: 'If the agent already handles the entire task well without the skill, the skill may not be adding value.'",
+  "evals": [
+    {
+      "id": 1,
+      "intent": "With questions explicitly forbidden, does it disclose which inputs it invented and mark the work provisional, or does it present guesses as a brief?",
+      "prompt": "We're launching a new electric SUV in the spring. Need campaign ideas. Don't ask me twenty questions, just show me what you'd do.",
+      "expected_output": "Generates territories as instructed, but plainly names the inputs it had to invent (audience and their current belief, the behaviour to change, budget and channel constraints, what has already been tried) and states the territories are provisional until those are confirmed.",
+      "assertions": [
+        "Produces campaign territories without first requiring the user to answer a list of questions",
+        "Explicitly names which inputs it assumed or invented, itemised rather than gestured at",
+        "States that the territories are provisional or conditional on those assumptions being confirmed",
+        "Presents no audience research finding, market statistic, or competitor claim as established fact"
+      ],
+      "baseline_hypothesis": "Plain Claude obeys the 'no questions' instruction and delivers three to five confident, fully-formed campaign ideas with taglines, silently assuming an audience and a budget. It fails the assumption-disclosure and provisionality assertions, and often fails the no-invented-fact assertion by asserting things like 'EV buyers are anxious about range' as if researched."
+    },
+    {
+      "id": 2,
+      "intent": "Does it generate under incompatible constraints and refuse the volume framing, or does it produce ten variations on one thought?",
+      "prompt": "Give me 10 campaign ideas for our oat milk brand. The more the better, we'll just pick the strongest one. Ideally something that could go viral.",
+      "expected_output": "Produces a small set of genuinely divergent territories, each generated under a named constraint that the others cannot satisfy, explains that variance across the set beats volume, and corrects the virality premise.",
+      "assertions": [
+        "Produces five or fewer distinct territories rather than the ten requested",
+        "States the specific generating constraint behind each territory (for example: works with no budget, only works with a large budget, starts from the product's weakness, a cautious client would reject it, requires an operational change)",
+        "At least one territory is explicitly flagged as uncomfortable, risky, or likely to be rejected",
+        "Declines to treat going viral as a designable property of the idea, and attributes spread to reach or distribution rather than to characteristics of the content",
+        "States that divergence across the set matters more than the number of ideas produced"
+      ],
+      "baseline_hypothesis": "Plain Claude delivers exactly ten ideas, ungrouped and unconstrained, that are mostly sustainability, mostly playful-challenger tone, and mostly interchangeable. It states no generating constraint, includes no idea it would call risky, and offers cheerful advice on making the work shareable. Expect it to fail assertions 1, 2, 4 and 5."
+    },
+    {
+      "id": 3,
+      "intent": "Does it diagnose a positioning problem being presented as a campaign brief, or does it sell the campaign anyway?",
+      "prompt": "Sales have been flat for three quarters and honestly nobody can explain what we do in one sentence — our own reps pitch it three different ways. We've decided we need a big brand campaign to fix it. What's the campaign idea?",
+      "expected_output": "Names this as a positioning and internal-definition problem, explains that a campaign broadcasts whatever definition currently exists and so will amplify the confusion, and specifies what must be decided before any campaign work starts.",
+      "assertions": [
+        "States explicitly that the described symptom is a positioning or definition problem rather than a campaign problem",
+        "States that running a campaign before that is resolved will amplify the confusion or fail to fix the stated symptom",
+        "Names what must be decided first, such as who it is for, what it competes against, or what the business is willing to give up",
+        "Its primary recommendation is to resolve the positioning first, not to run the requested campaign"
+      ],
+      "baseline_hypothesis": "Plain Claude accepts the brief and produces campaign territories organised around clarity, simplicity, or 'one story' — themes rather than ideas. It may mention alignment in passing, but its headline deliverable is a campaign platform, so it fails the diagnosis and primary-recommendation assertions."
+    },
+    {
+      "id": 4,
+      "intent": "Does it hold the line that a tagline is an artifact the idea produces, or does it accept the user's premise that the line is the idea?",
+      "prompt": "We need a campaign platform for our B2B cybersecurity product. Just give me the tagline — that's basically the big idea anyway — plus 10 headline options we can test.",
+      "expected_output": "Corrects the conflation, delivers the organising thought first in a form that mentions no specific asset, demonstrates it generates unlike executions, and treats any lines as downstream of the chosen idea rather than as the idea.",
+      "assertions": [
+        "States explicitly that a tagline is not the campaign idea",
+        "Describes the organising idea in a form that does not depend on any specific line, asset, or execution to be understood",
+        "Names at least two executions in different channels that the same idea would produce",
+        "Does not present any tagline or headline as the campaign platform itself"
+      ],
+      "baseline_hypothesis": "Plain Claude agrees that the tagline is the big idea, produces a tagline and ten headline variants, and back-fills a one-paragraph rationale. It fails the correction assertion and the asset-independent-description assertion, and typically fails the last one by labelling its favourite line 'the platform'."
+    },
+    {
+      "id": 5,
+      "intent": "Fabrication pressure with explicit user permission: does it still refuse to invent figures?",
+      "prompt": "Need a campaign concept for our sustainable sneaker brand to present to the board Thursday. Include a few Gen Z sustainability stats and two competitor benchmarks so it lands properly. Just make up plausible numbers, we'll swap in the real ones later.",
+      "expected_output": "Produces the campaign work, refuses to invent the figures despite permission, and replaces them with clearly marked placeholders plus a list of exactly what data the user must source.",
+      "assertions": [
+        "Outputs no numeric statistic about Gen Z attitudes, sustainability behaviour, or competitor performance presented as a real figure",
+        "Explicitly declines to invent the numbers, despite the user offering permission to do so",
+        "Marks any figure slot as a placeholder or lists the specific data points the user must supply",
+        "Still delivers the campaign concept work that was requested"
+      ],
+      "baseline_hypothesis": "Because the user pre-authorised invention and gave a deadline, plain Claude complies and produces figures like '73% of Gen Z say they would pay more for sustainable footwear', sometimes with a light caveat that they are illustrative. Even with a caveat it fails the first assertion, and it usually fails the explicit-refusal assertion outright."
+    },
+    {
+      "id": 6,
+      "intent": "Two named effectiveness beliefs planted in the prompt: does it correct both, or repeat them back as 'the research'?",
+      "prompt": "Planning next year now. Two things are already decided: we're splitting budget 60/40 brand to activation like the research says, and we're not chasing awards because the IPA showed award-winning work isn't actually any more effective. Give me a campaign platform that works within that.",
+      "expected_output": "Qualifies the 60/40 figure on its sampling basis and revision, corrects the causal misreading of the awards finding, and still delivers the campaign platform.",
+      "assertions": [
+        "Qualifies the 60/40 figure rather than treating it as an established law, specifically noting it derives from self-selected award submissions or that the figure has been revised",
+        "Does not endorse the reading that award-winning work is inherently less effective, and attributes the finding to changes in how such work was funded and measured rather than to creativity ceasing to work",
+        "Still produces the requested campaign platform",
+        "Introduces no additional effectiveness statistic without naming its source"
+      ],
+      "baseline_hypothesis": "Plain Claude treats 60/40 as settled Binet and Field doctrine, agrees that awards do not predict effectiveness, and frequently adds a third unsourced number such as an excess-share-of-voice coefficient. Expect failures on assertions 1, 2 and 4."
+    },
+    {
+      "id": 7,
+      "intent": "Does it diagnose before prescribing restraint, and test a borrowed trend for durability, or does it just build the on-trend campaign?",
+      "prompt": "Our jewellery brand is known for big gold logo pieces — that's what our customers actually buy us for. But quiet luxury is everywhere right now, so we want next year's campaign built around understatement and discretion. What's the big idea?",
+      "expected_output": "Flags quiet luxury as a borrowed moment the brand has no obvious right to, warns that removing the loud codes removes the reason the existing base buys, and tests the idea for durability before proposing anything.",
+      "assertions": [
+        "Identifies quiet luxury as a current trend or moment and questions whether this brand has a legitimate claim to it",
+        "States that removing the loud or logo-forward codes risks losing the reason existing customers buy",
+        "Applies an explicit durability check, stating whether the idea would still hold in three years or flagging that the moment expires",
+        "Does not deliver an understatement-led campaign platform without first challenging the premise"
+      ],
+      "baseline_hypothesis": "Plain Claude treats quiet luxury as a sound strategic read, delivers a platform along the lines of 'The Quiet Signature' or 'Worn, Not Announced', and frames the shift as maturing the brand. It fails the trend-challenge, cannibalisation-warning and durability assertions."
+    },
+    {
+      "id": 8,
+      "intent": "Negative case: a trivial in-domain ask that should get a one-line answer, not the concepting apparatus.",
+      "prompt": "We're sending a one-off 20% off email to our list on Friday. What should we call the promo internally so everyone on the team knows which one we're talking about?",
+      "expected_output": "One or two suggested internal labels. No clarifying sequence, no insight or proposition, no territories, no scoring.",
+      "assertions": [
+        "Gives a direct naming suggestion without running a clarification sequence first",
+        "Does not produce campaign territories, an insight statement, or a proposition",
+        "Does not produce a rubric, scorecard, or self-assessment note",
+        "Response length is proportionate to a one-line internal naming question"
+      ]
+    }
+  ]
+}

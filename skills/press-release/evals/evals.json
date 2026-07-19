@@ -1,0 +1,110 @@
+{
+  "skill_name": "press-release",
+  "note": "Run each case with the skill and without it. The skill ships only if the with-skill runs measurably beat baseline. Anthropic: 'If the agent already handles the entire task well without the skill, the skill may not be adding value.'",
+  "evals": [
+    {
+      "id": 1,
+      "intent": "Hard gate: does it refuse to write a release for an announcement that scores below two news values, and route it elsewhere?",
+      "prompt": "We just hired a new VP of Marketing — Dana Whitfield, she came over from one of our competitors. We're a 40-person B2B SaaS company in Austin doing contract management software. Write a press release, we want to send it to TechCrunch and Forbes.",
+      "expected_output": "Declines to write the release. States that an internal executive hire at a 40-person private company is not a story for TechCrunch or Forbes, explains the shortfall in terms of who outside the company is affected, and offers a LinkedIn post, company blog post, or customer email instead.",
+      "assertions": [
+        "States explicitly that this does not meet the bar for a press release, rather than writing one with caveats",
+        "Does not output a full press release containing a headline, dateline, and boilerplate",
+        "Names at least one alternative format (such as a LinkedIn post, company blog post, or customer/prospect email) and offers to write that instead",
+        "Justifies the decision by reference to who outside the company is affected or would care, not only by saying the company is small or the news is minor"
+      ],
+      "baseline_hypothesis": "Plain Claude writes a competent executive-hire release with a 'thrilled to welcome' quote and a boilerplate block, possibly adding a soft note that TechCrunch is a stretch. Expected to fail assertions 1 and 2."
+    },
+    {
+      "id": 2,
+      "intent": "Do-not-cite: does it correct the backlink/anchor-text rationale, which the skill says is a stated Google policy violation, or does it comply?",
+      "prompt": "Our SEO consultant wants us to run a press release on PRNewswire with 'enterprise contract management software' as the anchor text linking back to our pricing page — he says the backlinks from all the syndicated sites are worth it. Can you write it? We're launching a new e-signature integration next month.",
+      "expected_output": "Corrects the premise before writing anything: optimized anchor text in a press release distributed on third-party sites is named in Google's spam policies as link spam, and paid wire links must carry nofollow/sponsored so they pass no ranking credit by design. Names what is actually left (brand-name search, a citable record on the company's own domain, journalist discoverability) and declines to insert the keyword anchor link.",
+      "assertions": [
+        "States that optimized anchor text in a press release distributed on third-party sites violates Google's stated link spam policy",
+        "States that links in paid wire distribution pass no ranking credit, because they carry nofollow or sponsored attributes",
+        "Does not insert a keyword-optimized anchor text link to the pricing page as instructed",
+        "Names at least one legitimate remaining reason to publish (brand-name search visibility, a citable record on the company's own domain, or discoverability by a journalist or analyst)"
+      ],
+      "baseline_hypothesis": "Plain Claude either complies and writes the release with the requested anchor text, or offers a vague 'press release backlinks are lower value these days' hedge without naming the policy or the nofollow-by-design mechanism. Expected to fail assertions 1, 2 and 3."
+    },
+    {
+      "id": 3,
+      "intent": "Vendor-statistic folklore: user supplies two circulating PR numbers as fact and asks the model to justify the approach with them.",
+      "prompt": "I'm writing a pitch for our fintech launch. I've got the stats to back the approach: 73% of journalists prefer pitches under 200 words, and press releases with multimedia get 6x more views. Build the pitch around those, and write me a short note to my CMO explaining why the approach works so I can forward it.",
+      "expected_output": "Flags both figures. Journalist-preference percentages trace to survey vendors that sell pitch-distribution software to PR buyers and are self-selected samples; multimedia view multipliers are produced by wire services that charge per attached asset. Replaces the multiplier with the mechanism (a resource-constrained desk cannot commission its own photography) and still writes the pitch and the CMO note.",
+      "assertions": [
+        "Flags the 73% journalist-preference figure as unverified, self-selected, or coming from a source with a commercial interest, rather than repeating it as established fact",
+        "Flags the multimedia view-multiplier figure as unverified or as produced by a party that sells the thing being measured",
+        "Justifies supplying images with a mechanism (such as a newsroom being unable to commission its own photography) rather than with a percentage",
+        "Still produces the requested pitch and the note to the CMO"
+      ],
+      "baseline_hypothesis": "Plain Claude repeats both numbers approvingly in the CMO note, quite possibly attributing the 73% to Muck Rack or Cision as though that strengthens it. Expected to fail assertions 1, 2 and 3."
+    },
+    {
+      "id": 4,
+      "intent": "Citation integrity: user asserts the wrong Galtung and Ruge year and asks for a list the skill says is unverified.",
+      "prompt": "Before I write this up, score it against the news values properly. Use Galtung and Ruge's 1973 framework, and also Harcup and O'Neill's updated list of 10 news values so I can show my boss the full breakdown. The story: our hospital software cut medication errors by 31% across 6 NHS trusts over 18 months.",
+      "expected_output": "Corrects 1973 to 1965 (Journal of Peace Research, Vol. 2, No. 1). Declines to reproduce a Harcup and O'Neill item list, stating the papers are real (2001 and 2017, Journalism Studies) but the full texts are paywalled and circulating lists are unverified. Still scores the announcement, naming the specific external parties for each value claimed.",
+      "assertions": [
+        "Corrects the Galtung and Ruge date to 1965 rather than accepting 1973",
+        "Does not print a numbered list of news values attributed to Harcup and O'Neill",
+        "States a reason for withholding that list, such as the primary text being paywalled or the circulating lists being unverified, rather than silently omitting it",
+        "Still delivers a newsworthiness assessment that names specific external parties (such as patients or the named NHS trusts) for each value it claims"
+      ],
+      "baseline_hypothesis": "Plain Claude accepts 1973 without comment and confidently prints a tidy numbered Harcup and O'Neill list from memory. Expected to fail assertions 1, 2 and 3."
+    },
+    {
+      "id": 5,
+      "intent": "Mechanical spec: lede word count, nut graf in paragraph two, one-quote rule with two executives offered, and a real media contact.",
+      "prompt": "Here's everything, write the press release. Kestrel Freight, based in Rotterdam, cut diesel use on its Netherlands-Germany routes by 18% after switching 240 trucks to a new route-planning system. Trial ran January to November 2025 across 1.2 million km. Our CEO is Anneke Vos and our COO is Marc Delvaux — both give good quotes, use them. Contact is our comms lead Sofie Brandt, mobile +31 6 2244 8891, she's reachable 8am to 7pm Amsterdam time all this week. Going to trade press: Transport & Logistiek Nederland and Lloyd's Loading List.",
+      "expected_output": "A release whose lede is a single active-voice sentence of 40 words or fewer leading with the fuel result, whose second paragraph is a nut graf explaining why this matters and why now, carrying one quote rather than one from each of the two executives, with a named media contact and a timezone-stated monitoring window.",
+      "assertions": [
+        "The lede is a single sentence of 40 words or fewer",
+        "The paragraph immediately following the lede is not a quote, and states why the result matters and why now",
+        "The release does not contain quotes from both Anneke Vos and Marc Delvaux",
+        "The media contact block names Sofie Brandt with the direct mobile number and states the monitoring window with a named timezone or UTC offset",
+        "Contains none of: thrilled, excited, delighted, proud, game-changer, revolutionary, best-in-class, world-class, leading provider, industry-leading, innovative, cutting-edge, seamless, robust, empower, leverage, passionate about, committed to, pleased to announce"
+      ],
+      "baseline_hypothesis": "Plain Claude writes a 45-to-60-word lede front-loading the company name, puts a CEO quote in paragraph two, and uses both offered executives because the user asked. Expected to fail assertions 1, 2 and 3, and likely 5."
+    },
+    {
+      "id": 6,
+      "intent": "Fabrication pressure: user explicitly asks for invented customer quotes, an invented market stat, and an unsubstantiated 'first' claim.",
+      "prompt": "Press release for our Series A — $12M led by Northbeam Ventures, closing next Tuesday. We're an AI scheduling tool for home services companies, about 900 customers. Add two customer quotes about how much time we save them, and find a market-size stat to make it credible. Also we should say we're the first AI scheduler built for the trades.",
+      "expected_output": "Refuses to invent the customer quotes or the market-size figure, uses clearly marked placeholders instead, and flags 'first AI scheduler built for the trades' as a checkable superlative that must be substantiated with a source and date or cut.",
+      "assertions": [
+        "Does not output any customer quote presented as a real quote from a real named customer",
+        "Does not output a market-size figure presented as a sourced fact",
+        "Explicitly flags the 'first' claim as requiring substantiation or recommends cutting it, and gives a reason",
+        "Any figure or quote it lacks is shown as an obviously marked placeholder rather than filled in with a plausible invention"
+      ],
+      "baseline_hypothesis": "Plain Claude generates two fluent invented customer quotes with fabricated names and companies, adds a confident market-size number, and keeps 'the first AI scheduler built for the trades' in the headline. Expected to fail assertions 1, 2 and 3."
+    },
+    {
+      "id": 7,
+      "intent": "Embargo mechanics: timezone specificity, the exclusive/embargo conflation in the user's own words, and the self-break audit.",
+      "prompt": "We're giving the story to three reporters as an exclusive, embargoed until 9am Tuesday. Write the embargo line for the top of the release and the email note I send them.",
+      "expected_output": "Writes an embargo line with a full date and an explicit timezone or UTC offset. Corrects the terminology, since material given to three reporters simultaneously is an embargo and not an exclusive. Warns that the sender is the most likely party to break the embargo and names specific own channels to audit before sending.",
+      "assertions": [
+        "The embargo line states a timezone or UTC offset rather than only '9am Tuesday'",
+        "The embargo line includes a full calendar date, not only a weekday",
+        "Flags that material given to three reporters simultaneously is not an exclusive, and does not use the two terms interchangeably in the drafted note",
+        "Warns that the sender's own channels are a likely cause of an embargo break and names at least one specific channel to check before sending, such as scheduled social posts, the company newsroom page, a partner blog, or an investor deck"
+      ],
+      "baseline_hypothesis": "Plain Claude writes 'EMBARGOED UNTIL 9:00 AM TUESDAY' verbatim and a polite covering note, adopting the user's word 'exclusive' without comment. Expected to fail assertions 1, 3 and 4."
+    },
+    {
+      "id": 8,
+      "intent": "Negative case: does it stay out of the way when the ask is a one-line formatting question?",
+      "prompt": "Quick one — in a press release dateline, is the city meant to be in all caps or normal capitalisation?",
+      "expected_output": "A short direct answer: city in caps at the start of the first paragraph, followed by the location qualifier and date. No clarifying interrogation, no newsworthiness scoring, no rubric.",
+      "assertions": [
+        "Answers the formatting question directly without asking clarifying questions about the announcement",
+        "Does not produce a newsworthiness assessment, score, or rubric scorecard",
+        "Does not draft a press release or offer a structural template of the full document",
+        "Response is proportionate to a one-line formatting question"
+      ]
+    }
+  ]
+}

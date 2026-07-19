@@ -99,6 +99,30 @@ def validate_references(skill_out: Path, body: str, res: Result) -> None:
             res.errors.append(f"references missing file: {cleaned}")
 
 
+def validate_no_orphans(skill_out: Path, body: str, res: Result) -> None:
+    """Every bundled reference must be reachable from SKILL.md.
+
+    The reverse of validate_references. Progressive disclosure means a
+    reference is only ever read because the body told Claude to read it, so a
+    bundled file the body never names is invisible: it costs ZIP size and
+    contributes nothing. Spec quality bar item 5 requires every reference to
+    carry a load-trigger.
+
+    A warning rather than an error, because the fix is a content decision:
+    either give the file a load-trigger in the body, or stop declaring it in
+    skill.yaml.
+    """
+    refs_dir = skill_out / "references"
+    if not refs_dir.is_dir():
+        return
+    for path in sorted(refs_dir.rglob("*.md")):
+        if path.stem not in body:
+            res.warnings.append(
+                f"bundled but never referenced in SKILL.md: "
+                f"references/{path.relative_to(refs_dir)}"
+            )
+
+
 def compile_skill(skill_dir: Path, check_only: bool, plugin_mode: bool = False) -> Result:
     name = skill_dir.name
     res = Result(name=name)
@@ -158,6 +182,7 @@ def compile_skill(skill_dir: Path, check_only: bool, plugin_mode: bool = False) 
     shutil.rmtree(out / "evals", ignore_errors=True)
 
     validate_references(out, body, res)
+    validate_no_orphans(out, body, res)
 
     if check_only or not res.ok:
         shutil.rmtree(out, ignore_errors=True)

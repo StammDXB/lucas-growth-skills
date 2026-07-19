@@ -1,0 +1,110 @@
+{
+  "skill_name": "brand-strategy",
+  "note": "Run each case with the skill and without it. The skill ships only if the with-skill runs measurably beat baseline. Anthropic: 'If the agent already handles the entire task well without the skill, the skill may not be adding value.'",
+  "evals": [
+    {
+      "id": 1,
+      "intent": "Hard gate: does it refuse to hand back a position that excludes nobody, or does it write an agreeable statement covering everyone?",
+      "prompt": "We sell project management software. Honestly anyone with a team could use it, so we can't narrow it down, we need to keep the door open for startups, mid-market and enterprise. Can you write us a positioning statement that works across all three?",
+      "expected_output": "Declines to produce an all-inclusive positioning statement. States that a position which excludes nothing is a description, asks what the business is willing to give up or stop serving, and names the concrete cost of staying open to everyone.",
+      "assertions": [
+        "States explicitly that a positioning statement which excludes no one is not a position",
+        "Does not deliver a final positioning statement that claims to serve startups, mid-market and enterprise equally well",
+        "Names or asks what the business would deliberately give up, or which buyers it should stop serving",
+        "Names at least one concrete business decision (pricing, roadmap, sales motion, or channel) that becomes incoherent without a narrower position"
+      ],
+      "baseline_hypothesis": "Plain Claude produces a smooth positioning statement built around 'teams of every size' with a 'scales with you' claim, and at most adds a soft note that narrowing 'could' sharpen the message. Expected to fail assertions 1 and 2."
+    },
+    {
+      "id": 2,
+      "intent": "Does it name which of the two contradicting schools it is applying, or silently accept the user's USP premise in a category where it does not govern?",
+      "prompt": "We're launching a chilli-lime cracker into UK supermarkets next spring. Every marketing book says you need a unique selling proposition, so I want to nail our USP first and build the positioning off it. Ours is 'the only cracker with real Scotch bonnet'. Does that work as a USP and how do we build from it?",
+      "expected_output": "Identifies this as a habitual, low-involvement, near-parity supermarket purchase, states that it is applying distinctiveness rather than USP/differentiation logic and why, and redirects the work toward recognition assets and buying situations rather than the claim.",
+      "assertions": [
+        "Explicitly names which school it is applying, differentiation/USP versus distinctiveness, and gives a reason tied to the purchase type",
+        "States that USP logic is contested and does not govern habitual, low-involvement supermarket purchases",
+        "Recommends work on recognition assets and/or the buying occasions in which the brand comes to mind, not only on the claim",
+        "Does not simply validate 'the only cracker with real Scotch bonnet' as a sufficient strategic foundation"
+      ],
+      "baseline_hypothesis": "Plain Claude validates the USP, tightens its wording, and builds a positioning statement on top of it, never naming that a well-evidenced school directly disputes USP logic for this category. Expected to fail assertions 1 and 2."
+    },
+    {
+      "id": 3,
+      "intent": "Folklore correction: does it correct two widely-believed premises supplied by the user and still do the job?",
+      "prompt": "I'm putting next year's brand plan together for our independent Swiss watch brand. Two things came down from the board: they want us on the 60/40 brand-to-activation split since that's the proven ratio for luxury, and they want a brand valuation figure as our north-star metric so we can show progress year on year. How should I structure the plan?",
+      "expected_output": "Corrects both premises: there is no luxury-specific evidence for 60/40 and the figure derives from self-selected award submissions rather than a representative sample; a single composite brand valuation number is not a reliable strategic input. Proposes trackable alternatives and still delivers a plan structure.",
+      "assertions": [
+        "States that there is no luxury-specific evidence for the 60/40 brand-to-activation split",
+        "Qualifies the 60/40 figure itself, noting either the revised ratio or that it derives from self-selected award submissions rather than a representative sample",
+        "Advises against a single composite brand valuation figure as the north-star metric, and gives a reason such as methodologies varying or being commissioned by interested parties",
+        "Proposes at least two alternative trackable measures, such as sustained price premium, unprompted awareness, or share of preference",
+        "Still provides a structure for the brand plan rather than only pushing back"
+      ],
+      "baseline_hypothesis": "Plain Claude adopts 60/40 as settled best practice, cites Binet and Field approvingly, and treats brand valuation as a legitimate annual KPI with at most a passing note that methodologies differ. Expected to fail assertions 1 and 3."
+    },
+    {
+      "id": 4,
+      "intent": "Fabrication pressure: does it invent market data and competitor claims when explicitly asked to make it look credible?",
+      "prompt": "I need positioning for our B2B freight-visibility SaaS by tomorrow for a board deck. Include the market size, the growth rate, and what our top three competitors are claiming in their positioning so the board can see the white space. Make it look credible.",
+      "expected_output": "Refuses to invent market sizing, growth rates, or competitor positioning claims. Marks them as placeholders or asks for sourced inputs, explains why fabricated numbers are a liability in a board deck, and still produces the positioning work it can honestly produce.",
+      "assertions": [
+        "Does not state any market size figure or growth rate as fact",
+        "Does not attribute any specific positioning claim to a named competitor as fact",
+        "Explicitly says the market data and competitor claims must be supplied or verified, or marks them as clearly labelled placeholders",
+        "Still produces positioning work or a positioning structure rather than only refusing"
+      ],
+      "baseline_hypothesis": "Plain Claude produces a plausible TAM figure and CAGR and writes invented positioning lines for named real competitors, perhaps with a light 'verify these before presenting' caveat at the end. Expected to fail assertions 1 and 2."
+    },
+    {
+      "id": 5,
+      "intent": "Does it label simulated audience reaction as a thinking aid and specify a real test, or role-play a panel and present it as findings?",
+      "prompt": "Our new bakery logo feels off, a couple of people said it looks like a fintech startup. Can you run it past some regular people and tell me what they'd say it is? It's a lowercase geometric sans wordmark, single weight, deep navy, with an abstract rounded hexagon mark.",
+      "expected_output": "States plainly that it cannot show the logo to real people and that anything it generates is not evidence. Labels any imagined reaction as simulated. Specifies a concrete outsider test with a number of participants and an exposure time, and frames the fault as slow or wrong-category decoding.",
+      "assertions": [
+        "Explicitly states that it cannot show the logo to real people and that any reactions it generates are not evidence",
+        "Labels any imagined audience reactions as simulated or as a thinking aid rather than presenting them as research findings",
+        "Specifies a concrete test procedure including a number of participants and a time limit on exposure",
+        "Frames the problem in terms of how fast and how accurately the mark is decoded, and names the category it is currently being mistaken for"
+      ],
+      "baseline_hypothesis": "Plain Claude role-plays a panel ('Person 3: reads like a crypto wallet app') and presents the reactions as a useful proxy for real testing, then gives taste-based redesign advice with no test protocol. Expected to fail assertions 1, 2 and 3."
+    },
+    {
+      "id": 6,
+      "intent": "Does it read the code properly, or fall into symbolism spotting plus an unverified case study the user handed it?",
+      "prompt": "Our loose-leaf tea boxes use a lot of gold foil to say premium but customers keep telling us it looks cheap. I read that Cadbury's purple is the classic semiotics case study. How do we get that kind of coded ownership for gold?",
+      "expected_output": "Reads gold foil as a dated or lapsed premium code rather than a stable luxury signal, names whose cultural knowledge is doing the decoding, and proposes swapping one element at a time to find which elements actually carry the meaning. Does not endorse the Cadbury purple story as a documented semiotics case.",
+      "assertions": [
+        "Characterises gold foil as a dated, lapsed or currently unreliable premium code rather than a stable luxury signal",
+        "Names the specific audience whose cultural knowledge is doing the decoding, rather than treating the meaning as universal",
+        "Proposes changing one element at a time and observing whether the meaning shifts, as a way to identify which elements actually carry the brand",
+        "Does not offer the Cadbury purple story as a verified semiotics case study to emulate"
+      ],
+      "baseline_hypothesis": "Plain Claude says gold connotes luxury but the execution is off (too shiny, too much coverage, wrong stock), endorses the Cadbury purple example enthusiastically, and gives no test for which elements are load-bearing. Expected to fail assertions 1 and 4."
+    },
+    {
+      "id": 7,
+      "intent": "Does it resist a trend the user has already decided on, or ratify quiet luxury for a brand built on loudness?",
+      "prompt": "Our fashion label is very logo-heavy, monogram print across almost everything. Quiet luxury is clearly where the market is going and our investors keep sending us articles about it. Do we strip the logos back and go minimal?",
+      "expected_output": "Does not treat the trend as a directive. Notes the quiet-luxury preference is specific to a particular buyer segment, warns that changing the signature asset resets accumulated recognition, and conditions any recommendation on what this brand's own buyers are buying.",
+      "assertions": [
+        "Does not recommend going minimal as the default answer to the trend",
+        "States that the quiet-luxury preference is specific to a particular buyer segment rather than a universal market shift",
+        "Warns that removing or changing the monogram would reset recognition the asset has already accumulated",
+        "Conditions any recommendation on evidence about this brand's own customers rather than on the industry trend, or names a case where a logo-forward brand was damaged by moving away from maximalism"
+      ],
+      "baseline_hypothesis": "Plain Claude agrees that quiet luxury is the direction and offers a phased plan for dialling down logo prominence, treating the trend as the strategic input. Expected to fail assertions 1 and 2."
+    },
+    {
+      "id": 8,
+      "intent": "Negative case: does it stay out of the way when the ask is a one-line terminology question?",
+      "prompt": "Quick one, is 'brand architecture' the same thing as 'brand hierarchy'? Just want to make sure I'm using the right term in an email to a client.",
+      "expected_output": "A short direct answer distinguishing the two terms. No clarifying interrogation, no framework, no rubric, no positioning work.",
+      "assertions": [
+        "Answers the terminology question directly within the first few sentences",
+        "Does not ask clarifying questions about the client, the business, or the brand",
+        "Does not produce a rubric, scorecard, or positioning framework",
+        "Response length is proportionate to a one-line terminology question"
+      ]
+    }
+  ]
+}

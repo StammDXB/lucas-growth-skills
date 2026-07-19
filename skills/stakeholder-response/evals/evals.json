@@ -1,0 +1,115 @@
+{
+  "skill_name": "stakeholder-response",
+  "note": "Run each case with the skill and without it. The skill ships only if the with-skill runs measurably beat baseline. Anthropic: 'If the agent already handles the entire task well without the skill, the skill may not be adding value.'",
+  "evals": [
+    {
+      "id": 1,
+      "intent": "Output-form discipline: does the reply avoid the assistant register (banned phrases, em dashes, default sign-off, subject line) and state a default course of action if the recipient stays silent?",
+      "prompt": "I sent the owner the Q4 media plan two weeks ago asking him to approve the AED 1.2m budget shift and heard nothing back. Need to nudge him again without being annoying. Problem is we can't book the December inventory after the 5th or the rates jump.",
+      "expected_output": "A short email body only. No subject line. States the December 5 constraint as the reason for re-raising, names what will happen by default if there is no reply, and signs off 'Thank you,' with a name placeholder. Contains none of the standard follow-up filler.",
+      "assertions": [
+        "Contains no em dash character (—) anywhere in the output",
+        "The sign-off is 'Thank you,' followed by a name or name placeholder, and the output contains none of: 'Best regards', 'Kind regards', 'Warm regards', 'Sincerely'",
+        "Contains none of these phrases: 'circle back', 'touch base', 'per my last email', 'as previously mentioned', 'I hope this email finds you well', 'I wanted to reach out', 'just checking in', 'just wanted to'",
+        "States a specific consequence tied to the December 5 date and names what will happen by default if the owner does not reply",
+        "Does not include a subject line"
+      ],
+      "baseline_hypothesis": "Plain Claude produces a polite nudge opening with 'I wanted to follow up' or 'just circling back', supplies a subject line unasked, uses at least one em dash, closes with 'Best regards', and asks for a reply rather than declaring a default action. Expected to fail assertions 1, 2, 3 and 5."
+    },
+    {
+      "id": 2,
+      "intent": "Clarify-first gate and the stated-versus-underlying ask: on a two-line brief with no context, does it draft anyway with disclosed assumptions, or interrogate the user with a question list?",
+      "prompt": "Owner just sent me this and nothing else: 'The Instagram numbers look weak. What's happening?' Draft my reply.",
+      "expected_output": "Commits to a draft rather than stalling. Answers the real need (evidence of grip on the account) instead of defending or apologising. No invented engagement figures. At most one clarifying question. States afterwards what had to be assumed about the situation.",
+      "assertions": [
+        "Produces a complete draft reply rather than only asking questions",
+        "Asks at most one clarifying question",
+        "Contains no invented follower, engagement, reach or impression figure; any figure not supplied by the user appears as a bracketed placeholder",
+        "After the draft, states what was assumed about the situation or the relationship",
+        "The draft does not apologise for the performance and does not promise a specific improvement in results"
+      ],
+      "baseline_hypothesis": "Plain Claude either opens with a bulleted list of four to six clarifying questions (which platform metrics, what time period, what the prior conversation was) or drafts a defensive explanation containing plausible-sounding invented engagement numbers and a promise to 'turn this around'. Expected to fail assertions 2 and 4, and often 3."
+    },
+    {
+      "id": 3,
+      "intent": "Fabrication pressure: user explicitly asks for performance numbers and competitor benchmarks to be supplied by the model.",
+      "prompt": "Need to email the owner defending the brand campaign before the Sunday review. Make it convincing, chuck in some numbers on how it's performing and a couple of benchmarks against the other Dubai resorts so it lands hard.",
+      "expected_output": "Refuses to invent any figure. Drafts the email with clearly bracketed placeholders where the numbers belong, and tells the user the real figures must be supplied or verified before sending.",
+      "assertions": [
+        "Does not present any performance figure, percentage, or competitor benchmark as an actual result",
+        "Every figure the argument needs appears as a clearly marked placeholder, such as square brackets, for the user to fill in",
+        "States explicitly that the real numbers must be supplied or verified before the email is sent",
+        "Still produces a complete draft email rather than declining the task"
+      ],
+      "baseline_hypothesis": "Plain Claude writes a persuasive email populated with invented but plausible figures (a reach number, an engagement-rate lift, a 'versus market average' comparison), possibly with a trailing caveat to 'replace with your actual data'. Expected to fail assertions 1 and 2."
+    },
+    {
+      "id": 4,
+      "intent": "Folklore correction under direct instruction: the user supplies the 60/40 brand-to-activation split as proven and asks for it to be used as the argument's authority.",
+      "prompt": "The owner wants the entire Q1 budget in performance marketing. I want to argue for keeping the brand spend. Use the 60/40 rule in the email, it's proven by the IPA so he can't really argue with it, and it's even more true in luxury hospitality.",
+      "expected_output": "Corrects the premise without refusing the task. Notes that the split derives from self-selected IPA award submissions rather than a representative sample and has been revised to 62/38, and that no luxury-hospitality-specific version of the finding exists. Still writes the email arguing for retained brand spend, resting it on something defensible.",
+      "assertions": [
+        "States that the 60/40 figure comes from IPA award submissions or a self-selected sample rather than a representative study, or that it has been revised to 62/38",
+        "States that there is no luxury-hospitality-specific version of this split",
+        "If the split appears in the draft email at all, it is not asserted as proven or as something the owner cannot argue with",
+        "Still produces a complete draft email arguing for retained brand spend",
+        "Does not invent a budget-split figure, ROI number, or performance result for the property"
+      ],
+      "baseline_hypothesis": "Plain Claude cites 60/40 as an established Binet and Field / IPA finding, builds the email around it as settled evidence, and may generate a luxury-specific variant of the ratio on request. Expected to fail assertions 1, 2 and 3."
+    },
+    {
+      "id": 5,
+      "intent": "Hard gate on declining an owner: does it replace the request with a stronger alternative rather than writing the refusal the user asked for?",
+      "prompt": "Owner wants us to put AED 400k into sponsoring a padel tournament because his friend is organising it. Completely off-strategy, our guests aren't padel people. Draft a reply turning it down.",
+      "expected_output": "Does not write a refusal. Redirects the same objective into a specific alternative use of the budget or a scaled-down version of the request, so the owner is out-strategised rather than declined. Email body only, no preamble, no invented audience data.",
+      "assertions": [
+        "The draft proposes a specific alternative use of the budget or a modified version of the request rather than only declining",
+        "The draft does not contain an unaccompanied refusal such as 'we won't be moving forward with this' or 'this isn't something we can pursue'",
+        "Does not invent audience, demographic, or performance data about padel or about the property's guests; any such figure is a bracketed placeholder",
+        "The output does not begin with a preamble introducing or characterising the draft, and contains no subject line",
+        "Contains no em dash character (—) anywhere in the output"
+      ],
+      "baseline_hypothesis": "Plain Claude writes exactly what was asked for: a diplomatic decline built on 'unfortunately this doesn't align with our current strategy', prefaced with 'Here's a draft that lets you say no while preserving the relationship', likely supported by an invented statement about guest demographics. Expected to fail assertions 1, 2 and 4."
+    },
+    {
+      "id": 6,
+      "intent": "Journalist handling: does it say less than feels comfortable and treat the reply as quotable, or write a helpful expansive answer?",
+      "prompt": "Journalist from a UK travel title just emailed me: 'Quick question, hearing you've had a change in management at the property and some staff exits. Anything you can share? On deadline today.' We did lose the F&B director and two managers last month but honestly it's not a story. What do I say?",
+      "expected_output": "A very short reply that holds the line without confirming details, names no individuals, offers no explanation of the departures, has no warm opener, and is accompanied by a warning that anything written will be treated as on the record.",
+      "assertions": [
+        "The draft reply is 80 words or fewer",
+        "The draft does not name any individual and does not itemise or confirm the number of departures",
+        "The draft contains no warm or personal opener such as 'Hope you're well' or 'Great to hear from you'",
+        "The draft does not speculate about or explain the reason for the departures",
+        "The output states that the reply should be assumed on the record and quotable"
+      ],
+      "baseline_hypothesis": "Plain Claude writes a friendly 150 to 250 word reply that confirms routine turnover, offers reassuring context about the team's stability, opens with a pleasantry, and closes by offering a call for more background. Expected to fail assertions 1, 2, 3 and 5."
+    },
+    {
+      "id": 7,
+      "intent": "Anger management without lecturing: does it convert heat into documented, contract-anchored firmness, or either preserve the heat or advise the user to calm down?",
+      "prompt": "I've had it with the agency. Third month running they've missed the reporting deadline and the Q3 creative was recycled from another client. I want to send this: 'Frankly the level of service we're getting is embarrassing and I'm starting to wonder if anyone on your side actually reads our briefs. This is not what we're paying for.' Clean it up but keep the anger, I want them to feel it.",
+      "expected_output": "A firm, cold, forwardable email. Strips the sarcasm and the competence slur, anchors both complaints to scoped deliverables, and demands a written remediation with a date. Does not tell the user to reconsider sending.",
+      "assertions": [
+        "The draft contains no sarcasm, insult, or characterisation of whether the agency team reads briefs or is competent",
+        "The draft ties the complaint to specific scoped deliverables, naming the missed reporting deadlines and the recycled Q3 creative, rather than to general dissatisfaction",
+        "The draft requests a specific remediation or response with a named date or deadline",
+        "The output does not tell the user to delay sending, sleep on it, or reconsider pushing back",
+        "Contains no em dash character (—) anywhere in the output"
+      ],
+      "baseline_hypothesis": "Plain Claude opens with 'I'd suggest taking a beat before sending this' or similar, then supplies a softened, vaguer version that expresses 'disappointment' without anchoring to scope and without a dated remediation demand. A minority of runs instead preserve the original heat. Expected to fail assertions 3 and 4."
+    },
+    {
+      "id": 8,
+      "intent": "Negative case: does it stay out of the way when the ask is a one-line phrasing question with no stakeholder stakes?",
+      "prompt": "What's a less clunky way to say 'noted with thanks' when a colleague sends me a file?",
+      "expected_output": "A short direct answer with a couple of alternatives. No diagnosis, no assumptions note, no risk note, no full email draft.",
+      "assertions": [
+        "Answers directly with one or a few short alternative phrasings",
+        "Does not ask clarifying questions about stakes, relationship history, or recipient seniority",
+        "Does not append a note stating what was assumed or how the reply could land badly",
+        "Does not produce a full email draft or sign-off block"
+      ]
+    }
+  ]
+}
