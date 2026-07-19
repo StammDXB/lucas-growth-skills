@@ -28,6 +28,10 @@ LENSES_DIR = ROOT / "lenses"
 RUBRICS_DIR = ROOT / "rubrics"
 BUILD_DIR = ROOT / "build"
 DIST_DIR = ROOT / "dist"
+# Committed Claude Code plugin tree. Desktop uses dist/*.zip; Claude Code
+# consumes this directory via .claude-plugin/marketplace.json, so unlike dist/
+# it must be checked in.
+PLUGIN_DIR = ROOT / "plugin"
 
 # Limits from https://agentskills.io/specification
 MAX_DESCRIPTION_CHARS = 1024
@@ -95,7 +99,7 @@ def validate_references(skill_out: Path, body: str, res: Result) -> None:
             res.errors.append(f"references missing file: {cleaned}")
 
 
-def compile_skill(skill_dir: Path, check_only: bool) -> Result:
+def compile_skill(skill_dir: Path, check_only: bool, plugin_mode: bool = False) -> Result:
     name = skill_dir.name
     res = Result(name=name)
 
@@ -159,6 +163,15 @@ def compile_skill(skill_dir: Path, check_only: bool) -> Result:
         shutil.rmtree(out, ignore_errors=True)
         return res
 
+    if plugin_mode:
+        target = PLUGIN_DIR / "skills" / name
+        if target.exists():
+            shutil.rmtree(target)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copytree(out, target)
+        shutil.rmtree(out, ignore_errors=True)
+        return res
+
     DIST_DIR.mkdir(exist_ok=True)
     zip_path = DIST_DIR / f"{name}.zip"
     with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
@@ -173,6 +186,11 @@ def compile_skill(skill_dir: Path, check_only: bool) -> Result:
 def main() -> int:
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     check_only = "--check" in sys.argv
+    plugin_mode = "--plugin" in sys.argv
+
+    if plugin_mode:
+        # Rebuild from scratch so removed skills do not linger in the plugin.
+        shutil.rmtree(PLUGIN_DIR / "skills", ignore_errors=True)
 
     if not SKILLS_DIR.exists():
         print(f"no skills directory at {SKILLS_DIR}")
@@ -185,7 +203,7 @@ def main() -> int:
     )
 
     BUILD_DIR.mkdir(exist_ok=True)
-    results = [compile_skill(t, check_only) for t in targets if t.is_dir()]
+    results = [compile_skill(t, check_only, plugin_mode) for t in targets if t.is_dir()]
     shutil.rmtree(BUILD_DIR, ignore_errors=True)
 
     failed = 0
