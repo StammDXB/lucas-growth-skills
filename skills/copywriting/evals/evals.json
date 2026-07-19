@@ -1,0 +1,102 @@
+{
+  "skill_name": "copywriting",
+  "note": "Run each case with the skill and without it. The skill ships only if the with-skill runs measurably beat baseline. Anthropic: 'If the agent already handles the entire task well without the skill, the skill may not be adding value.'",
+  "evals": [
+    {
+      "id": 1,
+      "intent": "Does it stage the reader instead of defaulting to solution-aware copy?",
+      "prompt": "Write the hero section for our new expense management tool. We're going after finance teams at mid-size companies.",
+      "expected_output": "Asks who the reader is, what they currently use, and what proof exists before drafting. Does not produce a finished hero from this brief alone.",
+      "assertions": [
+        "Asks at least one clarifying question before producing final copy",
+        "Explicitly identifies or asks about the reader's awareness stage",
+        "Does not invent any statistic, customer name, or testimonial",
+        "If it drafts, it names which assumptions it made"
+      ]
+    },
+    {
+      "id": 2,
+      "intent": "Does it detect market sophistication rather than just writing a louder claim?",
+      "prompt": "We're launching another project management tool. Write the landing page headline. The category is completely saturated, everyone claims they save you time.",
+      "expected_output": "Recognises this is a high-sophistication market where a stronger claim fails, and shifts to mechanism, frame, or reader identity instead.",
+      "assertions": [
+        "Explicitly names market sophistication as the constraint",
+        "Does not produce a headline that is a louder version of 'saves you time'",
+        "Proposes a mechanism, reframe, or identity angle rather than claim escalation",
+        "Offers more than one structurally different option"
+      ]
+    },
+    {
+      "id": 3,
+      "intent": "Does it refuse to fabricate proof?",
+      "prompt": "Write a landing page for our AI security tool. Make it really convincing, add some impressive stats and a few customer quotes to make it credible.",
+      "expected_output": "Refuses to invent statistics or testimonials. Offers bracketed placeholders and asks for real proof.",
+      "assertions": [
+        "Does not output any invented statistic presented as real",
+        "Does not output any invented customer name or testimonial presented as real",
+        "Explicitly flags that proof must be supplied",
+        "Uses clearly marked placeholders if it drafts anyway"
+      ]
+    },
+    {
+      "id": 4,
+      "intent": "Does it apply platform-specific mechanics rather than generic social advice?",
+      "prompt": "Turn this into a LinkedIn post: we helped a hotel group cut their marketing headcount cost by restructuring who owned what, without firing anyone.",
+      "expected_output": "A post with a hook that stands alone above the fold, concrete specifics, a falsifiable claim, no engagement bait, no emoji bullets, irregular rhythm.",
+      "assertions": [
+        "First line works as a standalone thought and is not a generic opener",
+        "Contains at least one concrete specific (number, role, timeframe)",
+        "Does not end with an engagement-bait CTA such as 'agree?' or 'comment below'",
+        "Does not use emoji as bullet points",
+        "Sentence and paragraph lengths vary rather than clustering"
+      ]
+    },
+    {
+      "id": 5,
+      "intent": "Does it know email compliance constraints that are copy decisions?",
+      "prompt": "Write the order confirmation email for our store, and add a section promoting our new subscription plan.",
+      "expected_output": "Places transactional content first and substantial, keeps the subject line transactional only, and explains why.",
+      "assertions": [
+        "Transactional content appears before the promotional content",
+        "Subject line describes the transaction and not the promotion",
+        "Explains the legal or deliverability reason for the ordering",
+        "Includes a visible unsubscribe consideration or flags it"
+      ]
+    },
+    {
+      "id": 6,
+      "intent": "Does it edit rather than silently rewrite, and diagnose rather than react?",
+      "prompt": "Make this better: 'Founded in 2018, we are a passionate team of innovators dedicated to transforming how modern businesses approach customer engagement. Our mission is to empower organisations with cutting-edge solutions that drive meaningful results.'",
+      "expected_output": "Diagnoses the specific failures by name, asks for the real origin story, and does not invent a replacement history.",
+      "assertions": [
+        "Names specific diagnosable failures rather than giving a general impression",
+        "Flags the inflated verbs explicitly",
+        "Does not invent a founding story, client, or number to replace the abstraction",
+        "Asks for the real specifics needed to fix it"
+      ]
+    },
+    {
+      "id": 7,
+      "intent": "Does it resist folklore it was directly prompted to repeat?",
+      "prompt": "Write me a landing page and make sure you follow the rule that 80% of people only read the headline. Also avoid spam trigger words in the email version so we don't hit the spam folder.",
+      "expected_output": "Corrects both premises. The 80% claim is folklore with no traceable measurement; spam trigger words are not the mechanism behind modern filtering.",
+      "assertions": [
+        "Identifies the 80% headline claim as unverified or folklore",
+        "Identifies spam trigger word avoidance as not the real deliverability mechanism",
+        "Offers the accurate replacement reasoning for both",
+        "Still completes the requested task"
+      ]
+    },
+    {
+      "id": 8,
+      "intent": "Negative case: does it stay out of the way when the ask is trivial?",
+      "prompt": "What's a good subject line for an email letting my team know the Friday standup is moving to Thursday?",
+      "expected_output": "A short direct answer. No rubric ceremony, no clarifying interrogation, no framework application.",
+      "assertions": [
+        "Answers directly without running a full clarification sequence",
+        "Does not produce a rubric scorecard or quality note",
+        "Response is proportionate to a one-line internal logistics question"
+      ]
+    }
+  ]
+}
