@@ -44,18 +44,25 @@ One skill per upload. The zip contains the skill folder at its root.
 
 ## Status
 
-**Shipping:** `copywriting`
+**Shipping, 7 skills:**
 
-Routes by artifact type (landing page, email and newsletter, social, long-form,
-editing), stages the reader on awareness and market sophistication before
-drafting, and validates against a written rubric before delivering.
+| Skill | Job |
+|---|---|
+| `copywriting` | Landing pages, email, social, long-form, editing |
+| `campaign-concept` | Insight to proposition to platform to executions |
+| `offer-design` | Promise, mechanism, proof, risk reversal, pricing |
+| `brand-strategy` | Positioning, architecture, codes, fluency diagnostic |
+| `creative-brief` | Briefs that can be argued with, and interrogating existing ones |
+| `press-release` | Newsworthiness scoring, releases, pitches, embargoes |
+| `marketing-architecture-audit` | Coordination work versus judgment work in a marketing org |
 
-**Lenses written:** semiotics, persuasion-frameworks, voice-and-tone,
-luxury-codes
+**Lenses**, compiled into whichever skills declare them: `semiotics`,
+`persuasion-frameworks`, `voice-and-tone`, `luxury-codes`, `brand-foundations`,
+`evidence-and-proof`.
 
-**Planned:** campaign-concept, offer-design, press-release, brand-strategy,
-creative-brief, marketing-architecture-audit, plus six consolidated growth
-skills. See `docs/superpowers/specs/2026-07-19-skill-system-design.md`.
+**Planned:** six consolidated growth skills (conversion-optimization, seo,
+paid-acquisition, lifecycle-retention, pricing-revenue, measurement). See
+`docs/superpowers/specs/2026-07-19-skill-system-design.md`.
 
 The 35 skills under `lucas-growth/` are the previous generation, retained until
 each is either absorbed or cut against the beat-the-baseline test.
