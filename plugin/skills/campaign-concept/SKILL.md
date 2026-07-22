@@ -132,6 +132,26 @@ Lead with your recommendation. A menu with no point of view is not strategy.
 Keep the delivery note short. Do not show the rubric scoring or the revision
 rounds.
 
+## Boundaries
+
+This skill does not own adjacent work. When the real problem sits
+elsewhere, name the destination and stop rather than half-doing it here.
+
+| If the real problem is | Route to |
+|---|---|
+| There is no position underneath the idea | `brand-strategy` |
+| The proposition, not the idea, is what is failing | `offer-design` |
+| The idea is agreed and needs briefing | `creative-brief` |
+| The idea needs to become a vertical video | `short-form-video` |
+| The idea is agreed and needs lines written | `copywriting` |
+
+## Sources
+
+Read `references/semiotics.md` when reading or constructing visual and cultural codes.
+Read `references/luxury-codes.md` when the brand sits at a premium or luxury tier.
+Read `references/persuasion-frameworks.md` when choosing the persuasion structure for a piece.
+Read `references/evidence-and-proof.md` before quoting any statistic, benchmark or research finding, and before naming a framework or an expert.
+
 ## Gotchas
 
 - **Theme mistaken for platform.** "Innovation", "Togetherness", "Human". These

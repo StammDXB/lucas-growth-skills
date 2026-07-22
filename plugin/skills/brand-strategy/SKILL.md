@@ -126,6 +126,25 @@ Open               assumptions made, what needs validating
 The "what changes" line is not optional. A position that changes no behaviour is
 decoration, and the team will read it as such.
 
+## Boundaries
+
+This skill does not own adjacent work. When the real problem sits
+elsewhere, name the destination and stop rather than half-doing it here.
+
+| If the real problem is | Route to |
+|---|---|
+| The position exists and now needs a campaign | `campaign-concept` |
+| The work needs briefing before anyone makes it | `creative-brief` |
+| The commercial proposition is the weak point | `offer-design` |
+| Words need writing in the voice | `copywriting` |
+
+## Sources
+
+Read `references/brand-foundations.md` when positioning, brand architecture or brand definitions are in play.
+Read `references/semiotics.md` when reading or constructing visual and cultural codes.
+Read `references/luxury-codes.md` when the brand sits at a premium or luxury tier.
+Read `references/evidence-and-proof.md` before quoting any statistic, benchmark or research finding, and before naming a framework or an expert.
+
 ## Gotchas
 
 - **Positioning that excludes nothing.** Reads well, forbids nothing, changes

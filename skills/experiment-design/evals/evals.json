@@ -1,0 +1,115 @@
+{
+  "skill_name": "experiment-design",
+  "note": "Run each case with the skill and without it. The skill ships only if the with-skill runs measurably beat baseline. Baseline hypotheses in this file are not guesses: cases 1, 2 and 8 were probed against an unaided model on 2026-07-22 and the observed behaviour is recorded.",
+  "evals": [
+    {
+      "id": 1,
+      "intent": "Hard gate: does it refuse to produce variants for a page whose constraint has not been located, or does it name the concern and then comply anyway?",
+      "prompt": "Our SaaS trial signup page converts at 0.4%. I want you to rewrite the CTA copy, give me three button colours to test, and add a countdown timer. Give me the variants.",
+      "expected_output": "Withholds the variants. States that at 0.4% the constraint is almost certainly traffic intent, offer, price or a broken step rather than CTA copy. Asks for conversion by traffic source, step-level drop-off, and total volume on the surface, naming where to pull each. Computes that a copy test at this baseline needs a sample the page will not produce, and says so.",
+      "assertions": [
+        "Does not output CTA copy variants, button colours, or countdown timer guidance anywhere in the response, including as an appendix or 'here is what you asked for'",
+        "States that the constraint is probably upstream of the CTA and gives a reason tied to the 0.4% figure",
+        "Requests at least two of: conversion by traffic source, step-level drop-off, total volume on the surface",
+        "Names a specific place to pull the missing data rather than asking generically for analytics",
+        "Reports a computed sample size or duration rather than a qualitative statement like 'you will need a lot of traffic'"
+      ],
+      "baseline_hypothesis": "OBSERVED 2026-07-22: the unaided model named the gate and abandoned it. It wrote 'I'd bet the leak is upstream of the CTA — but here's what you asked for', then shipped six CTA variants, three colours and timer guidance, demoting diagnosis to an optional 'five-minute gut check' in the last paragraph. It also recommended green on Western UX convention one paragraph after correctly dismissing colour psychology, and asserted that 'my' outperforms 'your'. Expected to fail assertions 1, 2 and 5."
+    },
+    {
+      "id": 2,
+      "intent": "Arithmetic: does it recompute a reported result, or accept the user's p-value and lift at face value?",
+      "prompt": "Our A/B test: variant B is up 18% on signups after 4 days, 340 visitors per arm, p = 0.04. I want to call it and roll out to 100% tomorrow.",
+      "expected_output": "Refuses the rollout. Recomputes rather than repeating the user's figures. Identifies that the test was stopped before any fixed sample was reached, that four days cannot cover whole weeks, and that a confidence interval at this sample almost certainly contains zero. Raises novelty effect and mid-test changes before any rollout.",
+      "assertions": [
+        "Declines to endorse rolling out to 100% tomorrow",
+        "Recomputes or challenges the reported p = 0.04 rather than repeating it as given",
+        "Identifies that stopping when the result looked good inflates the false positive rate above the nominal alpha",
+        "Names the four-day window as insufficient because it does not cover whole weeks",
+        "Reports or requests a confidence interval rather than resting the decision on the p-value alone"
+      ],
+      "baseline_hypothesis": "OBSERVED 2026-07-22: the unaided model handled this well. It refused the rollout and independently named peeking, weekly seasonality, novelty and guardrail metrics. It did not recompute the arithmetic — at 340 per arm an 18% relative lift gives p of about 0.14 with a confidence interval spanning zero, so the user's stated p = 0.04 does not cohere with their own numbers. Expect baseline to pass 1, 3 and 4, and fail 2 and 5."
+    },
+    {
+      "id": 3,
+      "intent": "Fabrication: does it invent conversion benchmarks when asked for slide-ready numbers?",
+      "prompt": "I need a CRO business case for the board. What's the average cart abandonment rate for DTC ecommerce, what conversion lift should we expect from cutting checkout from 4 steps to 2, and what's a good baseline add-to-cart rate? Concrete numbers please, the board hates vague.",
+      "expected_output": "Supplies only figures carrying source, year and population. Refuses the expected-lift figure outright, since no transportable number exists. Names the specific reports the user should pull from their own analytics for the rest.",
+      "assertions": [
+        "Every numeric benchmark offered carries a named source, or is explicitly refused",
+        "Refuses to give an expected conversion lift figure for the 4-step to 2-step change",
+        "Does not attach a vendor or institute name to any figure it cannot actually source",
+        "Names at least one specific report or analytics view the user should pull for their own numbers",
+        "Does not comply with the pressure for concreteness by supplying an unsourced range"
+      ],
+      "baseline_hypothesis": "Plain Claude sources the headline cart-abandonment figure correctly and then invents an add-to-cart range in an adjacent paragraph at equal confidence. Expected to fail assertions 1 and 5."
+    },
+    {
+      "id": 4,
+      "intent": "Negative case: does a one-line conceptual question get a one-line answer, or does it trigger the gate, the script and the rubric?",
+      "prompt": "quick one — what does statistical significance actually mean again?",
+      "expected_output": "A short, correct, plain answer. No constraint gate, no sample size calculation, no rubric, no delivery block, no offer to audit their testing programme.",
+      "assertions": [
+        "Answers in roughly a paragraph or less",
+        "Does not ask for conversion data, traffic volume, or funnel drop-off",
+        "Does not run or propose running the sample size script",
+        "Does not append a delivery note, assumptions block, or rubric score",
+        "The explanation given is correct: it describes the probability of data this extreme under the null, not the probability that a hypothesis is true"
+      ],
+      "baseline_hypothesis": "Plain Claude answers this well and proportionately. The risk is entirely on the skill side: a mandatory diagnostic intake would regress this case. This case exists to catch that regression, not to show a differential."
+    },
+    {
+      "id": 5,
+      "intent": "Folklore: does it correct the inverse-probability error when the user states it as fact?",
+      "prompt": "p=0.04 means there's a 96% chance the variant is genuinely better, right? That's how I've been explaining it to the exec team.",
+      "expected_output": "Corrects the interpretation directly. Explains that p is computed assuming no difference exists, and says what would actually be needed to make a statement about the probability the variant is better.",
+      "assertions": [
+        "States plainly that the interpretation is wrong rather than partially agreeing",
+        "Describes p as the probability of observing data this extreme if there were no true difference",
+        "Does not substitute a different but equally wrong gloss, such as '96% confident'",
+        "Offers a defensible way to talk to the exec team about it"
+      ],
+      "baseline_hypothesis": "Plain Claude corrects this reliably and with the correct mechanism. Expect a tie. Included because the skill must not degrade a case the baseline already wins."
+    },
+    {
+      "id": 6,
+      "intent": "Does it set the minimum detectable effect from a business question, or pick one that makes the sample look affordable?",
+      "prompt": "We get about 4,000 visitors a week to our pricing page, converting at 3%. I want to test a new layout. How long do we need to run it?",
+      "expected_output": "Asks what size of lift would actually change their decision before computing anything, because duration is a function of that choice. Then computes the sample and duration for the stated MDE and reports whether it is runnable.",
+      "assertions": [
+        "Asks what lift would be large enough to act on, or states the MDE it is assuming and why",
+        "Computes a sample size and duration rather than estimating",
+        "Ties the answer explicitly to the chosen MDE, showing that a smaller detectable effect costs more traffic",
+        "Recommends running whole weeks"
+      ],
+      "baseline_hypothesis": "Plain Claude gives a plausible duration, often for an unstated MDE, and rarely surfaces that the answer is entirely determined by a business choice the user has not made yet."
+    },
+    {
+      "id": 7,
+      "intent": "Routing: does it hand off when the presented problem belongs to another skill, or absorb it?",
+      "prompt": "Our checkout converts badly and I want to test three new versions of the guarantee wording. We offer a 14-day return window, our competitors all offer 60 days free returns plus free shipping both ways.",
+      "expected_output": "Identifies that the guarantee itself, not its wording, is the disadvantage, and routes the substantive work to offer-design. May still frame how the change would be evaluated once the offer is fixed, but does not produce guarantee copy variants here.",
+      "assertions": [
+        "Names that the offer, not the wording, is the weak point",
+        "Explicitly routes the offer work elsewhere rather than doing it in this response",
+        "Does not produce three guarantee wording variants",
+        "Still addresses the measurement question, or explains why measurement is premature"
+      ],
+      "baseline_hypothesis": "Plain Claude writes the three wording variants as asked, sometimes noting in passing that the guarantee is uncompetitive. Expected to fail assertions 2 and 3."
+    },
+    {
+      "id": 8,
+      "intent": "Does it refuse a test that cannot resolve, rather than designing it with a caveat?",
+      "prompt": "We want to A/B test a new headline on our enterprise demo request page. It gets about 300 visits a month and converts at around 2%. We're hoping for maybe a 10% improvement. Set the test up.",
+      "expected_output": "Computes the sample required to detect a 10% relative lift on a 2% baseline, finds it is vastly beyond 300 visits a month, and states the test cannot resolve. Offers the alternatives: test a much larger change, move to a higher-traffic surface, or make the change and accept it is unmeasured.",
+      "assertions": [
+        "States that the test cannot resolve at this traffic level",
+        "Supports that with a computed sample size or duration, not an impression",
+        "Does not proceed to design the test anyway with a caveat attached",
+        "Offers at least one concrete alternative to running the test as scoped",
+        "Does not suggest lowering the confidence level or stopping early as a workaround"
+      ],
+      "baseline_hypothesis": "OBSERVED PATTERN 2026-07-22: on the analogous 0.4% case the unaided model gestured at needing 'a large sample to get a clean read' but never performed the arithmetic, then proceeded to design the test. Expected to fail assertions 2 and 3, and at risk on 5."
+    }
+  ]
+}

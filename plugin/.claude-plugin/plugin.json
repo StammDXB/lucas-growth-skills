@@ -1,8 +1,8 @@
 {
   "name": "lucas-growth",
-  "description": "10 marketing, brand, and creative skills: copywriting, campaign concepts, offer design, brand strategy, creative briefs, press releases, marketing org audits, short-form video, UI design engineering, and stakeholder responses",
-  "version": "2.1.0",
+  "description": "12 marketing, brand, and creative skills: copywriting, campaign concepts, offer design, brand strategy, creative briefs, press releases, marketing org audits, short-form video, UI design engineering, stakeholder responses, experiment design, and prompt engineering",
+  "version": "2.2.0",
   "author": { "name": "Lucas Stamm", "url": "https://lucasstamm.com" },
   "homepage": "https://lucasstamm.com",
-  "keywords": ["marketing", "brand", "copywriting", "campaign", "positioning", "pr", "growth", "video", "ui", "design", "stakeholder-comms"]
+  "keywords": ["marketing", "brand", "copywriting", "campaign", "positioning", "pr", "growth", "video", "ui", "design", "stakeholder-comms", "experimentation", "ab-testing", "prompt-engineering"]
 }

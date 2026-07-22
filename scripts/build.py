@@ -44,6 +44,8 @@ NAME_PATTERN = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 REF_PATTERN = re.compile(r"(?:references|assets|scripts)/[A-Za-z0-9._/-]+")
 # Manifest descriptions open with the skill count, e.g. "10 skills: ..."
 LEADING_COUNT = re.compile(r"^\s*(\d+)\b")
+# The README states the same count in prose, e.g. "**Shipping, 10 skills:**"
+README_COUNT = re.compile(r"\*\*Shipping,\s*(\d+)\s+skills?:\*\*")
 
 
 @dataclass
@@ -142,10 +144,43 @@ def _manifest_description(path: Path, res: Result) -> str | None:
     return data.get("description", "")  # plugin.json
 
 
+def validate_readme(skill_names: list[str], res: Result) -> None:
+    """Check the README's shipping claim against the skills that actually build.
+
+    Third instance of the same drift the manifests had. The README stated the
+    count in prose and listed the skills in a table, and both went stale the
+    moment a skill was added: it advertised 7 while 10 shipped, so the three
+    newest were invisible to anyone reading the repo. A reader reaches this
+    file before either manifest, which makes it the most public of the three.
+    """
+    path = ROOT / "README.md"
+    if not path.exists():
+        res.errors.append("missing README.md")
+        return
+
+    text = path.read_text()
+    count = len(skill_names)
+
+    match = README_COUNT.search(text)
+    if not match:
+        res.warnings.append(
+            f"README.md: no '**Shipping, N skills:**' line, so the count cannot "
+            f"be checked against the {count} skills that ship"
+        )
+    elif int(match.group(1)) != count:
+        res.errors.append(
+            f"README.md: says {match.group(1)} skills ship, but {count} do"
+        )
+
+    missing = [name for name in skill_names if f"`{name}`" not in text]
+    if missing:
+        res.errors.append(f"README.md: ships but is not listed: {', '.join(missing)}")
+
+
 def validate_distribution(skill_names: list[str], res: Result) -> None:
     """Check the hand-maintained manifests and the plugin tree against reality.
 
-    Two failures this catches, both of which have already shipped:
+    Three failures this catches, all of which have already shipped:
 
     1. Manifest drift. build.py rebuilds plugin/skills/ but never touches
        marketplace.json or plugin.json, so their descriptions go stale the
@@ -154,6 +189,8 @@ def validate_distribution(skill_names: list[str], res: Result) -> None:
     2. A stale plugin tree, which is what running build.py without --plugin
        leaves behind. The Claude Code marketplace then serves yesterday's
        skills with no other signal that anything is wrong.
+    3. A stale README, which made the same claim in prose and drifted with
+       them. See validate_readme.
     """
     count = len(skill_names)
 
@@ -189,6 +226,8 @@ def validate_distribution(skill_names: list[str], res: Result) -> None:
             res.errors.append(
                 f"plugin/skills/{name}/SKILL.md is stale; run build.py --plugin"
             )
+
+    validate_readme(skill_names, res)
 
 
 def compile_skill(skill_dir: Path, check_only: bool, plugin_mode: bool = False) -> Result:

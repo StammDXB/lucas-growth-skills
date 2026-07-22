@@ -137,6 +137,22 @@ Open            what needs substantiating before this goes out
 If you declined to write a release, deliver the reasoning and the alternative
 instead. That is a successful outcome, not a failure.
 
+## Boundaries
+
+This skill does not own adjacent work. When the real problem sits
+elsewhere, name the destination and stop rather than half-doing it here.
+
+| If the real problem is | Route to |
+|---|---|
+| The audience is customers, not journalists | `copywriting` |
+| The reply is to one journalist, not the desk | `stakeholder-response` |
+| There is no position the announcement can sit inside | `brand-strategy` |
+
+## Sources
+
+Read `references/evidence-and-proof.md` before quoting any statistic, benchmark or research finding, and before naming a framework or an expert.
+Read `references/voice-and-tone.md` when the register of the writing is in question, or before judging whether a draft sounds human.
+
 ## Gotchas
 
 - **Writing the release anyway.** The user asked for a press release, so you

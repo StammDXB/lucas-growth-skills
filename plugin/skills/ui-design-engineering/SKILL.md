@@ -119,6 +119,17 @@ fix. "This feels off" is not a review finding.
 
 Never show the rubric scoring or the revision rounds.
 
+## Boundaries
+
+This skill does not own adjacent work. When the real problem sits
+elsewhere, name the destination and stop rather than half-doing it here.
+
+| If the real problem is | Route to |
+|---|---|
+| The words in the interface are the problem | `copywriting` |
+| The question is whether the change can be tested | `experiment-design` |
+| Nobody agreed what the interface is for | `creative-brief` |
+
 ## Gotchas
 
 - **Animating because you can.** Motion that explains earns its place. Motion

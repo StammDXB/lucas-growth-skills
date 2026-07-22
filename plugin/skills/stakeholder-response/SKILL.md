@@ -266,6 +266,22 @@ message, the stakes read, and the draft with no reasoning attached, for the user
 to paste into a fresh conversation. A context that never saw the draft being
 written is the only unbiased reader available.
 
+## Boundaries
+
+This skill does not own adjacent work. When the real problem sits
+elsewhere, name the destination and stop rather than half-doing it here.
+
+| If the real problem is | Route to |
+|---|---|
+| The recipient is a journalist and this is on the record | `press-release` |
+| The output is marketing copy, not a reply | `copywriting` |
+| The friction is structural, not interpersonal | `marketing-architecture-audit` |
+
+## Sources
+
+Read `references/voice-and-tone.md` when the register of the writing is in question, or before judging whether a draft sounds human.
+Read `references/evidence-and-proof.md` before quoting any statistic, benchmark or research finding, and before naming a framework or an expert.
+
 ## DELIVERY NOTE
 
 After the draft, three lines maximum. Omit it entirely on a small ask, per the

@@ -1,6 +1,6 @@
 # lucas-growth-skills
 
-Marketing, brand, and growth skills for **Claude Desktop**.
+Marketing, brand, and growth skills for **Claude Desktop** and **Claude Code**.
 
 By [Lucas Stamm](https://lucasstamm.com).
 
@@ -17,34 +17,47 @@ skills/<job>/
   SKILL.md        lean router, under 500 lines
   skill.yaml      declares which lenses and rubrics to compile in
   references/     job-specific depth, each with a load-trigger
+  scripts/        executable tools, run rather than read
   evals/          beat-the-baseline test cases
 scripts/build.py  compiler
 dist/<job>.zip    self-contained, ready to upload
 ```
 
+Where a skill needs a deterministic answer rather than a judged one, it ships a
+script instead of prose. `experiment-design/scripts/power.py` computes sample
+size and evaluates results, because "you'll need a large sample" is the failure
+it exists to replace.
+
 ## Build
 
 ```bash
-python3 scripts/build.py              # build all
+python3 scripts/build.py              # dist/*.zip for Claude Desktop
+python3 scripts/build.py --plugin     # plugin/ for the Claude Code marketplace
 python3 scripts/build.py copywriting  # build one
 python3 scripts/build.py --check      # validate only
 ```
 
-The build hard-fails on any reference to a file that does not exist. That check
-exists because an earlier version of this repo shipped 46 references to files
-that were never written.
+**Run both build targets before committing.** Forgetting `--plugin` leaves the
+marketplace serving yesterday's skills; `--check` now fails on that, and on any
+count in `README.md`, `marketplace.json`, or `plugin.json` that disagrees with
+the skills actually present.
 
-## Install into Claude Desktop
+The build also hard-fails on any reference to a file that does not exist. That
+check exists because an earlier version of this repo shipped 46 references to
+files that were never written.
 
-1. `python3 scripts/build.py`
-2. In Claude, go to **Customize > Skills**, click **+ Create skill**
-3. Upload `dist/<skill>.zip`
+## Install
 
-One skill per upload. The zip contains the skill folder at its root.
+**Claude Desktop:** run `python3 scripts/build.py`, then in Claude go to
+**Customize > Skills**, click **+ Create skill**, and upload `dist/<skill>.zip`.
+One skill per upload; the zip contains the skill folder at its root.
+
+**Claude Code:** add this repo as a marketplace, then install the
+`lucas-growth` plugin. It serves the committed `plugin/` tree.
 
 ## Status
 
-**Shipping, 7 skills:**
+**Shipping, 12 skills:**
 
 | Skill | Job |
 |---|---|
@@ -55,14 +68,41 @@ One skill per upload. The zip contains the skill folder at its root.
 | `creative-brief` | Briefs that can be argued with, and interrogating existing ones |
 | `press-release` | Newsworthiness scoring, releases, pitches, embargoes |
 | `marketing-architecture-audit` | Coordination work versus judgment work in a marketing org |
+| `short-form-video` | Script, storyboard, and AI video prompts for a vertical cut |
+| `ui-design-engineering` | Animation decisions, component craft, motion performance |
+| `stakeholder-response` | High-stakes replies: pushing back, declining, delivering bad news |
+| `experiment-design` | Whether a test can resolve, whether a result is real, where the constraint is |
+| `prompt-master` | Tool-specific prompts for other AI systems ([vendored, MIT](NOTICE)) |
 
 **Lenses**, compiled into whichever skills declare them: `semiotics`,
 `persuasion-frameworks`, `voice-and-tone`, `luxury-codes`, `brand-foundations`,
-`evidence-and-proof`.
+`evidence-and-proof`, `consumer-psychology`.
 
-**Planned:** six consolidated growth skills (conversion-optimization, seo,
-paid-acquisition, lifecycle-retention, pricing-revenue, measurement). See
-`docs/superpowers/specs/2026-07-19-skill-system-design.md`.
+## How the skills fit together
+
+Claude Desktop skills cannot call each other, so coordination is structural
+rather than runtime. Three mechanisms carry it:
+
+1. **Shared lenses, compiled in.** Every skill that makes a claim compiles
+   `evidence-and-proof`; every writing skill compiles `voice-and-tone`. One
+   standard, enforced identically everywhere, resolved at build time.
+2. **Routing tables.** Every skill carries a `## Boundaries` section naming
+   which sibling owns adjacent work — the offer versus the copy, the brief
+   versus the idea, the test versus the thing being tested. A skill that hits
+   someone else's territory names the destination and stops.
+3. **A shared proportionality gate.** Every skill opens by sizing the ask, so a
+   one-line question gets a one-line answer instead of a full deliverable.
+
+## Planned
+
+Six consolidated growth skills were specified (conversion-optimization, seo,
+paid-acquisition, lifecycle-retention, pricing-revenue, measurement).
+**Baseline probing on 2026-07-22 did not support building them.** Across 24
+probes in six domains, an unaided model corrected marketing folklore in 6/6
+domains unassisted, and the only consistent failure was uncited or fabricated
+numbers. `experiment-design` is the one skill that survived that test, scoped to
+the gates and arithmetic the baseline actually misses. See
+`docs/evals/2026-07-22-growth-probe-results.md`.
 
 The 35 skills under `lucas-growth/` are the previous generation, retained until
 each is either absorbed or cut against the beat-the-baseline test.

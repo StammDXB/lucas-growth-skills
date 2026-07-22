@@ -122,6 +122,24 @@ Do not show the rubric scoring or the revision rounds.
 - **Captions in post, always.** Never baked into generated video.
 - **Music.** Tempo and texture direction, not a track name you cannot licence.
 
+## Boundaries
+
+This skill does not own adjacent work. When the real problem sits
+elsewhere, name the destination and stop rather than half-doing it here.
+
+| If the real problem is | Route to |
+|---|---|
+| There is no idea yet, only a brief | `campaign-concept` |
+| The script is really long-form or written copy | `copywriting` |
+| The brand's codes are undefined | `brand-strategy` |
+
+## Sources
+
+Read `references/voice-and-tone.md` when the register of the writing is in question, or before judging whether a draft sounds human.
+Read `references/luxury-codes.md` when the brand sits at a premium or luxury tier.
+Read `references/persuasion-frameworks.md` when choosing the persuasion structure for a piece.
+Read `references/evidence-and-proof.md` before quoting any statistic, benchmark or research finding, and before naming a framework or an expert.
+
 ## Gotchas
 
 - **Skipping to prompts.** Without a locked theme, four good clips will not cut

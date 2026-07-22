@@ -136,6 +136,23 @@ When asked to review rather than write:
 Give the diagnosis before the rewrite. If the brief has a hole, patching the
 prose hides it.
 
+## Boundaries
+
+This skill does not own adjacent work. When the real problem sits
+elsewhere, name the destination and stop rather than half-doing it here.
+
+| If the real problem is | Route to |
+|---|---|
+| Positioning is missing, so the brief cannot be written | `brand-strategy` |
+| The brief is sound and needs an idea | `campaign-concept` |
+| The brief is sound and needs execution | `copywriting` |
+| Briefs keep failing because nobody can decide | `marketing-architecture-audit` |
+
+## Sources
+
+Read `references/brand-foundations.md` when positioning, brand architecture or brand definitions are in play.
+Read `references/evidence-and-proof.md` before quoting any statistic, benchmark or research finding, and before naming a framework or an expert.
+
 ## Gotchas
 
 - **The deliverable presented as the problem.** "We need a brochure" is an answer

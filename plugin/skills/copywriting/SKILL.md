@@ -169,6 +169,27 @@ transcript.
 If they accept, emit the brief, the rubric name, and the copy with no reasoning
 attached, for them to paste into a new chat.
 
+## Boundaries
+
+This skill does not own adjacent work. When the real problem sits
+elsewhere, name the destination and stop rather than half-doing it here.
+
+| If the real problem is | Route to |
+|---|---|
+| The proposition is weak, not the words | `offer-design` |
+| There is no agreed voice or position to write in | `brand-strategy` |
+| Nobody agrees what the work is meant to do | `creative-brief` |
+| The audience is journalists | `press-release` |
+| The reader is an owner, principal or board member | `stakeholder-response` |
+| The question is whether to test the copy at all | `experiment-design` |
+
+## Sources
+
+Read `references/persuasion-frameworks.md` when choosing the persuasion structure for a piece.
+Read `references/semiotics.md` when reading or constructing visual and cultural codes.
+Read `references/voice-and-tone.md` when the register of the writing is in question, or before judging whether a draft sounds human.
+Read `references/evidence-and-proof.md` before quoting any statistic, benchmark or research finding, and before naming a framework or an expert.
+
 ## Gotchas
 
 These are the specific, diagnosable ways copy fails. Check for them by name.

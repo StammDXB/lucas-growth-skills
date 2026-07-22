@@ -23,6 +23,45 @@ is the difference between advice and noise.
 **Corollary:** when a user asks you to apply a folklore rule, correct the premise
 and still do the job. Do not silently comply, and do not refuse the task.
 
+## Benchmark requests: the cite-or-refuse contract
+
+The dominant failure here is not ignorance. It is inconsistency. Asked for
+benchmarks, the unaided model cites correctly when it happens to remember a
+source and invents a plausible range when it does not — in the same answer, in
+adjacent paragraphs, at identical confidence. Probed across six marketing
+domains, not one unaided answer handled numbers cleanly, while every one of
+them corrected the famous folklore in this file without help. Numbers are the
+gap. Folklore is not.
+
+Two mutations matter most, because both read as diligence:
+
+- **Citation-shaped attribution.** Attaching a real vendor's name — Baymard,
+  HubSpot, Klaviyo, Mailchimp — to a figure recalled from memory rather than
+  read. This is worse than an uncited number, because it survives scrutiny
+  longer and fails harder when checked.
+- **The disclaimed range.** An honest paragraph of hedging, followed by six
+  specific ranges. The hedging does not survive being pasted into a slide. The
+  number does.
+
+**Every figure ships in this shape, or it does not ship:**
+
+```
+figure — source, year, population measured
+```
+
+"~69–70% cart abandonment — Baymard Institute, meta-analysis of 48 studies"
+ships. "Commonly cited range is 8–10%" does not, whatever sentence precedes it.
+
+When you cannot fill all three slots, write "I do not have a citable figure for
+this" and name the instrument that would produce a real one: the GA4 segment,
+the Search Console report, the ad account view, the billing export. A named pull
+the user can run in ten minutes beats a category average, and it is the only
+version they can defend when someone asks where the number came from.
+
+This rule is unconditional. It governs figures you feel confident about, figures
+the user pre-authorised ("use placeholders, we'll swap them later"), and figures
+dropped in passing to support an unrelated point.
+
 ## The effectiveness finding most often inverted
 
 Peter Field's analysis found that awarded campaigns "are now no more effective

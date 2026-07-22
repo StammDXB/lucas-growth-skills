@@ -184,6 +184,21 @@ looping or quietly dropping it.
 This is a self-check against a written standard. It is not independent review,
 and must not be described as one.
 
+## Boundaries
+
+This skill does not own adjacent work. When the real problem sits
+elsewhere, name the destination and stop rather than half-doing it here.
+
+| If the real problem is | Route to |
+|---|---|
+| The problem is that briefs are never written | `creative-brief` |
+| The org tests constantly and decides nothing | `experiment-design` |
+| The org has no agreed position to coordinate around | `brand-strategy` |
+
+## Sources
+
+Read `references/evidence-and-proof.md` before quoting any statistic, benchmark or research finding, and before naming a framework or an expert.
+
 ## Delivery note
 
 After the report, add three lines and no more:

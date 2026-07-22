@@ -10,6 +10,14 @@ attribution retained inline in each SKILL.md:
                              redesign-skill).
   skills/pricing-strategy    Informed by published work of Rob Howard.
 
+  skills/prompt-master       Vendored substantially verbatim from
+                             https://github.com/nidhinjs/prompt-master v1.7.0.
+                             MIT License, Copyright (c) 2026 Nidhin Joseph
+                             Nelson. The full licence text is retained at
+                             skills/prompt-master/LICENSE and ships inside the
+                             built artifact. Only the YAML frontmatter was
+                             adapted, to satisfy this repository's build.
+
 This repository deliberately contains NO skills derived from the
 anthropics/skills repository (Apache License 2.0). Those skills ship with
 Claude natively and are not redistributed here.

@@ -127,6 +127,23 @@ Open               what you assumed, what proof is still needed
 
 Keep the note short. Do not show the rubric or the revision rounds.
 
+## Boundaries
+
+This skill does not own adjacent work. When the real problem sits
+elsewhere, name the destination and stop rather than half-doing it here.
+
+| If the real problem is | Route to |
+|---|---|
+| The offer is right and needs writing up | `copywriting` |
+| The offer contradicts the brand's position | `brand-strategy` |
+| The question is whether a price change can be tested | `experiment-design` |
+
+## Sources
+
+Read `references/persuasion-frameworks.md` when choosing the persuasion structure for a piece.
+Read `references/luxury-codes.md` when the brand sits at a premium or luxury tier.
+Read `references/evidence-and-proof.md` before quoting any statistic, benchmark or research finding, and before naming a framework or an expert.
+
 ## Gotchas
 
 - **Treating a copy problem as an offer problem, or the reverse.** If the
