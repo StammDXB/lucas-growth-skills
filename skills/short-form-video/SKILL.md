@@ -21,13 +21,29 @@ One pipeline, four stages, run in order. Each stage feeds the next, and skipping
 a stage shows up two stages later as clips that do not cut together.
 
 ```
-Brief  →  Script  →  Storyboard  →  Prompts
-         what it says   how it looks   how it renders
+Brief  →  Script  →  ⏸  →  Storyboard  →  ⏸  →  Prompts
+         what it says       how it looks        how it renders
 ```
 
 Run all four unless the user explicitly wants only one. If they ask for "the
 prompt", they usually still need the theme locked first, or the shots will not
 match.
+
+## The two checkpoints
+
+**When you are running the full pipeline, you stop twice and wait for a human
+answer.** Once after the script, once after the storyboard. These are marked ⏸
+in the steps below.
+
+The reason is cost asymmetry. Reversing a hook costs one paragraph. Reversing it
+after six shots and six prompts costs the whole package, and by then the user is
+attached to work they watched you build.
+
+**When the checkpoints apply:** any run that will produce more than one stage.
+
+**When they do not:** a single-stage request ("just write me the hook"), or
+anything the size-the-ask gate above already answers directly. One checkpoint per
+stage boundary, never more.
 
 ## Before anything: size the ask
 
@@ -71,6 +87,14 @@ of the three.
 Pick one structure and map every beat to seconds. Mark each line **VO** (spoken)
 or **TEXT** (on-screen, added in post) so the storyboard knows what it is placing.
 
+> **⏸ Checkpoint 1 — the idea.** Present the script and stop. Ask: *"Approve this
+> script, or change the hook, the angle, or the CTA?"* Offer one alternative hook
+> so approval is a choice rather than a rubber stamp.
+>
+> Do not storyboard until they answer. If they approve with a change, restate the
+> change in one line before continuing, so a misread is caught here and not four
+> shots later.
+
 ## Step 3: Storyboard
 
 Load `references/storyboard.md`.
@@ -81,6 +105,13 @@ and a motion language that names both what is allowed and **what is banned**.
 
 Then break into four to six shots. **One main action per shot.** Vary shot scale
 for rhythm. The hook image must land inside the first second.
+
+> **⏸ Checkpoint 2 — the look.** Present the visual theme and the shot table, and
+> stop. Ask: *"Approve this direction, or refine any shot?"* Name the one shot you
+> are least sure of and say why, so the review has somewhere to start.
+>
+> Do not write prompts until they answer. Prompts inherit the theme wholesale, so
+> an unapproved theme becomes six unapproved prompts.
 
 ## Step 4: Prompts
 
@@ -142,6 +173,8 @@ Read `references/evidence-and-proof.md` before quoting any statistic, benchmark 
 
 ## Gotchas
 
+- **Running past a checkpoint.** Presenting the script and continuing into the
+  storyboard in the same reply is not a checkpoint. Stopping and waiting is.
 - **Skipping to prompts.** Without a locked theme, four good clips will not cut
   together. This is the most common and most expensive failure.
 - **Stacked motion.** Subject, camera and environment all moving in a five-second

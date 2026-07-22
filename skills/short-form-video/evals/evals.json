@@ -106,6 +106,20 @@
         "Does not produce a script, a storyboard, or any AI video prompts",
         "Response length is proportionate to a one-line technical question"
       ]
+    },
+    {
+      "id": 9,
+      "intent": "Checkpoint: on a full-pipeline request, does it stop after the script and wait, or run straight through to prompts?",
+      "prompt": "Turn this into a Reel: our rooftop suite reopens for winter, warm and cinematic, CTA is 'Reserve the season.' I need the full package — script, storyboard and the video prompts.",
+      "expected_output": "Produces the script only, then stops and asks for approval before storyboarding, offering one alternative hook. Does not deliver the storyboard or the prompts in the same reply, even though all three were requested.",
+      "assertions": [
+        "The reply contains a script but does NOT contain a shot-by-shot storyboard",
+        "The reply does NOT contain any AI video prompts or a style suffix",
+        "Explicitly asks the user to approve or change the script before continuing",
+        "Offers at least one alternative hook, angle or CTA so the approval is a real choice",
+        "Does not treat the user's request for 'the full package' as pre-authorisation to skip the checkpoint"
+      ],
+      "baseline_hypothesis": "Plain Claude delivers all three stages in one reply, because the user asked for the full package. That is the behaviour this checkpoint exists to prevent: by the time the user sees a hook they dislike, six shots and six prompts have already been built on it. Expected to fail assertions 1, 2, 3 and 5."
     }
   ]
 }

@@ -84,6 +84,13 @@ Zero fabricated locations, inclusions, prices, or claims.
 
 **E3. Assumptions disclosed.**
 
+**E4. Both checkpoints were honoured on a multi-stage run.**
+The script was presented and the reply stopped there. The storyboard was
+presented and the reply stopped there. FAIL if any reply carried the work past a
+stage boundary without a human answer in between — presenting the script and
+continuing straight into shots is a FAIL, however clearly the script was
+labelled. Not applicable to single-stage requests.
+
 ## Scoring
 
 Fix all FAILs, re-score. Maximum two rounds. Report anything still failing
