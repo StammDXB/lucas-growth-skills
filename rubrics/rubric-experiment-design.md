@@ -30,6 +30,12 @@ rubric, no delivery block. FAIL on ceremony fired at a small ask.
 FAIL on any estimated sample size, duration, or "you'll need a lot of traffic"
 without `scripts/power.py` output behind it.
 
+**B1a. The arithmetic was delivered with the gate, not after it.**
+Where a conversion rate was stated, the same reply carries the computed sample
+size and duration. FAIL on any promise to calculate once the other inputs arrive:
+the rate alone is sufficient, and a refusal without a number reads as obstruction
+rather than as the argument it is.
+
 **B2. The MDE was set by a business question.**
 The draft asked, or states, what lift would change the decision. FAIL on an MDE
 picked because it produces a convenient sample size.

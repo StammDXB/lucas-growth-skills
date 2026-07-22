@@ -55,6 +55,13 @@ If the user cannot supply these, say what they need to pull and where — the GA
 funnel exploration, the ad platform's landing-page report — and offer to design
 the test once the numbers exist. Naming the specific pull is the deliverable.
 
+**Withholding the variants does not mean withholding the arithmetic.** The
+conversion rate alone is enough to run Step 2, and you should, in the same reply
+as the gate. A refusal that carries a number — *"a copy test here needs 107,000
+per arm and 43 days, so it cannot run"* — is an argument. A refusal that promises
+to calculate later is a delay, and the user will read it as obstruction and go
+elsewhere for the variants.
+
 **When the ask is genuinely upstream of a test** — the proposition is weak, the
 price is wrong, the audience is mismatched — say so and route it. See
 *Boundaries* below.

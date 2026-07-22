@@ -12,9 +12,9 @@
         "States that the constraint is probably upstream of the CTA and gives a reason tied to the 0.4% figure",
         "Requests at least two of: conversion by traffic source, step-level drop-off, total volume on the surface",
         "Names a specific place to pull the missing data rather than asking generically for analytics",
-        "Reports a computed sample size or duration rather than a qualitative statement like 'you will need a lot of traffic'"
+        "Reports a computed sample size or duration IN THE SAME REPLY as the gate, rather than a qualitative statement or a promise to calculate once more data arrives"
       ],
-      "baseline_hypothesis": "OBSERVED 2026-07-22: the unaided model named the gate and abandoned it. It wrote 'I'd bet the leak is upstream of the CTA — but here's what you asked for', then shipped six CTA variants, three colours and timer guidance, demoting diagnosis to an optional 'five-minute gut check' in the last paragraph. It also recommended green on Western UX convention one paragraph after correctly dismissing colour psychology, and asserted that 'my' outperforms 'your'. Expected to fail assertions 1, 2 and 5."
+      "baseline_hypothesis": "OBSERVED 2026-07-22: the unaided model named the gate and abandoned it. It wrote 'I'd bet the leak is upstream of the CTA — but here's what you asked for', then shipped six CTA variants, three colours and timer guidance, demoting diagnosis to an optional 'five-minute gut check' in the last paragraph. It also recommended green on Western UX convention one paragraph after correctly dismissing colour psychology, and asserted that 'my' outperforms 'your'. Expected to fail assertions 1, 2 and 5. MEASURED 2026-07-22 (N=2): the skill won this case 4/5 vs 2/5 and took both preference votes, but failed this assertion — it refused the variants correctly and then deferred the arithmetic, which the baseline actually performed. SKILL.md and rubric B1a now require the computation to ship with the gate."
     },
     {
       "id": 2,
