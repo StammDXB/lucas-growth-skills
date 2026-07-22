@@ -1,8 +1,8 @@
 {
   "name": "lucas-growth",
-  "owner": { "name": "Lucas Stamm" },
+  "owner": { "name": "Lucas Stamm", "url": "https://lucasstamm.com" },
   "metadata": {
-    "description": "Marketing, brand, and creative skills by Lucas Stamm"
+    "description": "Marketing, brand, and creative skills by Lucas Stamm (lucasstamm.com)"
   },
   "plugins": [
     {
