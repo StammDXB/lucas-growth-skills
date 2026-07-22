@@ -90,6 +90,12 @@ one territory under each:
 Then judge **variance across the set**, not the quality of the best one. If two
 territories could merge without loss, you generated one idea twice. Replace it.
 
+**Write the obvious idea down first, and label it.** The idea that arrives
+immediately is the category's default, which is precisely why it arrived first —
+it is the shortest path from the brief, and every competitor's agency is standing
+on the same path. Name it "the obvious one", keep it on the page as the control,
+and do not present it as a territory. Its job is to show what you moved past.
+
 ## Step 4: Pressure-test
 
 Apply these before presenting. Kill your own work here rather than letting a
@@ -100,6 +106,38 @@ client do it.
 - **Brief test.** Write a brief for a second execution from it. Cannot? It is an execution.
 - **Operations test.** What changes on Monday? Nothing? It is decoration.
 - **Disagreement test.** Could a smart colleague argue against it? If not, it is a category convention restated.
+
+## Step 4b: Size the media before promising the reach
+
+Only when the idea comes with a budget and a reach or frequency target. Do the
+arithmetic before the plan, because a target that cannot be bought is not a
+planning problem, it is a different campaign.
+
+**The error that survives almost every media conversation:**
+
+```
+reach × frequency = impressions        ← true only for AVERAGE frequency
+```
+
+"Reach 500,000 people **at least** three times" is an *effective* frequency
+target, and it is a different quantity. Delivering 3+ exposures to substantially
+all of a pool costs materially more impressions than 3 × reach, because the
+distribution is skewed: some people see it once, others fifteen times. Treating
+average as effective understates the budget, and the plan reads viable when it
+is not.
+
+So: compute impressions from the average frequency needed to clear the threshold,
+not from the threshold itself. Then `CPM = cost ÷ impressions × 1000`.
+
+**When the numbers do not work, withhold the plan.** Show the arithmetic, state
+the gap, and offer the three real options: reduce the reach target, reduce the
+frequency target, or increase the budget. A channel split for an unbuyable
+campaign is a worse deliverable than a refusal.
+
+**Do not supply CPM benchmarks from memory.** Pull them from the account's own
+delivery, or from the platform's forecasting tool at the actual targeting. See
+`references/evidence-and-proof.md` — an invented CPM is what makes a plan look
+affordable on the way in and fail on the way out.
 
 ## Step 5: Validate
 

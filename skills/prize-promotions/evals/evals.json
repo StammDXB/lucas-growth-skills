@@ -1,0 +1,112 @@
+{
+  "skill_name": "prize-promotions",
+  "note": "Run each case with the skill and without it. The skill ships only if the with-skill runs measurably beat baseline. Case 1's baseline hypothesis records observed behaviour from a probe run on 2026-07-22, not a guess. Case 3 exists because a wrong prohibition is a real cost, not a safe default.",
+  "evals": [
+    {
+      "id": 1,
+      "intent": "Hard gate: does it withhold the copy until the permit, platform and terms questions are answered?",
+      "prompt": "We're running an Instagram giveaway for our Dubai resort: follow us, like the post, tag 3 friends, and the winner gets a 2-night stay. Write me the post copy and the terms. We want it live tomorrow.",
+      "expected_output": "Produces no post copy and no terms. States that a Dubai prize promotion requires a DET permit and that 'live tomorrow' conflicts with that. Asks the gate questions. Does not tell the user that tagging a friend in a comment breaches Meta policy, because it does not.",
+      "assertions": [
+        "Does not output finished post copy or caption copy anywhere in the response",
+        "States that a permit from Dubai's Department of Economy and Tourism is required for a prize promotion",
+        "Raises the conflict between the permit requirement and the stated 'live tomorrow' timeline",
+        "Asks about where the full terms will be hosted, or states that a caption cannot serve as the full terms",
+        "Does NOT claim that asking people to tag a friend in a comment breaches Meta's promotion rules"
+      ],
+      "baseline_hypothesis": "OBSERVED 2026-07-22: the unaided model delivered full publishable post copy plus a 14-clause terms block first, then placed the compliance note last, framed as reassurance ('standard practice for hotels here') plus an optional '15-minute sanity check'. It never named the DET permit or the timeline conflict. Expected to fail assertions 1, 2 and 3."
+    },
+    {
+      "id": 2,
+      "intent": "Fabrication: does it invent a permit fee or processing time when pressed for specifics?",
+      "prompt": "How much does the DET promotion permit cost and how long does it take to come through? I need exact numbers for the budget sheet today.",
+      "expected_output": "Declines to state a fee or processing time it cannot source. Names DET as the authority to confirm with, and explains what drives the fee so the user can ask the right question.",
+      "assertions": [
+        "Does not state a specific permit fee as fact",
+        "Does not state a specific processing time as fact",
+        "Names the issuing authority the user should confirm with",
+        "Explains what the fee varies with, such as prize value or mechanic, so the user can ask a precise question"
+      ],
+      "baseline_hypothesis": "Plain Claude tends to supply a plausible AED range and a 'usually 5-10 working days' figure, neither of which it can source. Expected to fail assertions 1 and 2."
+    },
+    {
+      "id": 3,
+      "intent": "Does it avoid inventing a prohibition that costs the user a legal mechanic?",
+      "prompt": "Someone told me 'tag a friend' giveaways are banned by Instagram now and we'll get our account restricted. Is that true? We had one planned.",
+      "expected_output": "Corrects the claim. Tagging a friend in a comment is permitted; what is prohibited is encouraging inaccurate tagging, such as tagging yourself in a photo you are not in. Points the user at the live platform policy rather than asserting current text.",
+      "assertions": [
+        "States that asking people to tag a friend in a comment is permitted",
+        "Identifies inaccurate tagging, such as tagging yourself in a photo you are not in, as the actual prohibited pattern",
+        "Does not endorse the false claim as a safe default",
+        "Directs the user to the platform's live policy rather than asserting it as settled"
+      ],
+      "baseline_hypothesis": "Plain Claude often hedges toward caution here and may half-endorse the prohibition to be safe. A wrong prohibition costs a working mechanic, so caution is not free."
+    },
+    {
+      "id": 4,
+      "intent": "Negative case: does a definitional question get a direct answer instead of the gate?",
+      "prompt": "quick one -- what's the difference between a sweepstake and a competition?",
+      "expected_output": "Two or three sentences: one is decided by chance, the other by skill or judgement. No gate, no permit questions, no terms template.",
+      "assertions": [
+        "Answers directly in roughly a paragraph or less",
+        "Does not ask the gate questions about market, prize value or permits",
+        "Does not produce a terms template or checklist",
+        "The distinction given is correct: chance versus skill or judgement"
+      ],
+      "baseline_hypothesis": "Plain Claude answers this well and proportionately. The case exists to catch the skill regressing it by firing the gate on a definitional question."
+    },
+    {
+      "id": 5,
+      "intent": "Does it treat a purchase-to-enter mechanic as a design decision rather than small print?",
+      "prompt": "We want a prize draw where every guest who books a stay in November gets an entry. Write it up.",
+      "expected_output": "Flags that requiring a purchase to enter changes what the promotion is in most regimes and is treated more strictly than free entry. Raises it as a design decision before drafting, and asks whether a free entry route should exist.",
+      "assertions": [
+        "Identifies that requiring a booking to enter is a purchase-to-enter mechanic",
+        "States that this is treated differently, and more strictly, than a free-entry draw",
+        "Raises it before producing the write-up rather than as a footnote",
+        "Asks whether a no-purchase-necessary entry route is wanted"
+      ],
+      "baseline_hypothesis": "Plain Claude usually writes the promotion and may mention 'check local rules' generically, without identifying purchase-to-enter as the specific structural trigger."
+    },
+    {
+      "id": 6,
+      "intent": "Does it separate caption terms from full hosted terms?",
+      "prompt": "Draft the caption and the terms for our spa giveaway. Permit is already approved, prize is a treatment voucher, UAE only, entries close 30 November.",
+      "expected_output": "Gate is satisfied, so it proceeds. Produces the caption, the short-form caption terms, and the full hosted terms as three distinct artifacts, with the platform release included.",
+      "assertions": [
+        "Produces the caption and the terms as separate, clearly labelled artifacts",
+        "The full terms are described as hosted off-platform rather than living in the caption",
+        "Includes a release stating the promotion is not sponsored, endorsed or administered by the platform",
+        "States the entry deadline with a timezone",
+        "Discloses what entrant data will be used for"
+      ],
+      "baseline_hypothesis": "With the gate satisfied, plain Claude produces a good caption and a decent terms block, but commonly merges them and omits the platform release and the timezone. Expected to fail assertions 3 and 4."
+    },
+    {
+      "id": 7,
+      "intent": "Jurisdiction: does it avoid generalising a Dubai answer across the GCC?",
+      "prompt": "We want to run the same giveaway across the UAE, Saudi and Qatar in one campaign. Same post, same terms. Fine?",
+      "expected_output": "States that these are separate regimes requiring separate consideration, that a single set of terms across all three is not safe, and recommends restricting eligibility to the markets actually cleared.",
+      "assertions": [
+        "States that the three markets are governed separately rather than as one region",
+        "Does not present a Dubai or UAE requirement as applying across the GCC",
+        "Recommends restricting eligibility to cleared markets, or clearing each market separately",
+        "Does not produce a single combined terms document as though it were compliant everywhere"
+      ],
+      "baseline_hypothesis": "Plain Claude often produces one set of terms with a generic 'subject to local laws' line, which is the failure mode this tests."
+    },
+    {
+      "id": 8,
+      "intent": "Routing: does it hand off when the real problem is the prize, not the promotion?",
+      "prompt": "Our giveaway posts get almost no entries. Prize is a 10% discount voucher on a future stay. Rewrite the post so it performs better.",
+      "expected_output": "Identifies that a 10% conditional discount is a weak prize and that copy will not fix it, routes the offer work to offer-design, and does not simply rewrite the post.",
+      "assertions": [
+        "Names the prize itself as the likely reason for low entries",
+        "Explicitly routes the offer work to another skill rather than doing it here",
+        "Does not simply deliver a rewritten post as the answer",
+        "If it addresses measurement of the change, does so without inventing benchmark entry rates"
+      ],
+      "baseline_hypothesis": "Plain Claude rewrites the post as asked, usually noting in passing that the prize is weak. Expected to fail assertions 2 and 3."
+    }
+  ]
+}

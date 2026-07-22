@@ -1,6 +1,9 @@
 {
   "name": "lucas-growth",
-  "owner": { "name": "Lucas Stamm", "url": "https://lucasstamm.com" },
+  "owner": {
+    "name": "Lucas Stamm",
+    "url": "https://lucasstamm.com"
+  },
   "metadata": {
     "description": "Marketing, brand, and creative skills by Lucas Stamm (lucasstamm.com)"
   },
@@ -8,7 +11,7 @@
     {
       "name": "lucas-growth",
       "source": "./plugin",
-      "description": "12 skills: copywriting, campaign-concept, offer-design, brand-strategy, creative-brief, press-release, marketing-architecture-audit, short-form-video, ui-design-engineering, stakeholder-response, experiment-design, prompt-master"
+      "description": "13 skills: copywriting, campaign-concept, offer-design, brand-strategy, creative-brief, press-release, marketing-architecture-audit, short-form-video, ui-design-engineering, stakeholder-response, experiment-design, prompt-master, prize-promotions"
     }
   ]
 }

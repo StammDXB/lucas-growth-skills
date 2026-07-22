@@ -57,7 +57,7 @@ One skill per upload; the zip contains the skill folder at its root.
 
 ## Status
 
-**Shipping, 12 skills:**
+**Shipping, 13 skills:**
 
 | Skill | Job |
 |---|---|
@@ -72,6 +72,7 @@ One skill per upload; the zip contains the skill folder at its root.
 | `ui-design-engineering` | Animation decisions, component craft, motion performance |
 | `stakeholder-response` | High-stakes replies: pushing back, declining, delivering bad news |
 | `experiment-design` | Whether a test can resolve, whether a result is real, where the constraint is |
+| `prize-promotions` | Permit, platform and terms gate for giveaways and prize draws |
 | `prompt-master` | Tool-specific prompts for other AI systems ([vendored, MIT](NOTICE)) |
 
 **Lenses**, compiled into whichever skills declare them: `semiotics`,
