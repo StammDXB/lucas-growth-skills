@@ -11,7 +11,7 @@ Claude already writes decent marketing copy. A skill that says "write good copy"
 therefore adds nothing, and most marketing skills are exactly that.
 
 Every skill here had to beat an unaided model on blind, graded evals before it
-shipped. Where the evals did not back a skill, it was not built.
+shipped.
 
 Three things the skills add, measured rather than asserted:
 
