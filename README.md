@@ -5,13 +5,13 @@ Thirteen marketing, brand, and growth skills for **Claude Desktop** and
 
 By [Lucas Stamm](https://lucasstamm.com).
 
-## 🎯 The premise
+## 🎯 Why this exists
 
 Claude already writes decent marketing copy. A skill that says "write good copy"
 therefore adds nothing, and most marketing skills are exactly that.
 
 Every skill here had to beat an unaided model on blind, graded evals before it
-shipped. Six planned skills failed that test and were never built.
+shipped. Where the evals did not back a skill, it was not built.
 
 Three things the skills add, measured rather than asserted:
 
@@ -24,12 +24,6 @@ Three things the skills add, measured rather than asserted:
 The grader's note on the gate case: *"it says colour is the lowest-leverage
 lever and supplies three colours."* Naming a gate is baseline behaviour. Holding
 it is what the skill adds.
-
-Folklore is the exception worth naming: an unaided model already corrects most
-marketing myths on its own. So the references do not re-teach that. They carry a
-**do-not-cite** list instead — "80% of people only read the headline" and
-spam-trigger-word avoidance included — because uncited numbers are the failure
-that survives.
 
 Full results: [`docs/evals/`](docs/evals).
 
@@ -104,42 +98,28 @@ Skills appear as `lucas-growth:<skill>`.
 
 ### 📦 Or one skill at a time, as a zip
 
-Only if you want a single skill rather than the pack. Needs Python 3 and PyYAML
-(`pip3 install pyyaml`), because `dist/` is not committed:
+If you want a single skill rather than the pack, build its zip and upload it:
 
 ```bash
 git clone https://github.com/StammDXB/lucas-growth-skills.git
 cd lucas-growth-skills
+pip3 install pyyaml
 python3 scripts/build.py copywriting     # or omit the name for all thirteen
 ```
 
 Then in Claude: **Customize → Skills → +**, upload `dist/copywriting.zip`, and
-toggle it on. The zip holds the skill folder at its root, which is the structure
-Claude expects.
+toggle it on.
 
-## 🏛️ Why it is structured this way
+## 🏛️ How it is built
 
 Claude Desktop skills cannot invoke each other at runtime and cannot share files
 across skill directories. So shared knowledge is **compiled in at build time**
-rather than chained at runtime.
-
-```
-lenses/           shared knowledge, authored once
-rubrics/          validators the skills score against
-skills/<job>/
-  SKILL.md        lean router, under 500 lines
-  skill.yaml      declares which lenses and rubrics to compile in
-  references/     job-specific depth, each with a load-trigger
-  scripts/        executable tools, run rather than read
-  evals/          beat-the-baseline test cases
-scripts/build.py  compiler
-dist/<job>.zip    self-contained, ready to upload
-```
+rather than chained at runtime. Every skill you install is self-contained.
 
 Where a skill needs a deterministic answer rather than a judged one, it ships a
-script instead of prose. `experiment-design/scripts/power.py` computes sample
-size and evaluates results, because "you'll need a large sample" is the failure
-it exists to replace.
+script instead of prose. `experiment-design` computes your sample size and
+evaluates your result in code, because "you'll need a large sample" is the
+failure it exists to replace.
 
 ### 🔍 The lenses
 
@@ -157,61 +137,25 @@ Authored once, compiled into whichever skills declare them:
 
 ### 🔗 How the skills fit together
 
-Coordination is structural rather than runtime. Three mechanisms carry it:
-
-1. **Shared lenses, compiled in.** Every skill that makes a claim compiles
-   `evidence-and-proof`; every writing skill compiles `voice-and-tone`. One
-   standard, enforced identically everywhere, resolved at build time.
-2. **Routing tables.** Every skill carries a `## Boundaries` section naming
-   which sibling owns adjacent work — the offer versus the copy, the brief
-   versus the idea, the test versus the thing being tested. A skill that hits
-   someone else's territory names the destination and stops.
-3. **A shared proportionality gate.** Every skill opens by sizing the ask, so a
-   one-line question gets a one-line answer instead of a full deliverable.
-
-## 🔨 Build
-
-| Command | What it does |
+| Mechanism | What it does for you |
 |---|---|
-| `python3 scripts/build.py` | `dist/*.zip` for Claude Desktop |
-| `python3 scripts/build.py --plugin` | `plugin/` for the Claude Code marketplace |
-| `python3 scripts/build.py copywriting` | Build one skill |
-| `python3 scripts/build.py --check` | Validate only, emit nothing |
-
-**Run both build targets before committing.** Forgetting `--plugin` leaves the
-marketplace serving yesterday's skills; `--check` now fails on that, and on any
-count in `README.md`, `marketplace.json`, or `plugin.json` that disagrees with
-the skills actually present.
-
-The build also hard-fails on any reference to a file that does not exist. That
-check exists because an earlier version of this repo shipped 46 references to
-files that were never written.
+| **Shared lenses** | Every skill that makes a claim compiles `evidence-and-proof`; every writing skill compiles `voice-and-tone`. One standard, enforced identically everywhere |
+| **Routing tables** | Each skill names which sibling owns adjacent work — the offer versus the copy, the brief versus the idea. A skill that hits someone else's territory names the destination and stops |
+| **Proportionality gate** | Each skill sizes the ask first, so a one-line question gets a one-line answer instead of a full deliverable |
 
 ## 🧾 Evidence standard
 
 Every claim in a reference file is graded. Where a framework is real but its
 supporting evidence is weak, the file says so. Where a widely repeated statistic
-has no traceable source, it appears on a **do-not-cite** list rather than being
-quietly omitted.
+has no traceable source — "80% of people only read the headline", spam-trigger
+words — it goes on a **do-not-cite** list by name, rather than being quietly
+omitted.
 
-This matters more than it sounds: the default failure mode when an LLM writes
-marketing content is confidently emitting folklore. Several references
-explicitly instruct against claims the model would otherwise reach for.
-
-## 🚫 What was not built
-
-Six consolidated growth skills were specified (conversion-optimization, seo,
-paid-acquisition, lifecycle-retention, pricing-revenue, measurement).
-**Baseline probing on 2026-07-22 did not support building them.** Across 24
-probes in six domains, an unaided model corrected marketing folklore in 6/6
-domains unassisted, and the only consistent failure was uncited or fabricated
-numbers. `experiment-design` is the one skill that survived that test, scoped to
-the gates and arithmetic the baseline actually misses. See
-`docs/evals/2026-07-22-growth-probe-results.md`.
-
-The 35 skills under `lucas-growth/` are the previous generation, retained until
-each is either absorbed or cut against the same test.
+This matters more than it sounds. The default failure mode when an LLM writes
+marketing content is confidently emitting folklore, and a claim you cannot
+source is a claim you cannot defend in the room.
 
 ## 📄 License
 
-MIT. See `LICENSE`. Third-party attribution in `NOTICE`.
+MIT. See `LICENSE`. Third-party attribution in `NOTICE`. Contributing and build
+instructions: [`CONTRIBUTING.md`](CONTRIBUTING.md).
