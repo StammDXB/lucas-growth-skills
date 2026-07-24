@@ -59,65 +59,39 @@ Claude loads the matching skill.
 
 ## 🚀 Install
 
+Both apps install the same plugin straight from this repo. Nothing to build, no
+zips to manage — Desktop does it through the UI, Claude Code through a command.
+
 | | Claude Desktop | Claude Code |
 |---|---|---|
-| **How** | Upload a zip per skill | One marketplace command |
-| **Build step** | Required, `dist/` is not committed | None, serves the committed `plugin/` tree |
-| **Gets you** | The skills you choose | All thirteen at once |
-| **Steps** | [Eight, below](#-claude-desktop-step-by-step) | [Two, below](#-claude-code) |
+| **How** | Add the marketplace in the UI | Two slash commands |
+| **Build step** | None | None |
+| **Gets you** | All thirteen at once | All thirteen at once |
+| **Steps** | Six, below | Two, below |
 
 ### 💻 Claude Desktop, step by step
 
-Desktop takes one skill per upload, as a zip.
+1. **🖥️ Open Claude Desktop** and go to **Customize**.
+2. **🧩 Click Plugins.**
+3. **➕ Click Add**, then **Add Marketplace**.
+4. **📚 Choose Add from Repository.**
+5. **🔗 Paste the repo URL** and confirm:
 
-**Before you start**
-
-| Requirement | Why |
-|---|---|
-| 🐍 Python 3 with PyYAML — `pip3 install pyyaml` | The build script parses `skill.yaml` |
-| ⚙️ **Code execution** switched on in Claude | Skills do not run without it. Any plan works |
-
-**Steps**
-
-1. **📦 Build the zips.**
-
-   ```bash
-   git clone https://github.com/StammDXB/lucas-growth-skills.git
-   cd lucas-growth-skills
-   python3 scripts/build.py
+   ```
+   https://github.com/StammDXB/lucas-growth-skills
    ```
 
-   Thirteen self-contained zips land in `dist/`. For a single skill:
-   `python3 scripts/build.py copywriting`.
+6. **⬇️ Install the `lucas-growth` plugin** from the marketplace that appears.
+   All thirteen skills arrive together.
 
-2. **⚙️ Turn on code execution.** In Claude, open **Settings → Capabilities**
-   and enable **Code execution and file creation**. Skip if it is already on.
-
-3. **🗂️ Open the skills panel.** Go to **Customize → Skills**.
-
-4. **➕ Add a skill.** Click **+** (labelled *Add skill* or *Create skill*
-   depending on your version), then choose the upload option.
-
-5. **📎 Pick a zip** from `dist/`, for example `dist/copywriting.zip`. Claude
-   reads `SKILL.md` and shows the name, description, and license. The zip holds
-   the skill folder at its root, which is the structure Claude expects.
-
-6. **🔛 Toggle it on** in the skills list.
-
-7. **🔁 Repeat 4-6** for each skill you want. Uploaded skills are private to
-   your account.
-
-8. **✅ Check it fires.** Start a chat and paste a page of copy with "make this
-   less generic". Expand Claude's thinking: the skill should be named there.
-
-**If something goes wrong**
+**Then check it fires.** Start a chat and paste a page of copy with "make this
+less generic". Expand Claude's thinking: the skill should be named there.
 
 | Symptom | Cause | Fix |
 |---|---|---|
-| Upload rejected | Files sit at the zip root instead of inside a skill folder | Use the zips from `scripts/build.py`, which nest correctly |
-| Skill uploads but never fires | Code execution is off | **Settings → Capabilities → Code execution and file creation** |
-| Still never fires | Toggle is off, or the ask is too small to warrant it | Check the toggle. Every skill sizes the ask first and answers one-liners plainly |
-| `ModuleNotFoundError: yaml` | PyYAML missing | `pip3 install pyyaml` |
+| Marketplace adds but no skills appear | Plugin added, not installed | Open the marketplace entry and install **lucas-growth** |
+| Skills installed but never fire | Code execution is off | **Settings → Capabilities → Code execution and file creation** |
+| Still never fires | The ask is too small to warrant it | Expected. Every skill sizes the ask first and answers one-liners plainly |
 
 ### ⌨️ Claude Code
 
@@ -126,8 +100,22 @@ Desktop takes one skill per upload, as a zip.
 /plugin install lucas-growth@lucas-growth
 ```
 
-All thirteen arrive at once and appear as `lucas-growth:<skill>`. No build step
-is needed.
+Skills appear as `lucas-growth:<skill>`.
+
+### 📦 Or one skill at a time, as a zip
+
+Only if you want a single skill rather than the pack. Needs Python 3 and PyYAML
+(`pip3 install pyyaml`), because `dist/` is not committed:
+
+```bash
+git clone https://github.com/StammDXB/lucas-growth-skills.git
+cd lucas-growth-skills
+python3 scripts/build.py copywriting     # or omit the name for all thirteen
+```
+
+Then in Claude: **Customize → Skills → +**, upload `dist/copywriting.zip`, and
+toggle it on. The zip holds the skill folder at its root, which is the structure
+Claude expects.
 
 ## 🏛️ Why it is structured this way
 
